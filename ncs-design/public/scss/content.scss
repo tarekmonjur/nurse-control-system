@@ -1,0 +1,119 @@
+
+$card-color:      $theme-color;
+$card-bg-color:   $theme-bg-color;
+$card-btn-color:  $navbar-bg-color;
+
+#content {
+  min-height: calc(100vh - 150px);
+  background-color: #575859;
+  margin-top: 6px;
+  padding-top: 15px;
+  margin-bottom: 46px;
+
+  .card {
+    margin-bottom: 15px;
+
+    .card-header {
+      color: $card-color;
+      background-color: $card-bg-color;
+      line-height: 1.8rem;
+
+      img {
+        vertical-align: top;
+        width: 30px;
+      }
+
+      a {
+        color: $card-color;
+      }
+    }
+
+    .card-body {
+
+      .card {
+        > * input {
+          border: 1px solid rgba($navbar-bg-color, 95);
+        }
+
+        > * select {
+          font-size: .8rem;
+        }
+
+        img {
+          width: 26px;
+          vertical-align: top;
+        }
+
+        .input-group-text {
+          padding: 0rem 1rem;
+          color: $menu-color;
+          background-color: rgba($navbar-bg-color, 80);
+          border: 1px solid rgba($navbar-bg-color, 95);
+        }
+
+        label {
+          margin: 0px;
+        }
+
+        .btn {
+          font-size: 1rem;
+          padding: .1rem .4rem;
+        }
+      }
+
+      .table {
+        font-size: .9rem;
+        margin: 0rem;
+
+        th {
+          color: $table-dark-color;
+          background-color: $gray-700;
+          border-color: $gray-600;
+        }
+
+        .actions {
+
+          img {
+            width: 20px;
+          }
+        }
+      }
+
+      img {
+        width: 21px;
+      }
+    }
+
+    .card-footer {
+      color: $dark;
+      font-size: .85rem;
+
+      .pagination {
+        margin: 0px;
+
+        .page-link{
+          line-height: 1.1;
+          color: $dark;
+        }
+      }
+    }
+
+    .btn {
+      @include button-variant($card-btn-color, $card-btn-color);
+    }
+
+    //@each $color, $value in $theme-colors {
+    //  .btn-outline-{$color} {
+    //    @include button-outline-variant($value);
+    //  }
+    //}
+  }
+
+  #login {
+    background-color: $white;
+
+    .btn {
+      @include button-variant($card-btn-color, $card-btn-color);
+    }
+  }
+}

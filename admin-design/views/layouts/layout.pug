@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        title=title
+        block styles
+            link(href='/assets/style.css' type='text/css' rel="stylesheet")
+
+        block scripts
+
+    body
+        div.container(id='main')
+            include header.pug
+            block content
+            include footer.pug
+
+
