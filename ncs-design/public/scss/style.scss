@@ -17,8 +17,7 @@ $card-inner-border-radius:  0rem;
 $card-spacer-y:             .4rem;
 $card-spacer-x:             1rem;
 
-
-@import "./../../node_modules/bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 $theme-color:           $white;
 $theme-bg-color:        $teal;
@@ -68,7 +67,7 @@ body {
       width: 100%;
       height: 100%;
       opacity: 0.4;
-      background-image: url('../hospital-banner.png');
+      background-image: url('../img/hospital-banner.png');
       background-repeat: no-repeat;
       background-position: center;
       -ms-background-size: cover;
