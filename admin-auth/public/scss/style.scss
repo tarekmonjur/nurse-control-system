@@ -1,0 +1,36 @@
+
+@import "~bootstrap/scss/bootstrap";
+
+$body-color: $dark;
+
+$body-bg-color: #e6eaf875;
+$header-color: $white;
+$header-bg-color: $dark;
+
+$content-color: $dark;
+$content-bg-color: $white;
+
+$footer-color: $white;
+$footer-bg-color: $dark;
+
+
+#main {
+  color: $body-color;
+  background-color: $body-bg-color;
+}
+
+@import "header";
+
+#content {
+  color:$content-color;
+  background-color: $content-bg-color;
+}
+
+#footer {
+  color: $footer-color;
+  background-color: $footer-bg-color;
+}
+
+
+
+
