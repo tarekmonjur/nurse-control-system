@@ -79,12 +79,26 @@ class Signup extends Component{
         console.log('error: ', errors);
         console.log('data:',data);
         if (isEmpty(errors)) {
-            console.log('data:',data);
+            // let formElement = document.querySelector('form[name="form-signup"]');
+            const form = new FormData();
+            for(const key in data) {
+                form.append(key, data[key]);
+            }
+            const fileField = document.querySelector('input[type="file"]');
+            form.append('photo', fileField.files[0]);
+
+            fetch(`${process.env.HOST}:${process.env.PORT}/signup`, {
+                method: 'POST',
+                body: form,
+            })
+                .then(response => response.json())
+                .then(result => console.log(result))
+                .catch(error => console.error(error));
         }
     }
 
     render() {
-        const {data, errors} = this.state;
+        let {data, errors} = this.state;
         return (
             <div className="row justify-content-center">
                 <div className="col-md-6">
@@ -179,6 +193,22 @@ class Signup extends Component{
                                                    name="confirm_password" />
                                             { errors.confirm_password &&
                                             <div className="invalid-feedback">{ errors.confirm_password }</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="form-row">
+                                    <div className="col">
+                                        <div className="form-group input-group-sm">
+                                            <label htmlFor="photo">Photo</label>
+                                            <input type="file"
+                                                   className={errors.photo ? 'form-control is-invalid': 'form-control'}
+                                                   id="photo"
+                                                   onChange={this.handleChange}
+                                                   name="photo" />
+                                            { errors.photo &&
+                                            <div className="invalid-feedback">{ errors.photo }</div>
                                             }
                                         </div>
                                     </div>
