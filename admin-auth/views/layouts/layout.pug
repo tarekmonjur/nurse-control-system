@@ -4,6 +4,7 @@ html
         meta(charset="utf-8")
         meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
         title=title
+        link(rel="shortcut icon" href="/img/health.png")
 
         block styles
             link(href='/assets/main.css' type='text/css' rel="stylesheet")
@@ -14,3 +15,7 @@ html
         include footer.pug
 
     block scripts
+        script(type='text/javascript').
+            window.locals = {};
+            window.locals.user = !{JSON.stringify(locals.user)};
+            window.locals.title = 'Home page';

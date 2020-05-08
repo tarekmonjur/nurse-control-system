@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=development --watch",
     "start": "nodemon app.js",
-    "start:dev": "npm-run-all --parallel build start"
+    "start:dev": "set DEBUG=express-session && npm-run-all --parallel build start"
   },
   "keywords": [
     "admin",
@@ -17,19 +17,25 @@
   "author": "Tarek Monjur",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^1.7.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
+    "mongodb": "^3.5.7",
     "multer": "^1.4.2",
     "popper.js": "^1.16.1",
     "pug": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.4.2",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.8",
     "validator": "^13.0.0"

@@ -92,8 +92,19 @@ class Signup extends Component{
                 body: form,
             })
                 .then(response => response.json())
-                .then(result => console.log(result))
-                .catch(error => console.error(error));
+                .then(result => {
+                    if (result.status == 'success' && result.result._id) {
+                        window.location.href='/login'
+                    }
+                    this.setState({
+                        errors: {
+                            status: result.status,
+                            message: result.message
+                        }
+                    });
+
+                })
+                .catch(error => console.error('error', error));
         }
     }
 
@@ -109,6 +120,9 @@ class Signup extends Component{
                         <h2>Registration</h2>
                     </div>
                     <div className="card">
+                        { errors.status &&
+                            <div className={errors.status == 'success'? 'card-header text-success': 'card-header text-danger'}>{errors.message}</div>
+                        }
                         <div className="card-body">
                             <form name="form-signup" onSubmit={this.handleSubmit}>
                                 <div className="form-row">
@@ -230,7 +244,7 @@ class Signup extends Component{
                                         </div>
                                     </div>
                                 </div>
-                                <button className="btn btn-sm btn-primary" type="submit">Login</button>
+                                <button className="btn btn-sm btn-primary" type="submit">Signup</button>
                             </form>
                         </div>
                     </div>

@@ -69,11 +69,9 @@ class Login extends Component {
 
         const errors = this.checkValidation(data);
         this.setState({errors});
-
-        if (!isEmpty(errors)) {
-            console.log('errors: ',errors);
-        } else {
-            console.log('data: ',data);
+        console.log('errors: ',errors);
+        console.log('data: ',data);
+        if (isEmpty(errors)) {
             const options = {
                 method: 'POST',
                 headers: {
@@ -81,10 +79,18 @@ class Login extends Component {
                 },
                 body: JSON.stringify(data),
             };
-
             fetch(`${process.env.HOST}:${process.env.PORT}/login`, options)
-                .then(response => { return response.json(); })
-                .then(data => { console.log(data); window.location.href = '/';});
+                .then((response) => { return response.json(); })
+                .then((data) => {
+                    if (!data.error) {
+                        window.location.href = '/';
+                    } else {
+                        this.setState({
+                            errors: data
+                        })
+                    }
+                })
+                .catch(err => console.log({err}))
 
     }
 
@@ -101,6 +107,9 @@ class Login extends Component {
                      width="72"
                      height="72" />
                 <h1 className="h3 mb-3 font-weight-normal">System SignIn</h1>
+                { errors.error &&
+                    <p className="text-danger">{errors.error}</p>
+                }
                 <label htmlFor="email"
                        className="sr-only">Email address</label>
                 <input type="email"

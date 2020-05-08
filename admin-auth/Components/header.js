@@ -1,30 +1,17 @@
+import React from 'react';
+import ReactDOM from "react-dom";
+import { Provider } from 'react-redux';
+import {createStore} from "redux";
+const store = createStore((type)=>{return {}});
+import $ from "jquery";
 
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import HeaderLeft from '../Components/header/header-left';
-import HeaderCenter from './header/header-center';
-import HeaderRight from './header/header-right';
+import Header from './header/header';
 
-class Header extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            appName: process.env.APP_NAME
-        }
-    }
-
-    render() {
-        return (
-            <div className='row'>
-                <HeaderLeft />
-                <HeaderCenter appName={ this.state.appName } />
-                <HeaderRight />
-            </div>
-        )
-    }
-}
-
-ReactDOM.render(
-  <Header />,
-  document.getElementById('header')
-);
+$(function () {
+    ReactDOM.render(
+        <Provider store={store}>
+            <Header />
+        </Provider>,
+        document.getElementById('header')
+    );
+});

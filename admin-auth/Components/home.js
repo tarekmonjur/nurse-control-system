@@ -1,24 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+const store = createStore((type)=>{return {...window.locals}});
+console.log('home store: ', store.getState());
 import $ from "jquery";
 
-class Home extends React.Component {
-
-    render() {
-        return (
-            <div className='row'>
-                <div className="col-md-12">
-                    <h1 className='text-dark'>Hello React...</h1>
-                </div>
-            </div>
-        );
-    }
-}
-
+import Home from './home/home';
 
 $(function () {
     ReactDOM.render(
-        <Home />,
+        <Provider store={store}>
+            <Home />
+        </Provider>,
         document.getElementById('content')
     );
 });
