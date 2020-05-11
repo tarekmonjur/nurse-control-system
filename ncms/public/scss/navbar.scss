@@ -1,0 +1,71 @@
+
+%menu-navbar {
+  height: 46px;
+  background-color: $navbar-bg-color;
+  color: $menu-color;
+}
+
+#navbar {
+  margin-top: 6px;
+  margin-right: auto!important;
+  padding-right: 15px!important;
+  @extend %menu-navbar;
+
+  .navbar {
+    @extend %menu-navbar;
+
+    .dropdown-menu {
+      border-radius: 0;
+      color: $navbar-color;
+      background-color: $navbar-bg-color;
+
+      .dropdown-item {
+        color: $navbar-color;
+        padding: .4rem 1rem;
+
+        @include hover-focus() {
+          background-color: $navbar-hover-bg-color;
+          color: $navbar-hover-color;
+        }
+      }
+
+      img {
+        vertical-align: top;
+        width: 28px;
+      }
+    }
+  }
+
+  .navbar-toggler {
+    @extend %menu-navbar;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .navbar-collapse {
+    background-color: $navbar-bg-color;
+  }
+
+  .nav-link {
+    line-height: 1.8rem;
+    color: $navbar-color;
+    padding: 0.5rem 0.5rem;
+
+    @include hover-focus() {
+      background-color: $navbar-hover-bg-color;
+      color: $navbar-hover-color;
+    }
+
+    img {
+      vertical-align: top;
+      width: 30px;
+    }
+  }
+
+  .show > .nav-link,
+  .active > .nav-link,
+  .nav-link.show,
+  .nav-link.active {
+    background-color: $navbar-hover-bg-color;
+    color: $navbar-hover-color;
+  }
+}

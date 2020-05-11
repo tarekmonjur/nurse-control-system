@@ -1,0 +1,116 @@
+
+$white:                 #fff;
+$dark:                  #343a40;
+
+$menu-color:                $white;
+$navbar-color:              rgba($menu-color, .80);
+$navbar-hover-color:        rgba($menu-color, .95);
+$navbar-padding-y:          0.0rem;
+$navbar-padding-x:          0.0rem;
+$nav-link-padding-y:        .5rem;
+$nav-link-padding-x:        1rem;
+$navbar-nav-link-padding-x: 1rem;
+
+$card-border-width:         0rem;
+$card-border-radius:        0rem;
+$card-inner-border-radius:  0rem;
+$card-spacer-y:             .4rem;
+$card-spacer-x:             1rem;
+
+@import '~bootstrap/scss/bootstrap';
+
+$theme-color:           $white;
+$theme-bg-color:        $teal;
+$navbar-bg-color:       $cyan;
+$navbar-hover-bg-color: $dark;
+
+body {
+  background-color: $dark;
+}
+
+@import "header";
+
+@import "navbar";
+
+@import "content";
+
+#main{
+  background-color: $dark;
+
+  .login {
+    position: relative;
+    overflow: hidden;
+
+    .banner {
+
+      img {
+        position: absolute;
+        left: 0;
+        top: -45%;
+        width: 100%;
+        height: auto;
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .content {
+    position: relative;
+    overflow: hidden;
+
+    .banner::before {
+      content: ' ';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+      background-image: url('../img/hospital-banner.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      -ms-background-size: cover;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+  }
+}
+
+@import "footer";
+
+.modal {
+
+  .modal-header {
+    background-color: $theme-bg-color;
+    border-radius: 0px;
+    padding: 0.5rem;
+    color: $theme-color;
+    font-size: $font-size-sm;
+
+    .modal-title {
+      img {
+        width: 30px;
+        vertical-align: middle;
+      }
+
+      span {
+        vertical-align: middle;
+      }
+    }
+
+  }
+
+  .modal-content {
+    border-radius: 0px;
+  }
+
+  .modal-footer {
+    padding: 0px;
+    .btn {
+      @include button-variant($card-btn-color, $card-btn-color);
+    }
+  }
+}

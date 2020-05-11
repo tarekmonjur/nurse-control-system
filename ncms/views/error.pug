@@ -1,0 +1,8 @@
+extends layouts/layout
+
+block content
+    #content(class="container-fluid content")
+        div(class="text-white")
+            h1= locals.error.code
+            div !{locals.error.message}
+            p !{locals.error.body}
