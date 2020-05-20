@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import Filter from "./filter";
+import AddPatient from "./add";
 import {
     Table,
     Paginate,
+    Modal,
+    ListTitle,
     AddButton,
     FilterButton,
     PdfButton,
@@ -15,7 +18,12 @@ import {
 class Patient extends Component {
     constructor(props) {
         super(props);
+        this.addModalId = "add-patient-modal";
     }
+
+    addButton = () => {
+        $(`#${this.addModalId}`).modal('show');
+    };
     
     render() {
         return (
@@ -25,14 +33,17 @@ class Patient extends Component {
                     <div className="card">
                         <div className="card-header">
                             <div className="d-flex">
-                                <div className="flex-grow-1">
-                                    <img src="../img/patient-03.png" alt="" />
-                                        Patients List
-                                </div>
+                                <ListTitle
+                                    title="Patients List"
+                                    icon="patient-03.png"
+                                />
                                 <ExcelButton />
                                 <PdfButton />
                                 <FilterButton />
-                                <AddButton />
+                                <AddButton
+                                    title="Admit Patient"
+                                    onclick={this.addButton}
+                                />
                             </div>
                         </div>
                         <div className="card-body">
@@ -44,10 +55,22 @@ class Patient extends Component {
                         </div>
                     </div>
                 </div>
+
+                <Modal
+                    id={this.addModalId}
+                    size="modal-lg"
+                    icon="bed-04.png"
+                    title="Admit New Patient"
+                    submitButton="Submit Admitted Form"
+                    onsubmit={ () => { this.child.handleSubmit() }}>
+                    <AddPatient
+                        formName={this.addModalId}
+                        setChild={child => this.child = child} />
+                </Modal>
+
             </div>
         );
     }
 }
 
 export default connect(state => state)(Patient);
-

@@ -17,6 +17,7 @@ $card-inner-border-radius:  0rem;
 $card-spacer-y:             .4rem;
 $card-spacer-x:             1rem;
 
+@import "~react-datepicker/dist/react-datepicker.css";
 @import '~bootstrap/scss/bootstrap';
 
 $theme-color:           $white;

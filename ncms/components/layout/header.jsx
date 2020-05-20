@@ -14,11 +14,12 @@ class Header extends Component {
     }
 
     render() {
+        const {user} = this.state;
         return (
             <div className="row">
                 <HeaderLeft />
-                <HeaderCenter />
-                <HeaderRight />
+                { user && <HeaderCenter /> }
+                { user && <HeaderRight /> }
             </div>
         )
     }

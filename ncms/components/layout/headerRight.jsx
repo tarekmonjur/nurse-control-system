@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 class HeaderRight extends Component {
     constructor(props) {
         super(props);
+        this.user = this.props.user;
     }
 
     render() {
@@ -14,15 +15,15 @@ class HeaderRight extends Component {
                         <img src="../img/user.png" alt="" />
                     </div>
                     <div className="col-md-10 col-md-10">
-                        <h6 className="font-weight-bold">Tarek Ahammed Monjur
+                        <h6 className="font-weight-bold">{this.user.name}
                             <br />
-                            <small> ABCD Doctor.</small>
+                            <small> {this.user.name}</small>
                             <br />
-                            <small> 01780292737</small>
+                            <small> {this.user.mobile_no}</small>
                             <br />
-                            <small> tarekmonjur@gmail.com</small>
+                            <small> {this.user.email}</small>
                             <br />
-                            <small><a href="">Logout.</a></small>
+                            <small><a href="/logout">Logout.</a></small>
                         </h6>
                     </div>
                 </div>
@@ -31,5 +32,4 @@ class HeaderRight extends Component {
     }
 }
 
-// export default connect(state => state)(Home);
-export default HeaderRight;
+export default connect(state => state)(HeaderRight);

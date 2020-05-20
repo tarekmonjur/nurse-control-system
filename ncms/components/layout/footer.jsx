@@ -13,7 +13,7 @@ class Footer extends Component {
                     <div className="d-flex">
                         <div className="font-weight-bold pr-2">
                             <img src="../img/news.png" width="20px" alt="" />
-                                News:
+                            &nbsp;News:
                         </div>
                         <div className="flex-fill pr-1 pl-1 news-title">
                             <p className="text-nowrap">

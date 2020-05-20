@@ -1,35 +1,39 @@
 const express = require('express');
 const app = express();
-require('dotenv').config();
 const path = require('path');
-const url = require('url');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const passport = require('passport');
+require('dotenv').config();
+global.appRoot = path.resolve(__dirname, 'src');
+// console.log(appRoot);
+require(`${appRoot}/lib/db`);
+const pagesRoute = require(`${appRoot}/routes/pages`);
+const apiRoute = require(`${appRoot}/routes/api`);
 
-const auth = require('./src/routes/auth');
-const patient = require('./src/routes/patient');
 
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.disable('x-powered-by');
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/assets', express.static(path.join(__dirname, 'public/dist')));
 
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
+app.use(session({
+   secret: process.env.SECRET,
+   resave: false,
+   saveUninitialized: false,
+   cookie: { secure: false, maxAge: 600000 }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use((req, res, next) => {
-   const segments = url.parse(req.url).pathname.split('/');
-   if (segments[1] !== 'login')
-      res.locals.user = {name: 'tarek'};
-   next();
-});
-
-app.use('/login', auth);
-app.use('/patient', patient);
-
-app.get('/', (req, res) => {
-   res.render('home');
-});
-
-
+app.use('/', pagesRoute);
+app.use('/api', apiRoute);
 
 app.use('*', (req, res, next) => {
    next({
@@ -41,11 +45,11 @@ app.use('*', (req, res, next) => {
 
 app.use((err, req, res, next) => {
    console.error(err.stack);
-   const errCode = 503;
+   const errCode = err.code || 500;
    res.status(errCode);
    res.render('error', {
       error: {
-         code: err.code || errCode,
+         code: errCode,
          message: err.message,
          body: err.stack
       }
