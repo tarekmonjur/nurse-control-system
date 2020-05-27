@@ -1,30 +1,24 @@
 import React, {Component} from "react";
-import { capitalize, isEmpty } from 'lodash';
+import { capitalize } from 'lodash';
 
 class Alert extends Component {
     constructor(props) {
         super(props);
-        const {type, title, icon, message} = this.props.data;
+        const response = this.props.data;
         this.data = {
-            title: title,
-            type: type,
-            icon: icon,
-            message: message,
+            type: response.code === 200 ? 'success' : 'danger',
+            title: `${response.status} message!`,
+            icon: `${response.status}.png`,
+            message: response.message,
         };
     }
 
     componentDidMount() {
-        this.show();
-        console.log('data', this.data);
-    }
-
-    componentDidUpdate() {
-        this.show();
-        console.log('data', this.data);
-    }
-
-    show() {
         $('.toast').toast('show');
+    }
+
+    componentWillUnmount() {
+        this.hide();
     }
 
     hide() {
@@ -32,16 +26,26 @@ class Alert extends Component {
     }
 
     render() {
-
         return (
-            <div style={{position: 'relative'}}>
-                <div className="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000" data-autohide="true"
-                     style={{position: 'absolute', top: 0, right: 0}}>
+            <div style={{position: 'relative', zIndex: 9999}}>
+                <div className="toast mr-3"
+                     role="alert"
+                     aria-live="assertive"
+                     aria-atomic="true"
+                     data-delay="5000"
+                     data-autohide="true"
+                     style={{position: 'absolute', top: 0, right: 0, minWidth: '200px'}}>
                     <div className="toast-header">
-                        <img src={`../img/${this.data.icon}`} className="rounded mr-2" style={{width: '11%'}} alt="..."/>
+                        <img src={`../img/${this.data.icon}`}
+                             className="rounded mr-2"
+                             style={{width: '11%'}} alt="..."/>
                         <strong className="mr-auto">{capitalize(this.data.title)}</strong>
-                        <button type="button" onClick={this.hide} className="ml-2 mb-1 close" data-dismiss="toast"
-                                aria-label="Close">
+                        <button
+                            type="button"
+                            onClick={this.hide}
+                            className="ml-2 mb-1 close"
+                            data-dismiss="toast"
+                            aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>

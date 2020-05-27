@@ -1,31 +1,39 @@
 import React, {Component} from 'react';
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
+import {loader} from './../../store/actions';
 
 import Filter from "./filter";
-import AddPatient from "./add";
+import AddModal from "../patient/addModal";
 import {
     Table,
     Paginate,
-    Modal,
     ListTitle,
     AddButton,
     FilterButton,
     PdfButton,
-    ExcelButton
+    ExcelButton,
+    Alert
 } from './../common';
+
 
 
 class Patient extends Component {
     constructor(props) {
         super(props);
-        this.addModalId = "add-patient-modal";
+
+        this.state = {
+            addModal: false
+        };
     }
 
-    addButton = () => {
-        $(`#${this.addModalId}`).modal('show');
-    };
-    
+    componentDidMount() {
+        console.log('patients');
+    }
+
     render() {
+        const {response} = this.props.data;
+        const {actions} = this.props.data.patient;
         return (
             <div className="row">
                 {this.props.children}
@@ -42,7 +50,9 @@ class Patient extends Component {
                                 <FilterButton />
                                 <AddButton
                                     title="Admit Patient"
-                                    onclick={this.addButton}
+                                    onclick={() => {
+                                        this.child.open()
+                                    }}
                                 />
                             </div>
                         </div>
@@ -55,22 +65,23 @@ class Patient extends Component {
                         </div>
                     </div>
                 </div>
-
-                <Modal
-                    id={this.addModalId}
-                    size="modal-lg"
-                    icon="bed-04.png"
-                    title="Admit New Patient"
-                    submitButton="Submit Admitted Form"
-                    onsubmit={ () => { this.child.handleSubmit() }}>
-                    <AddPatient
-                        formName={this.addModalId}
-                        setChild={child => this.child = child} />
-                </Modal>
-
+                <AddModal setChild={(child) => this.child = child}/>
+                { response &&
+                    <Alert />
+                }
             </div>
         );
     }
 }
 
-export default connect(state => state)(Patient);
+const mapStateToProps = (state, ownProps = {}) => {
+    return {...state, ...ownProps};
+};
+
+const actionCreators = {loader};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(actionCreators, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Patient);

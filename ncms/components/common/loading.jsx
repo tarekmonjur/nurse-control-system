@@ -7,8 +7,14 @@ class Loading extends Component {
     }
 
     render() {
+        const {col} = this.props;
         return (
-            <ReactLoading type="bars" color="#ffffff" height={this.props.height} width={this.props.width} />
+            <div className={col || 'col-6'} style={{margin: "0px auto"}}>
+                <ReactLoading
+                    type="bars"
+                    style={{margin: "0px auto", fill: "rgb(255, 255, 255)"}} />
+            </div>
+
         );
     }
 }

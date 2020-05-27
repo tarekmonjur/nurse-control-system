@@ -58,7 +58,7 @@ const initialize = (passport, getUserByEmail, getUserById) => {
 
 const checkAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
-        res.locals.user = req.user;
+        res.locals.data.user = req.user;
         return next();
     }
     return res.redirect('/login');
@@ -66,7 +66,7 @@ const checkAuthenticated = (req, res, next) => {
 
 const checkNotAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
-        res.locals.user = req.user;
+        res.locals.data.user = req.user;
         return res.redirect('/');
     }
     return next();

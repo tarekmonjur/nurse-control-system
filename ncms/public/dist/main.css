@@ -10972,52 +10972,55 @@ body {
   }
 }
 
-.modal .modal-header {
+.modal .modal-content {
+  border-radius: 0px;
+}
+.modal .modal-content .modal-header {
   background-color: #20c997;
   border-radius: 0px;
   padding: 0.5rem;
   color: #fff;
   font-size: 0.875rem;
 }
-.modal .modal-header .modal-title img {
+.modal .modal-content .modal-header .modal-title img {
   width: 30px;
   vertical-align: middle;
 }
-.modal .modal-header .modal-title span {
+.modal .modal-content .modal-header .modal-title span {
   vertical-align: middle;
 }
-.modal .modal-content {
-  border-radius: 0px;
+.modal .modal-content .modal-body .react-datepicker-wrapper {
+  display: block;
 }
-.modal .modal-footer {
+.modal .modal-content .modal-footer {
   padding: 0px;
 }
-.modal .modal-footer .btn {
+.modal .modal-content .modal-footer .btn {
   color: #fff;
   background-color: #17a2b8;
   border-color: #17a2b8;
 }
-.modal .modal-footer .btn:hover {
+.modal .modal-content .modal-footer .btn:hover {
   color: #fff;
   background-color: #138496;
   border-color: #117a8b;
 }
-.modal .modal-footer .btn:focus, .modal .modal-footer .btn.focus {
+.modal .modal-content .modal-footer .btn:focus, .modal .modal-content .modal-footer .btn.focus {
   color: #fff;
   background-color: #138496;
   border-color: #117a8b;
   box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
 }
-.modal .modal-footer .btn.disabled, .modal .modal-footer .btn:disabled {
+.modal .modal-content .modal-footer .btn.disabled, .modal .modal-content .modal-footer .btn:disabled {
   color: #fff;
   background-color: #17a2b8;
   border-color: #17a2b8;
 }
-.modal .modal-footer .btn:not(:disabled):not(.disabled):active, .modal .modal-footer .btn:not(:disabled):not(.disabled).active, .show > .modal .modal-footer .btn.dropdown-toggle {
+.modal .modal-content .modal-footer .btn:not(:disabled):not(.disabled):active, .modal .modal-content .modal-footer .btn:not(:disabled):not(.disabled).active, .show > .modal .modal-content .modal-footer .btn.dropdown-toggle {
   color: #fff;
   background-color: #117a8b;
   border-color: #10707f;
 }
-.modal .modal-footer .btn:not(:disabled):not(.disabled):active:focus, .modal .modal-footer .btn:not(:disabled):not(.disabled).active:focus, .show > .modal .modal-footer .btn.dropdown-toggle:focus {
+.modal .modal-content .modal-footer .btn:not(:disabled):not(.disabled):active:focus, .modal .modal-content .modal-footer .btn:not(:disabled):not(.disabled).active:focus, .show > .modal .modal-content .modal-footer .btn.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
 }

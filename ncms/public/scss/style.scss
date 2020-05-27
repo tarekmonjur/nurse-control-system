@@ -84,34 +84,39 @@ body {
 
 .modal {
 
-  .modal-header {
-    background-color: $theme-bg-color;
+  .modal-content {
     border-radius: 0px;
-    padding: 0.5rem;
-    color: $theme-color;
-    font-size: $font-size-sm;
 
-    .modal-title {
-      img {
-        width: 30px;
-        vertical-align: middle;
-      }
+    .modal-header {
+      background-color: $theme-bg-color;
+      border-radius: 0px;
+      padding: 0.5rem;
+      color: $theme-color;
+      font-size: $font-size-sm;
 
-      span {
-        vertical-align: middle;
+      .modal-title {
+        img {
+          width: 30px;
+          vertical-align: middle;
+        }
+
+        span {
+          vertical-align: middle;
+        }
       }
     }
 
-  }
+    .modal-body {
+      .react-datepicker-wrapper {
+        display: block;
+      }
+    }
 
-  .modal-content {
-    border-radius: 0px;
-  }
-
-  .modal-footer {
-    padding: 0px;
-    .btn {
-      @include button-variant($card-btn-color, $card-btn-color);
+    .modal-footer {
+      padding: 0px;
+      .btn {
+        @include button-variant($card-btn-color, $card-btn-color);
+      }
     }
   }
 }

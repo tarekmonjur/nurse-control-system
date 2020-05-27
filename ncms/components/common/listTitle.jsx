@@ -10,7 +10,7 @@ class ListTitle extends Component {
         return (
             <div className="flex-grow-1">
                 <img src={`../img/${this.props.icon}`} alt="" />
-                {this.props.title}
+                &nbsp;{this.props.title}
             </div>
         );
     }

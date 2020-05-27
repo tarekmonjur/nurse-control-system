@@ -10,6 +10,7 @@ class Table extends Component {
     }
 
     render() {
+        console.log('table');
         return (
             <div className="table-responsive">
                 <table className="table table-sm table-bordered">

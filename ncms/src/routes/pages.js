@@ -4,7 +4,8 @@ const { checkAuthenticated, checkNotAuthenticated } = require(`${appRoot}/lib/pa
 
 router.use((req, res, next) => {
     if (req.path) {
-        res.locals.route = req.path.split('/')[1];
+        res.locals.data = Object.assign({}, res.locals, {route: ''});
+        res.locals.data.route = req.path.split('/')[1];
     }
     next();
 });
@@ -17,7 +18,7 @@ router.get('/', checkAuthenticated, (req, res) => {
     return res.render('home');
 });
 
-router.get('/patients', checkAuthenticated, (req, res) => {
+router.get('/patients', (req, res) => {
     return res.render('patient');
 });
 

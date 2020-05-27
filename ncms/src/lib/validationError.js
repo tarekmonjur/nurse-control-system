@@ -4,6 +4,7 @@ class ValidationError extends Error {
         super(message);
         this.code = 422;
         this.name = 'ValidationError';
+        this.status = 'error';
         this.message = message;
         this.errors = errors;
         return this.toJSON();
@@ -30,6 +31,7 @@ class ValidationError extends Error {
         return {
             code: this.code,
             name: this.name,
+            status: this.status,
             message: this.message,
             errors: this.errorMessages(),
             stacktrace: this.stack,

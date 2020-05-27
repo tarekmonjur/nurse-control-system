@@ -1,90 +1,19 @@
 import React, {Component} from "react";
-import {connect} from "react-redux";
-import {isEmpty, isDate} from 'lodash';
-import validator from 'validator';
 import DatePicker from "react-datepicker";
-
 
 class AddPatient extends Component {
     constructor(props) {
         super(props);
-        const {setChild, formName} = this.props;
-        this.setChild = setChild;
-        this.formName = formName;
-        this.state = {
-            formData: {},
-            errors: {},
-            date: new Date()
-        }
     }
-
-    handleChange = (event) => {
-        if (isDate(event)) {
-            this.setState({
-                formData: {
-                    ...this.state.formData,
-                    admitted_date : event.toISOString().split('T')[0],
-                },
-                date: event
-            });
-        } else {
-            this.setState({
-                formData: {
-                    ...this.state.formData,
-                    [event.target.name]: event.target.value,
-                }
-            });
-        }
-
-    };
-
-    handleValidate(data) {
-        const errors = {};
-        if (validator.isEmpty(data.name)) {
-            errors['name'] = 'This field is required';
-        }
-        if (!validator.isEmpty(data.bed_no) &&
-            !validator.isLength(data.bed_no, {min: 3, max: 10})) {
-            errors['bed_no'] = 'This field length min:3 max:10';
-        }
-        if (!validator.isMobilePhone(data.mobile_no,['bn-BD'])) {
-            errors.mobile_no = 'Please enter valid number';
-        }
-        if (!validator.isEmpty(data.address) &&
-            !validator.isLength(data.address, {min: 10, max: 255})) {
-            errors.address = 'This field length min:10 max:255';
-        }
-        return errors;
-    }
-
-    handleSubmit() {
-        const formData = this.state.formData;
-        const errors = this.handleValidate(formData);
-        this.setState({errors});
-        if (isEmpty(errors)) {
-            console.log(formData);
-        } else {
-            console.log(errors);
-        }
-
-    };
 
     componentDidMount() {
-        this.setChild(this);
-        let formData = {};
-        const form = document.querySelector(`form[name="${this.formName}"]`);
-        for (let i=0; i < form.elements.length; i++) {
-            if (!isEmpty(form.elements[i].name)) {
-                formData[form.elements[i].name] = form.elements[i].value;
-            }
-        }
-        this.setState({formData});
+        this.props.init();
     }
 
     render() {
-        const {errors, date} = this.state;
+        const {formName, errors, date} = this.props;
         return (
-            <div>
+            <form name={formName}>
                 <div className="form-row">
                     <div className="col">
                         <div className="form-group">
@@ -94,8 +23,11 @@ class AddPatient extends Component {
                                 id="name"
                                 className={`form-control form-control-sm ${errors.name && 'is-invalid'}`}
                                 name="name"
-                                onChange={this.handleChange}
-                                placeholder="Enter patient name.." />
+                                onChange={this.props.handleChange}
+                                placeholder="Enter patient name.."/>
+                            {errors.name &&
+                            <div className="invalid-feedback">{errors.name}</div>
+                            }
                         </div>
                     </div>
                     <div className="col">
@@ -106,8 +38,80 @@ class AddPatient extends Component {
                                 id="bed_no"
                                 className={`form-control form-control-sm ${errors.bed_no && 'is-invalid'}`}
                                 name="bed_no"
-                                onChange={this.handleChange}
-                                placeholder="Enter patient bed no.." />
+                                onChange={this.props.handleChange}
+                                placeholder="Enter patient bed no.."/>
+                            {errors.bed_no &&
+                            <div className="invalid-feedback">{errors.bed_no}</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="col">
+                        <div className="form-group">
+                            <label htmlFor="patient_mobile_no">Patient Mobile No : </label>
+                            <input
+                                type="text"
+                                id="patient_mobile_no"
+                                className={`form-control form-control-sm ${errors.patient_mobile_no && 'is-invalid'}`}
+                                name="patient_mobile_no"
+                                onChange={this.props.handleChange}
+                                placeholder="Enter patient mobile no.."/>
+                            {errors.patient_mobile_no &&
+                            <div className="invalid-feedback">{errors.patient_mobile_no}</div>
+                            }
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div className="form-group">
+                            <label>Patient Gender :</label><br/>
+                            <div className="form-check form-check-inline">
+                                <input
+                                    type="radio"
+                                    id="inlineRadio1"
+                                    className="form-check-input"
+                                    name="gender"
+                                    onChange={this.props.handleChange}
+                                    value="male"/>
+                                <label className="form-check-label"
+                                       htmlFor="inlineRadio1">Male</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input
+                                    type="radio"
+                                    id="inlineRadio2"
+                                    className="form-check-input"
+                                    name="gender"
+                                    onChange={this.props.handleChange}
+                                    value="female"/>
+                                <label className="form-check-label"
+                                       htmlFor="inlineRadio2">Female</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input
+                                    type="radio"
+                                    id="inlineRadio3"
+                                    className="form-check-input"
+                                    name="gender"
+                                    onChange={this.props.handleChange}
+                                    value="other"/>
+                                <label className="form-check-label"
+                                       htmlFor="inlineRadio3">Other</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div className="form-group">
+                            <label htmlFor="admitted_date">Admitted Date :</label>
+                            <DatePicker
+                                id="admitted_date"
+                                className={`form-control form-control-sm ${errors.admitted_date && 'is-invalid'}`}
+                                onChange={this.props.handleChange}
+                                selected={date}
+                                placeholder="admit date..."/>
+                            {errors.admitted_date &&
+                            <div className="invalid-feedback">{errors.admitted_date}</div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -120,71 +124,26 @@ class AddPatient extends Component {
                                 id="guardian_name"
                                 className={`form-control form-control-sm ${errors.guardian_name && 'is-invalid'}`}
                                 name="guardian_name"
-                                onChange={this.handleChange}
-                                placeholder="Enter patient guardian name.." />
+                                onChange={this.props.handleChange}
+                                placeholder="Enter patient guardian name.."/>
+                            {errors.guardian_name &&
+                            <div className="invalid-feedback">{errors.guardian_name}</div>
+                            }
                         </div>
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="mobile_no">Patient Mobile No : <span className="text-danger">*</span></label>
+                            <label htmlFor="guardian_mobile_no">Guardian Mobile No : </label>
                             <input
                                 type="text"
-                                id="mobile_no"
-                                className={`form-control form-control-sm ${errors.mobile_no && 'is-invalid'}`}
-                                name="mobile_no"
-                                onChange={this.handleChange}
-                                placeholder="Enter patient mobile no.." />
-                        </div>
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="col">
-                        <div className="form-group">
-                            <label>Patient Gender :</label><br />
-                            <div className="form-check form-check-inline">
-                                <input
-                                    type="radio"
-                                    id="inlineRadio1"
-                                    className="form-check-input"
-                                    name="gender"
-                                    onChange={this.handleChange}
-                                    value="male" />
-                                <label className="form-check-label"
-                                       htmlFor="inlineRadio1">Male</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input
-                                    type="radio"
-                                    id="inlineRadio2"
-                                    className="form-check-input"
-                                    name="gender"
-                                    onChange={this.handleChange}
-                                    value="female" />
-                                <label className="form-check-label"
-                                       htmlFor="inlineRadio2">Female</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input
-                                    type="radio"
-                                    id="inlineRadio3"
-                                    className="form-check-input"
-                                    name="gender"
-                                    onChange={this.handleChange}
-                                    value="other" />
-                                <label className="form-check-label"
-                                       htmlFor="inlineRadio3">Other</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="form-group">
-                            <label htmlFor="admitted_date">Admitted Date :</label>
-                            <DatePicker
-                                id="admitted_date"
-                                className={`form-control form-control-sm ${errors.admitted_date && 'is-invalid'}`}
-                                onChange={this.handleChange}
-                                selected={date}
-                                placeholder="admit date..." />
+                                id="guardian_mobile_no"
+                                className={`form-control form-control-sm ${errors.guardian_mobile_no && 'is-invalid'}`}
+                                name="guardian_mobile_no"
+                                onChange={this.props.handleChange}
+                                placeholder="Enter guardian mobile no.."/>
+                            {errors.guardian_mobile_no &&
+                            <div className="invalid-feedback">{errors.guardian_mobile_no}</div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -195,13 +154,16 @@ class AddPatient extends Component {
                             id="address"
                             className={`form-control form-control-sm ${errors.address && 'is-invalid'}`}
                             name="address"
-                            onChange={this.handleChange}
-                            placeholder="Address..." />
+                            onChange={this.props.handleChange}
+                            placeholder="Address..."/>
+                        {errors.address &&
+                        <div className="invalid-feedback">{errors.address}</div>
+                        }
                     </div>
                 </div>
-            </div>
+            </form>
         );
     }
 }
 
-export default connect(state => state)(AddPatient);
+export default AddPatient;

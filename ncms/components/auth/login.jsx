@@ -12,6 +12,7 @@ class Login extends Component {
             formData: {},
             errors: {},
             loading: false,
+            response: null
         };
     }
 
@@ -95,12 +96,7 @@ class Login extends Component {
                     <img src="../img/hospital-banner.png" alt="" />
                 </div>
                 { response &&
-                    <Alert data={{
-                        type: response.code === 200 ? 'success' : 'danger',
-                        title: `${response.status} message!`,
-                        icon: `${response.status}.png`,
-                        message: response.message,
-                    }} />
+                    <Alert data={response} />
                 }
                 <div className="row justify-content-center">
                     <div className="col-md-4 col-sm-12 mt-5">
