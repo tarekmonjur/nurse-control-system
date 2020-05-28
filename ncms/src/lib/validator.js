@@ -35,6 +35,21 @@ class Validator {
         }
     }
 
+    isEmail(field) {
+        if (!validator.isEmpty(this.payload[field]) &&
+            !validator.isEmail(this.payload[field])) {
+            this.errors[field] = 'Please enter valid email';
+        }
+    }
+
+    equals(field, same) {
+        if (!validator.equals(this.payload[field], this.payload[same])) {
+            this.errors[field] = `Please enter the same ${same}`;
+        }
+    }
+
+
+
     getErrors(){
         if (Object.keys(this.errors).length > 0) {
             return new ValidationError('Fill Correct Data', this.errors);
@@ -60,6 +75,12 @@ class Validator {
                             break;
                         case 'mobile':
                             this.isMobilePhone(field, rule_parts[1]);
+                            break;
+                        case 'email':
+                            this.isEmail(field);
+                            break;
+                        case 'equal':
+                            this.equals(field, rule_parts[1]);
                             break;
                         default:
                             break;

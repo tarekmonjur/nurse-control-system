@@ -28,12 +28,13 @@ class Patient extends Component {
     }
 
     componentDidMount() {
-        console.log('patients');
+        console.log('patients componentDidMount');
     }
 
     render() {
         const {response} = this.props.data;
         const {actions} = this.props.data.patient;
+        console.log('patients');
         return (
             <div className="row">
                 {this.props.children}

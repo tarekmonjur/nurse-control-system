@@ -105,6 +105,7 @@ class AddPatient extends Component {
                             <label htmlFor="admitted_date">Admitted Date :</label>
                             <DatePicker
                                 id="admitted_date"
+                                name="admitted_date"
                                 className={`form-control form-control-sm ${errors.admitted_date && 'is-invalid'}`}
                                 onChange={this.props.handleChange}
                                 selected={date}

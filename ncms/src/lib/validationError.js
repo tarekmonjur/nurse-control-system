@@ -16,7 +16,7 @@ class ValidationError extends Error {
         for (const key in errors) {
             if (errors.hasOwnProperty(key)){
                 if (errors[key].hasOwnProperty('message')) {
-                    messages[key] = `${key}${errors[key].message.split('(``)')[1]}`;
+                    messages[key] = `${errors[key].message.replace(/[``]/g, '')}`;
                 } else if (errors[key].hasOwnProperty('msg')) {
                     messages[errors[key].param] = errors[key].msg;
                 } else {
@@ -28,14 +28,17 @@ class ValidationError extends Error {
     }
 
     toJSON() {
-        return {
+        const response =  {
             code: this.code,
             name: this.name,
             status: this.status,
             message: this.message,
             errors: this.errorMessages(),
-            stacktrace: this.stack,
+        };
+        if (process.env.ENVIRONMENT === 'development') {
+            response.stacktrace = this.stack;
         }
+        return response;
     }
 
 }

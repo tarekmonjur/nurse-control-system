@@ -4,13 +4,10 @@ module.exports = {
     makePayload(data) {
         const payload = Object.assign({
             name: '',
-            bed_no: '',
-            gender: '',
-            patient_mobile_no: '',
-            guardian_name: '',
-            guardian_mobile_no: '',
-            admitted_date:'',
-            address: '',
+            email: '',
+            mobile_no: '',
+            password: '',
+            confirm_password: '',
         }, data);
         return payload;
     },
@@ -18,11 +15,10 @@ module.exports = {
     handleValidate(data) {
         const rules = {
             name: 'require|min:3|max:50',
-            bed_no: 'require|min:3|max:10',
-            patient_mobile_no: 'mobile:bn-BD',
-            guardian_name: 'min:3|max:50',
-            guardian_mobile_no: 'mobile:bn-BD',
-            address: 'max:255'
+            email: 'require|email',
+            mobile_no: 'mobile:bn-BD',
+            password: 'require',
+            confirm_password: 'equal:password'
         };
         const payload = this.makePayload(data);
         const validate = new Validator(payload, rules);
