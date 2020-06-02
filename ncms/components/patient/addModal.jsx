@@ -1,9 +1,11 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {isEmpty, isDate} from 'lodash';
-import { handleValidate } from './../../src/services/patient.service';
 import {Alert, Modal} from "../common";
 import AddPatient from "../patient/add";
+import patientService from './../../src/services/patient.service';
+import patientApi from './../../store/patient';
+import {getPatients} from './../../store/actions';
 
 class AddModal extends Component {
     constructor(props) {
@@ -59,33 +61,49 @@ class AddModal extends Component {
         this.setState(stateData);
     };
 
-    handleSubmit() {
+    async handleSubmit() {
         this.setState({loading: true, response: null});
         const formData = this.state.formData;
-        const errors = handleValidate(formData);
+        const errors = patientService.handleValidate(formData);
         // const errors = null;
 
         if (!errors) {
-            fetch(`${process.env.HOST}:${process.env.PORT}/api/patients`, {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGFyZWsiLCJtb2JpbGVfbm8iOiIiLCJlbWFpbCI6InRhcmVrQGdtYWlsLmNvbSIsImlkIjoiNWVjMzk0YjcxNDRmOTEyMzAwN2JlNzc2IiwiaWF0IjoxNTg5OTE4NDg5fQ.BNcNtGVA4kz5Ls6G3A598ovDdT95pkj4U-JlqSAgd8U'
-                },
-                json: true
-            })
-                .then(response => response.json())
-                .then(result => {
-                    setTimeout(() => {
-                        this.setState({
-                            loading: false,
-                            errors: result.errors || {},
-                            response: result,
-                            modal: !!result.errors,
-                        });
-                    }, 1000);
-                });
+            await patientApi.addPatientApi(formData).then(result => {
+                setTimeout(() => {
+                    this.setState({
+                        loading: false,
+                        errors: result.errors || {},
+                        response: result,
+                        modal: !!result.errors,
+                    });
+                }, 1000);
+            });
+            await patientApi.getPatientsApi().then(result => {
+                console.log({result});
+                this.props.dispatch(getPatients(result));
+            });
+
+            // fetch(`${process.env.HOST}:${process.env.PORT}/api/patients`, {
+            //     method: 'POST',
+            //     body: JSON.stringify(formData),
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGFyZWsiLCJtb2JpbGVfbm8iOiIiLCJlbWFpbCI6InRhcmVrQGdtYWlsLmNvbSIsImlkIjoiNWVjMzk0YjcxNDRmOTEyMzAwN2JlNzc2IiwiaWF0IjoxNTg5OTE4NDg5fQ.BNcNtGVA4kz5Ls6G3A598ovDdT95pkj4U-JlqSAgd8U'
+            //     },
+            //     json: true
+            // })
+            //     .then(response => response.json())
+            //     .then(result => {
+            //         await getPatients();
+            //         setTimeout(() => {
+            //             this.setState({
+            //                 loading: false,
+            //                 errors: result.errors || {},
+            //                 response: result,
+            //                 modal: !!result.errors,
+            //             });
+            //         }, 1000);
+            //     });
 
         } else {
             setTimeout(() => {
@@ -138,4 +156,4 @@ class AddModal extends Component {
     }
 }
 
-export default AddModal;
+export default connect(state=>state)(AddModal);

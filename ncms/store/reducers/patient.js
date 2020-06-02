@@ -1,13 +1,8 @@
 import {GET_RESPONSE, PATIENT_GET} from './../actions/actionTypes';
 
 const initialState = {
-    patient: {
-        metadata: {},
-        actions: ['ADD', 'EDIT'],
-        results: [],
-    },
+    data: null,
     response: null,
-    modal: null,
     ...window.locals
 };
 

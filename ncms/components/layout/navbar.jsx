@@ -11,7 +11,7 @@ class Navbar extends Component {
 
     render() {
         const { route } = this.state;
-        console.log(route);
+        // console.log(route);
         return (
             <div id="navbar" className="container-fluid sticky-top">
                 <nav className="navbar navbar-expand-lg">

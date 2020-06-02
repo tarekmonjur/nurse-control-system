@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import {loader} from './../../store/actions';
+import {getPatients, loader} from './../../store/actions';
 
 import Filter from "./filter";
 import AddModal from "../patient/addModal";
@@ -15,26 +15,41 @@ import {
     ExcelButton,
     Alert
 } from './../common';
+import patientApi from "../../store/patient";
 
 
 
 class Patient extends Component {
     constructor(props) {
         super(props);
-
+        this.user = props.user;
         this.state = {
-            addModal: false
+            ...props
         };
     }
 
-    componentDidMount() {
-        console.log('patients componentDidMount');
+    async componentDidMount() {
+        // console.log('patients componentDidMount');
+        // fetch(`${process.env.HOST}:${process.env.PORT}/api/patients`, {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        // })
+        //     .then(response => response.json())
+        //     .then(result => {
+        //         this.setState({
+        //             data: result.results,
+        //         });
+        //     });
+        await patientApi.getPatientsApi().then(result => {
+            this.props.getPatients(result);
+        });
     }
 
     render() {
-        const {response} = this.props.data;
-        const {actions} = this.props.data.patient;
-        console.log('patients');
+        const {response, data} = this.props;
+        console.log('patients data', data);
         return (
             <div className="row">
                 {this.props.children}
@@ -59,7 +74,9 @@ class Patient extends Component {
                         </div>
                         <div className="card-body">
                             <Filter />
-                            <Table />
+                            {data &&
+                                <Table data={data}/>
+                            }
                         </div>
                         <div className="card-footer">
                             <Paginate />
@@ -68,7 +85,7 @@ class Patient extends Component {
                 </div>
                 <AddModal setChild={(child) => this.child = child}/>
                 { response &&
-                    <Alert />
+                    <Alert data={response}/>
                 }
             </div>
         );
@@ -79,7 +96,7 @@ const mapStateToProps = (state, ownProps = {}) => {
     return {...state, ...ownProps};
 };
 
-const actionCreators = {loader};
+const actionCreators = {loader, getPatients};
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(actionCreators, dispatch);

@@ -3,9 +3,14 @@ const PatientController = require('./../../controllers/patient.controller');
 const patientService = require('./../../services/patient.service');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+    const filter = patientService.makeFilter(req);
+    const results = await PatientController.index(filter);
     return res.status(200).json({
-
+        code: 200,
+        status: 'success',
+        message: 'Patient created Successfully',
+        results: results
     });
 });
 

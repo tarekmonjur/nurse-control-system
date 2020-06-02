@@ -23,6 +23,10 @@ module.exports = {
     },
 
     async getUserById(id) {
-        return await User.findById(id, {'_id': 0}).select('name email mobile_no');
+        return await User.findById(id, {'_id': 0}).select('name email mobile_no token');
+    },
+
+    async updateAuthTokenById(id, token) {
+        return await User.updateOne({_id: id}, {token: token});
     }
 };

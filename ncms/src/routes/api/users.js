@@ -10,10 +10,10 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const errors = userService.handleValidate(req.body);
-        if (errors) {
-            return res.status(errors.code).json(errors);
-        }
+        // const errors = userService.handleValidate(req.body);
+        // if (errors) {
+        //     return res.status(errors.code).json(errors);
+        // }
         const result = await UserController.store(req.body);
         return res.status(200).json({
             code: 200,

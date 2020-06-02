@@ -46,7 +46,9 @@ const initialize = (passport, getUserByEmail, getUserById) => {
             try {
                 if (jwtPayload.id && jwtPayload.email) {
                     const user = await getUserById(jwtPayload.id);
-                    return done(null, user);
+                    if (user && user.token !=='') {
+                        return done(null, user);
+                    }
                 }
                 return done('Unauthorized', false);
             } catch (err) {
@@ -74,7 +76,7 @@ const checkNotAuthenticated = (req, res, next) => {
 
 const checkJWTAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
-        next();
+        return next();
     }
     passport.authenticate('jwt', {session: false}, (err, user) => {
         if (err || !user) {
@@ -85,7 +87,8 @@ const checkJWTAuthenticated = (req, res, next) => {
                 errors: err
             });
         }
-        next();
+        req.user = user;
+        return next();
     })(req, res);
 };
 

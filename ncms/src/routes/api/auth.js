@@ -32,6 +32,7 @@ router.post('/', async (req, res, next) => {
                 const {name, mobile_no, email} = user;
                 const auth_user = {name, mobile_no, email};
                 const token = jwt.sign({...auth_user, id: user._id}, process.env.SECRET);
+                authService.updateAuthTokenById(user._id, token);
 
                 return res.status(200).json({
                     code: 200,

@@ -18,7 +18,7 @@ router.get('/', checkAuthenticated, (req, res) => {
     return res.render('home');
 });
 
-router.get('/patients', (req, res) => {
+router.get('/patients', checkAuthenticated, (req, res) => {
     return res.render('patient');
 });
 

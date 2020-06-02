@@ -7,7 +7,7 @@ const usersRoute = require('./users');
 const patientsRoute = require('./patients');
 
 router.use('/login', authRoute);
-router.use('/users', checkJWTAuthenticated, usersRoute);
+router.use('/users', usersRoute);
 router.use('/patients', checkJWTAuthenticated, patientsRoute);
 
 module.exports = router;
