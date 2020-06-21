@@ -2,10 +2,10 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {isEmpty, isDate} from 'lodash';
 import {Alert, Modal} from "../common";
-import AddPatient from "../patient/add";
+import Form from "../patient/form";
 import patientService from './../../src/services/patient.service';
-import patientApi from './../../store/patient';
 import {getPatients} from './../../store/actions';
+import api from "../../store/api";
 
 class AddModal extends Component {
     constructor(props) {
@@ -18,6 +18,7 @@ class AddModal extends Component {
             loading: false,
             modalId: "add-patient-modal",
             response: null,
+            info: {},
         };
     }
 
@@ -65,46 +66,23 @@ class AddModal extends Component {
         this.setState({loading: true, response: null});
         const formData = this.state.formData;
         const errors = patientService.handleValidate(formData);
-        // const errors = null;
 
         if (!errors) {
-            await patientApi.addPatientApi(formData).then(result => {
-                setTimeout(() => {
+            api.storePatient(formData)
+                .then(result => {
                     this.setState({
                         loading: false,
                         errors: result.errors || {},
                         response: result,
                         modal: !!result.errors,
                     });
-                }, 1000);
+                    if (result.status !== 'error') {
+                        api.getPatients({columns: this.props.columns})
+                            .then(result => {
+                                this.props.dispatch(getPatients(result));
+                            });
+                    }
             });
-            await patientApi.getPatientsApi().then(result => {
-                console.log({result});
-                this.props.dispatch(getPatients(result));
-            });
-
-            // fetch(`${process.env.HOST}:${process.env.PORT}/api/patients`, {
-            //     method: 'POST',
-            //     body: JSON.stringify(formData),
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGFyZWsiLCJtb2JpbGVfbm8iOiIiLCJlbWFpbCI6InRhcmVrQGdtYWlsLmNvbSIsImlkIjoiNWVjMzk0YjcxNDRmOTEyMzAwN2JlNzc2IiwiaWF0IjoxNTg5OTE4NDg5fQ.BNcNtGVA4kz5Ls6G3A598ovDdT95pkj4U-JlqSAgd8U'
-            //     },
-            //     json: true
-            // })
-            //     .then(response => response.json())
-            //     .then(result => {
-            //         await getPatients();
-            //         setTimeout(() => {
-            //             this.setState({
-            //                 loading: false,
-            //                 errors: result.errors || {},
-            //                 response: result,
-            //                 modal: !!result.errors,
-            //             });
-            //         }, 1000);
-            //     });
-
         } else {
             setTimeout(() => {
                 this.setState({
@@ -112,17 +90,17 @@ class AddModal extends Component {
                     errors: errors.errors,
                     response: errors,
                 });
-            }, 1000);
+            }, 300)
         }
 
     };
 
     render() {
-        const {errors, response, date, modal, modalId} = this.state;
+        const {errors, response, date, modal, modalId, info} = this.state;
         return (
             <div>
                 { response &&
-                    <Alert data={response}/>
+                    <Alert data={response} id="add-alert"/>
                 }
 
                 { modal &&
@@ -143,8 +121,9 @@ class AddModal extends Component {
                         onSubmit={() => {
                             this.handleSubmit();
                         }}>
-                        <AddPatient
+                        <Form
                             formName={modalId}
+                            info={info}
                             errors={errors}
                             date={date}
                             init={() => { this.init() }}

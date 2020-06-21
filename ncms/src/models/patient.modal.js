@@ -45,10 +45,29 @@ const patientSchema = new Schema({
         default: '',
     }
 },{
-    timestamps: true,
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
+    },
+    versionKey: false,
 });
 
-// patientSchema.path('gender').options.enum;
+// patientSchema.path('createdAt').options.enum;
+
+// schema.set(timestamps, {
+//     createdAt: true,
+//     updatedAt: { path: 'updatedAt', setOnInsert: false }
+// });
+
+patientSchema.pre('save', function(){
+    if (this.isNew) {
+        this.set({created_at: new Date()});
+        this.set('updated_at', '');
+    } else {
+        this.set({created_at: this.get('created_at')});
+        this.set('updated_at', new Date());
+    }
+});
 
 const Patient = mongoose.model('patients', patientSchema);
 

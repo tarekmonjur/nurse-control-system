@@ -9,17 +9,30 @@ class Table extends Component {
         super(props);
     }
 
-    tableBody(columns, results) {
+    tableBody(data) {
+        let columns = data.metadata.columns;
+        let results = data.results;
+        const onView = this.props.onView;
+        const onEdit = this.props.onEdit;
+        const onDelete = this.props.onDelete;
         columns = columns.split(',');
+
         return results.map((data, index) => {
             index++;
-            return <TableBodyTr key={index} tr={index} columns={columns} data={data} />
+            return <TableBodyTr
+                key={index}
+                tr={index}
+                columns={columns}
+                data={data}
+                onView={onView}
+                onEdit={onEdit}
+                onDelete={onDelete}
+            />
         })
     };
 
     render() {
-        const {data} = this.props;
-        console.log('table', data);
+        const {data, onView, onEdit, onDelete} = this.props;
         return (
             <div className="table-responsive">
                 <table className="table table-sm table-bordered table-hover">
@@ -29,11 +42,13 @@ class Table extends Component {
                         { data.columns &&
                             Object.entries(data.columns).map((column) => (<th key={column[0]}>{column[1]}</th>))
                         }
-                        <th>Options</th>
+                        { (onView || onEdit || onDelete) &&
+                            <th>Options</th>
+                        }
                     </tr>
                     </thead>
                     <tbody>
-                        {data.results && this.tableBody(data.metadata.columns, data.results) }
+                        {data.results && this.tableBody(data) }
                     </tbody>
                 </table>
             </div>
@@ -53,11 +68,28 @@ const TableBodyTr = (props) => {
             <TableBodyTd key={`${props.tr}${td}`} value={props.data[column]} />
         ))}
         <td>
-            <div className="d-flex actions">
-                <EditButton />
-                <ViewButton />
-                <DeleteButton />
-            </div>
+            { (props.onEdit || props.onEdit || props.onDelete) &&
+                <div className="d-flex actions">
+                    {props.onEdit &&
+                    <EditButton
+                        rowId={props.data._id}
+                        action={props.onEdit}
+                    />
+                    }
+                    {props.onView &&
+                    <ViewButton
+                        rowId={props.data._id}
+                        action={props.onView}
+                    />
+                    }
+                    {props.onDelete &&
+                    <DeleteButton
+                        rowId={props.data._id}
+                        action={props.onDelete}
+                    />
+                    }
+                </div>
+            }
         </td>
     </tr>)
 };

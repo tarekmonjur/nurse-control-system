@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import {getPatients, loader} from './../../store/actions';
+import {getPatients, loader, getResponse} from './../../store/actions';
+import api from "../../store/api";
 
 import Filter from "./filter";
 import AddModal from "../patient/addModal";
+import EditModal from "../patient/editModal";
+import ViewModal from "../patient/viewModal";
 import {
     Table,
     Paginate,
@@ -15,41 +18,37 @@ import {
     ExcelButton,
     Alert
 } from './../common';
-import patientApi from "../../store/patient";
-
 
 
 class Patient extends Component {
     constructor(props) {
         super(props);
         this.user = props.user;
-        this.state = {
-            ...props
-        };
+        this.onDelete = this.onDelete.bind(this);
+        this.state = { response: null }
     }
 
     async componentDidMount() {
-        // console.log('patients componentDidMount');
-        // fetch(`${process.env.HOST}:${process.env.PORT}/api/patients`, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        // })
-        //     .then(response => response.json())
-        //     .then(result => {
-        //         this.setState({
-        //             data: result.results,
-        //         });
-        //     });
-        await patientApi.getPatientsApi().then(result => {
-            this.props.getPatients(result);
-        });
+        this.props.getPatients(
+            await api.getPatients({ columns: this.props.columns })
+        );
+    }
+
+    onDelete(id) {
+        this.setState({ response: null });
+        api.deletePatient(id)
+            .then(result => {
+                this.setState({ response: result });
+                api.getPatients({ columns: this.props.columns })
+                    .then(result => {
+                        this.props.getPatients(result);
+                    });
+            });
     }
 
     render() {
-        const {response, data} = this.props;
-        console.log('patients data', data);
+        const { data } = this.props;
+        const { response } = this.state;
         return (
             <div className="row">
                 {this.props.children}
@@ -67,15 +66,21 @@ class Patient extends Component {
                                 <AddButton
                                     title="Admit Patient"
                                     onclick={() => {
-                                        this.child.open()
+                                        this.addModal.open()
                                     }}
                                 />
                             </div>
                         </div>
-                        <div className="card-body">
+                        <div className="card-body"
+                             style={{maxHeight: 'calc(100vh - 300px)', overflowY: 'auto'}}>
                             <Filter />
                             {data &&
-                                <Table data={data}/>
+                                <Table
+                                    data={data}
+                                    onEdit={this.editModal.open}
+                                    onView={this.viewModal.onView}
+                                    onDelete={this.onDelete}
+                                />
                             }
                         </div>
                         <div className="card-footer">
@@ -83,9 +88,11 @@ class Patient extends Component {
                         </div>
                     </div>
                 </div>
-                <AddModal setChild={(child) => this.child = child}/>
+                <AddModal setChild={(child) => this.addModal = child} />
+                <EditModal setChild={(child) => this.editModal = child} />
+                <ViewModal setChild={(child) => this.viewModal = child}/>
                 { response &&
-                    <Alert data={response}/>
+                    <Alert data={response} id="alert"/>
                 }
             </div>
         );
@@ -96,7 +103,7 @@ const mapStateToProps = (state, ownProps = {}) => {
     return {...state, ...ownProps};
 };
 
-const actionCreators = {loader, getPatients};
+const actionCreators = {loader, getPatients, getResponse};
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(actionCreators, dispatch);

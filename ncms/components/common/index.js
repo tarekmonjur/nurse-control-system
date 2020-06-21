@@ -10,6 +10,7 @@ import PdfButton from "./button/pdf";
 import ExcelButton from "./button/excel";
 import Loading from './loading';
 import Alert from './alert';
+import View from './view';
 
 export {
     Table,
@@ -21,5 +22,6 @@ export {
     PdfButton,
     ExcelButton,
     Loading,
-    Alert
+    Alert,
+    View,
 }

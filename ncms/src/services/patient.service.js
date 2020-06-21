@@ -1,4 +1,5 @@
 const Validator = require('./../lib/validator');
+const ValidationError = require('./../lib/validationError');
 const Patient = require('./../models/patient.modal');
 
 module.exports = {
@@ -54,7 +55,7 @@ module.exports = {
     makeFilter(req) {
         console.log(req.user);
         const actions = req.user.actions || [];
-        let select = req.query.column || '';
+        let select = req.query.columns || '';
         let columns = this.defaultColumns;
 
         if (select) {
@@ -77,6 +78,24 @@ module.exports = {
     },
 
     async getAllPatients(filters = {filter: {}}) {
-        return await Patient.find(filters.filter, filters.select).sort({createdAt: -1});
+        return await Patient.find(filters.filter, filters.select).sort({created_at: -1});
+    },
+
+    async getPatientById(id) {
+        return await Patient.findById(id);
+    },
+
+    async deletePatientById(id) {
+        return await Patient.deleteOne({_id: id});
+    },
+
+    async upsertPatient(payload, isNew = true) {
+        const patient = new Patient(payload);
+        const error = patient.validateSync();
+        if (error && error.errors) {
+            throw new ValidationError('Patient fields error', error.errors);
+        }
+        patient.isNew = isNew;
+        return await patient.save();
     }
 };

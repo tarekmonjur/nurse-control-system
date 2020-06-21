@@ -8,6 +8,11 @@ module.exports = {
         login: ['./components/login.js'],
         home: ['./components/home.js'],
         patient: ['./components/patient.js'],
+        bed: ['./components/bed.js'],
+        doctor: ['./components/doctor.js'],
+        nurse: ['./components/nurse.js'],
+        call_history: ['./components/call_history.js'],
+        real_time_call: ['./components/real_time_call.js'],
     },
     output: {
         filename: '[name].js',

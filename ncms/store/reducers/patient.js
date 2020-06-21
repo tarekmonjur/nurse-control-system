@@ -1,13 +1,10 @@
-import {GET_RESPONSE, PATIENT_GET} from './../actions/actionTypes';
+import {GET_RESPONSE, GET_PATIENT} from './../actions/actionTypes';
 
 const initialState = {
     data: null,
     response: null,
+    columns: '',
     ...window.locals
-};
-
-const patient = (state = {}, action) => {
-    return state;
 };
 
 export const patients = (state = initialState, action) => {
@@ -15,8 +12,11 @@ export const patients = (state = initialState, action) => {
         return {...state, response: action.response};
     }
 
-    if (action.type === PATIENT_GET) {
-        return {...state, data: action.data};
+    if (action.type === GET_PATIENT) {
+        if (action.payload.status === 'error') {
+            return {...state, response: action.payload};
+        }
+        return {...state, data: action.payload.results};
     }
 
     return state;

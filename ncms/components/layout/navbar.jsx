@@ -31,32 +31,32 @@ class Navbar extends Component {
                                     <img src="../img/patient.png" alt="" />
                                     &nbsp;Patient</a>
                             </li>
-                            <li className="nav-item">
+                            <li className={`nav-item ${route === 'beds' && 'active'}`}>
                                 <a className="nav-link" href="/beds">
                                     <img src="../img/bed-02.png" alt="" />
                                     &nbsp;Bed & Device</a>
                             </li>
-                            <li className="nav-item">
+                            <li className={`nav-item ${route === 'doctors' && 'active'}`}>
                                 <a className="nav-link" href="/doctors">
                                     <img src="../img/doctor.png" alt="" />
                                     &nbsp;Doctor</a>
                             </li>
-                            <li className="nav-item">
+                            <li className={`nav-item ${route === 'nurses' && 'active'}`}>
                                 <a className="nav-link" href="/nurses">
                                     <img src="../img/nurse.png" alt="" />
                                     &nbsp;Nurse</a>
                             </li>
-                            <li className="nav-item">
+                            <li className={`nav-item ${route === 'call-history' && 'active'}`}>
                                 <a className="nav-link" href="/call-history">
                                     <img src="../img/emergency-call.png" alt="" />
                                     &nbsp;Call History</a>
                             </li>
-                            <li className="nav-item">
+                            <li className={`nav-item ${route === 'real-time-call' && 'active'}`}>
                                 <a className="nav-link" href="/real-time-call">
                                     <img src="../img/ecg.png" alt="" />
                                     &nbsp;Real Time Call</a>
                             </li>
-                            <li className="nav-item">
+                            <li className={`nav-item ${route === 'reports' && 'active'}`}>
                                 <a className="nav-link" href="/reports">
                                     <img src="../img/report-01.png" alt="" />
                                     &nbsp;Report</a>

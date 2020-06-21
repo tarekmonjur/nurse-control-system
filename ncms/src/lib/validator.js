@@ -48,6 +48,12 @@ class Validator {
         }
     }
 
+    isDecimal(field) {
+        if (!validator.isEmpty(this.payload[field]) &&
+            !validator.isDecimal(this.payload[field])) {
+            this.errors[field] = `Please enter decimal value`;
+        }
+    }
 
 
     getErrors(){
@@ -81,6 +87,9 @@ class Validator {
                             break;
                         case 'equal':
                             this.equals(field, rule_parts[1]);
+                            break;
+                        case 'decimal':
+                            this.isDecimal(field, rule_parts[1]);
                             break;
                         default:
                             break;

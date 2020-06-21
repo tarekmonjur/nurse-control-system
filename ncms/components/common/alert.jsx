@@ -4,7 +4,7 @@ import { capitalize } from 'lodash';
 class Alert extends Component {
     constructor(props) {
         super(props);
-        const response = this.props.data;
+        const response = props.data;
         this.data = {
             type: response.code === 200 ? 'success' : 'danger',
             title: `${response.status} message!`,
@@ -14,7 +14,7 @@ class Alert extends Component {
     }
 
     componentDidMount() {
-        $('.toast').toast('show');
+        $(`#${this.props.id}`).toast('show');
     }
 
     componentWillUnmount() {
@@ -22,13 +22,14 @@ class Alert extends Component {
     }
 
     hide() {
-        $('.toast').toast('hide');
+        $(`#${this.props.id}`).toast('hide');
     }
 
     render() {
         return (
             <div style={{position: 'relative', zIndex: 9999}}>
                 <div className="toast mr-3"
+                     id={this.props.id}
                      role="alert"
                      aria-live="assertive"
                      aria-atomic="true"
@@ -42,7 +43,7 @@ class Alert extends Component {
                         <strong className="mr-auto">{capitalize(this.data.title)}</strong>
                         <button
                             type="button"
-                            onClick={this.hide}
+                            onClick={() => this.hide}
                             className="ml-2 mb-1 close"
                             data-dismiss="toast"
                             aria-label="Close">

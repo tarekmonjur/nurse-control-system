@@ -37,7 +37,11 @@ const userSchema = new Schema({
         default: ''
     }
 }, {
-    timestamps: true,
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
+    },
+    versionKey: false,
 });
 
 userSchema.path('password').set(v => {

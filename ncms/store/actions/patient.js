@@ -1,15 +1,8 @@
-import {GET_RESPONSE, PATIENT_GET} from './actionTypes';
-
-export const getResponse = (payload) => {
-    return {
-        type: GET_RESPONSE,
-        response: payload,
-    }
-};
+import {GET_PATIENT} from './actionTypes';
 
 export const getPatients = (payload) => {
     return {
-        type: PATIENT_GET,
-        data: payload.results,
+        type: GET_PATIENT,
+        payload,
     }
 };

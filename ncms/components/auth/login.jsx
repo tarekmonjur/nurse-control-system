@@ -96,7 +96,7 @@ class Login extends Component {
                     <img src="../img/hospital-banner.png" alt="" />
                 </div>
                 { response &&
-                    <Alert data={response} />
+                    <Alert data={response} id="alert"/>
                 }
                 <div className="row justify-content-center">
                     <div className="col-md-4 col-sm-12 mt-5">
@@ -157,9 +157,7 @@ class Login extends Component {
                                         disabled={loading}
                                         type="submit">
                                         {loading ?
-                                            <Loading
-                                                height="50%"
-                                                width="50%" /> :
+                                            <Loading col="col-10" /> :
                                             'Login'
                                         }
                                     </button>
