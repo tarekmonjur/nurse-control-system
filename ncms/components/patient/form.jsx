@@ -74,7 +74,7 @@ class Form extends Component {
                                     id="inlineRadio1"
                                     className="form-check-input"
                                     name="gender"
-                                    checked={info.gender === 'male'}
+                                    checked={info.gender && info.gender === 'male'}
                                     onChange={this.props.handleChange}
                                     value="male"/>
                                 <label className="form-check-label"
@@ -86,7 +86,7 @@ class Form extends Component {
                                     id="inlineRadio2"
                                     className="form-check-input"
                                     name="gender"
-                                    checked={info.gender === 'female'}
+                                    checked={info.gender && info.gender === 'female'}
                                     onChange={this.props.handleChange}
                                     value="female"/>
                                 <label className="form-check-label"
@@ -98,7 +98,7 @@ class Form extends Component {
                                     id="inlineRadio3"
                                     className="form-check-input"
                                     name="gender"
-                                    checked={info.gender === 'other'}
+                                    checked={info.gender && info.gender === 'other'}
                                     onChange={this.props.handleChange}
                                     value="other"/>
                                 <label className="form-check-label"

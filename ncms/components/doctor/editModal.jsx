@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {isEmpty, isDate} from 'lodash';
 import {Alert, Modal} from "../common";
-import Form from "../doctor/form";
+import Form from "./form";
 import doctorService from './../../src/services/doctor.service';
 import {getData} from './../../store/actions';
 import api from "../../store/api";

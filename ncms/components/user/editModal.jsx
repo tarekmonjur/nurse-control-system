@@ -7,19 +7,20 @@ import doctorService from './../../src/services/doctor.service';
 import {getData} from './../../store/actions';
 import api from "../../store/api";
 
-class AddModal extends Component {
+class EditModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
             formData: {},
-            date: new Date(),
             errors: {},
             modal: false,
             loading: false,
-            modalId: "add-doctor-modal",
+            modalId: "edit-user-modal",
             response: null,
-            info: {},
+            doctor: {},
         };
+        this.id = null;
+        this.open = this.open.bind(this);
     }
 
     init() {
@@ -33,8 +34,15 @@ class AddModal extends Component {
         this.setState({ formData });
     }
 
-    open() {
-        this.setState({ modal:true });
+    open(id) {
+        this.id = id;
+        api.showDoctor(id).then(result => {
+            if (result.status === 'error') {
+                this.setState({ response: result });
+            } else {
+                this.setState({ modal:true, doctor: result.results });
+            }
+        });
     }
 
     componentDidMount() {
@@ -42,23 +50,12 @@ class AddModal extends Component {
     }
 
     handleChange = (event) => {
-        let stateData = {};
-        if (isDate(event)) {
-            stateData = {
-                formData: {
-                    ...this.state.formData,
-                    joining_date : event.toISOString().split('T')[0],
-                },
-                date: event,
-            };
-        } else {
-            stateData = {
-                formData: {
-                    ...this.state.formData,
-                    [event.target.name]: event.target.value,
-                },
-            };
-        }
+        const stateData = {
+            formData: {
+                ...this.state.formData,
+                [event.target.name]: event.target.value,
+            },
+        };
         this.setState(stateData);
     };
 
@@ -68,13 +65,15 @@ class AddModal extends Component {
         const errors = doctorService.handleValidate(formData);
 
         if (!errors) {
-            api.storeDoctor(formData)
+            console.log({formData});
+            api.updateDoctor(this.id, formData)
                 .then(result => {
                     this.setState({
                         loading: false,
                         errors: result.errors || {},
                         response: result,
                         modal: !!result.errors,
+                        formData: {},
                     });
                     if (result.status !== 'error') {
                         this.props.dispatch(getData({ columns: this.props.columns }));
@@ -89,29 +88,32 @@ class AddModal extends Component {
                 });
             }, 200)
         }
+
     };
 
     render() {
-        const { errors, response, modal, modalId, info, date } = this.state;
+        const {errors, response, modal, modalId, doctor, formData} = this.state;
+        const data = Object.assign(doctor, formData);
         return (
             <div>
                 { response &&
-                    <Alert data={response} id="add-alert"/>
+                    <Alert data={response} id="edit-alert"/>
                 }
 
                 { modal &&
                     <Modal
                         id={modalId}
                         size="modal-lg"
-                        icon="doctor.png"
-                        title="Register New Doctor"
-                        button="Submit Registration Form"
+                        icon="bed-03.png"
+                        title="Edit Doctor"
+                        button="Submit Doctor Form"
                         loading={this.state.loading}
                         onClose={() => {
                             this.setState({
                                 modal: false,
                                 errors: false,
-                                response: null
+                                response: null,
+                                formData: {},
                             });
                         }}
                         onSubmit={() => {
@@ -119,8 +121,7 @@ class AddModal extends Component {
                         }}>
                         <Form
                             formName={modalId}
-                            info={info}
-                            date={date}
+                            info={data}
                             errors={errors}
                             init={() => { this.init() }}
                             handleChange={this.handleChange} />
@@ -131,4 +132,4 @@ class AddModal extends Component {
     }
 }
 
-export default connect(state=>state)(AddModal);
+export default connect(state=>state)(EditModal);

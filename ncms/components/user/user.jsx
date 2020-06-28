@@ -6,10 +6,10 @@ import {
     getData,
     deleteData
 } from './../../store/actions';
-import Filter from "./filter";
-import AddModal from "./addModal";
-import EditModal from "./editModal";
-import ViewModal from "./viewModal";
+import Filter from './filter';
+import AddModal from './addModal';
+import EditModal from './editModal';
+import ViewModal from './viewModal';
 import {
     Table,
     Paginate,
@@ -22,12 +22,11 @@ import {
 } from './../common';
 
 
-class Bed extends Component {
+class User extends Component {
     constructor(props) {
         super(props);
-        this.user = props.user;
+        this.state = { response: null };
         this.onDelete = this.onDelete.bind(this);
-        this.state = { response: null }
     }
 
     async componentDidMount() {
@@ -41,7 +40,7 @@ class Bed extends Component {
 
     render() {
         const { data, response } = this.props;
-        console.log('beds..');
+        console.log('user..');
         return (
             <div className="row">
                 {this.props.children}
@@ -50,14 +49,14 @@ class Bed extends Component {
                         <div className="card-header">
                             <div className="d-flex">
                                 <ListTitle
-                                    title="Bed & Device Mapping"
-                                    icon="bed.png"
+                                    title="Users List"
+                                    icon="administrator.png"
                                 />
                                 <ExcelButton />
                                 <PdfButton />
                                 <FilterButton />
                                 <AddButton
-                                    title="Add New Bed & Device"
+                                    title="Register New User"
                                     onclick={() => {
                                         this.addModal.open()
                                     }}
@@ -102,4 +101,4 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(actionCreators, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Bed);
+export default connect(mapStateToProps, mapDispatchToProps)(User);

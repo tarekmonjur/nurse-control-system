@@ -13,6 +13,8 @@ module.exports = {
         nurse: ['./components/nurse.js'],
         call_history: ['./components/call_history.js'],
         real_time_call: ['./components/real_time_call.js'],
+        report: ['./components/report.js'],
+        user: ['./components/user.js'],
     },
     output: {
         filename: '[name].js',

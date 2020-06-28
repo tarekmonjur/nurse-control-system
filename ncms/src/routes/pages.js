@@ -51,4 +51,8 @@ router.get('/reports', checkAuthenticated, (req, res) => {
     return res.render('report');
 });
 
+router.get('/users', checkAuthenticated, (req, res) => {
+    return res.render('user');
+});
+
 module.exports = router;

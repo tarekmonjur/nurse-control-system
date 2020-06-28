@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {isEmpty, isDate} from 'lodash';
 import {Alert, Modal} from "../common";
-import Form from "../bed/form";
+import Form from "./form";
 import bedService from './../../src/services/bed.service';
 import {getData} from './../../store/actions';
 import api from "../../store/api";

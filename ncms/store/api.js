@@ -5,6 +5,8 @@ const DOCTOR_URL = '/doctors';
 const NURSE_URL = '/nurses';
 const CALL_HISTORY_URL = '/call-histories';
 const REAL_TIME_CALL_URL = '/real-time-call';
+const REPORT_URL = '/reports';
+const USER_URL = '/users';
 
 async function makeRequest(url, method = 'GET', payload = null, headers = null) {
     url = `${API_PREFIX}${url}`;
@@ -196,5 +198,54 @@ module.exports = {
             REAL_TIME_CALL_URL,
             'get',
             payload);
+    },
+
+    /********REPORT CALL API**********/
+    async getDailyPatientNurseCall(payload = {}) {
+        return await makeRequest(
+            `${REPORT_URL}/daily-patient-nurse-call-summary`,
+            'get',
+            payload);
+    },
+
+    async getMonthlyPatientNurseCall(payload = {}) {
+        return await makeRequest(
+            `${REPORT_URL}/monthly-patient-nurse-call-summary`,
+            'get',
+            payload);
+    },
+
+    /********USER API**********/
+    async getUsers(payload = {}) {
+        return await makeRequest(
+            USER_URL,
+            'get',
+            payload);
+    },
+
+    async storeUser(payload) {
+        return await makeRequest(
+            USER_URL,
+            'post',
+            payload);
+    },
+
+    async showUser(id) {
+        return await makeRequest(
+            `${USER_URL}/${id}`,
+            'get');
+    },
+
+    async updateUser(id, payload) {
+        return await makeRequest(
+            `${USER_URL}/${id}`,
+            'put',
+            payload);
+    },
+
+    async deleteUser(id) {
+        return await makeRequest(
+            `${USER_URL}/${id}`,
+            'delete');
     },
 };

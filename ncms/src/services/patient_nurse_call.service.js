@@ -1,5 +1,4 @@
-const Validator = require('./../lib/validator');
-const ValidationError = require('./../lib/validationError');
+
 const PatientNurseCall = require('./../models/patient_nurse_call.modal');
 
 module.exports = {
@@ -18,19 +17,6 @@ module.exports = {
     makePayload(data) {
         const payload = Object.assign(this.getFields(), data);
         return payload;
-    },
-
-    handleValidate(data) {
-        const rules = {
-            name: 'require|min:3|max:20',
-            department: 'min:3|max:50',
-            designation: 'min:3|max:50',
-            mobile_no: 'require|mobile:bn-BD',
-            address: 'max:255',
-        };
-        const payload = this.makePayload(data);
-        const validate = new Validator(payload, rules);
-        return validate.getErrors();
     },
 
     getFields() {
@@ -78,22 +64,4 @@ module.exports = {
     async getAllCallHistories(filters = {filter: {}}) {
         return await PatientNurseCall.find(filters.filter, filters.select).sort({created_at: -1});
     },
-
-    async getNurseById(id) {
-        return await PatientNurseCall.findById(id);
-    },
-
-    async deleteNurseById(id) {
-        return await PatientNurseCall.deleteOne({_id: id});
-    },
-
-    async upsertNurse(payload, isNew = true) {
-        const nurse = new PatientNurseCall(payload);
-        const error = nurse.validateSync();
-        if (error && error.errors) {
-            throw new ValidationError('Nurse fields error', error.errors);
-        }
-        nurse.isNew = isNew;
-        return await nurse.save();
-    }
 };

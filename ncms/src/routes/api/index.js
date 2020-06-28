@@ -10,6 +10,7 @@ const doctorsRoute = require('./doctors');
 const nursesRoute = require('./nurses');
 const callHistoryRoute = require('./call_histories');
 const RealTimeCallRoute = require('./real_time_call');
+const ReportRoute = require('./reports');
 
 router.use('/login', authRoute);
 router.use('/users', usersRoute);
@@ -19,5 +20,6 @@ router.use('/doctors', checkJWTAuthenticated, doctorsRoute);
 router.use('/nurses', checkJWTAuthenticated, nursesRoute);
 router.use('/call-histories', checkJWTAuthenticated, callHistoryRoute);
 router.use('/real-time-call', checkJWTAuthenticated, RealTimeCallRoute);
+router.use('/reports', checkJWTAuthenticated, ReportRoute);
 
 module.exports = router;

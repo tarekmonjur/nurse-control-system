@@ -5,9 +5,9 @@ import {getPatients, loader, getResponse} from './../../store/actions';
 import api from "../../store/api";
 
 import Filter from "./filter";
-import AddModal from "../patient/addModal";
-import EditModal from "../patient/editModal";
-import ViewModal from "../patient/viewModal";
+import AddModal from "./addModal";
+import EditModal from "./editModal";
+import ViewModal from "./viewModal";
 import {
     Table,
     Paginate,

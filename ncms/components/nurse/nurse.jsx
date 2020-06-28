@@ -7,9 +7,9 @@ import {
     deleteData
 } from './../../store/actions';
 import Filter from "./filter";
-import AddModal from "../nurse/addModal";
-import EditModal from "../nurse/editModal";
-import ViewModal from "../nurse/viewModal";
+import AddModal from "./addModal";
+import EditModal from "./editModal";
+import ViewModal from "./viewModal";
 import {
     Table,
     Paginate,

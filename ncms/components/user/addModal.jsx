@@ -16,7 +16,7 @@ class AddModal extends Component {
             errors: {},
             modal: false,
             loading: false,
-            modalId: "add-doctor-modal",
+            modalId: "add-user-modal",
             response: null,
             info: {},
         };
@@ -68,7 +68,7 @@ class AddModal extends Component {
         const errors = doctorService.handleValidate(formData);
 
         if (!errors) {
-            api.storeDoctor(formData)
+            api.storeUser(formData)
                 .then(result => {
                     this.setState({
                         loading: false,
@@ -103,8 +103,8 @@ class AddModal extends Component {
                     <Modal
                         id={modalId}
                         size="modal-lg"
-                        icon="doctor.png"
-                        title="Register New Doctor"
+                        icon="user.png"
+                        title="Register New User"
                         button="Submit Registration Form"
                         loading={this.state.loading}
                         onClose={() => {
