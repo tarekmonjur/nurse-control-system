@@ -1,17 +1,62 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import DatePicker from "react-datepicker";
+import { isEmpty, isDate } from 'lodash';
 
 class Form extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            date: new Date(),
+            formData: this.props.info
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    init() {
+        let formData = {};
+        const form = document.querySelector(`form[name="${this.props.formName}"]`);
+        for (let i = 0; i < form.elements.length; i++) {
+            if (!isEmpty(form.elements[i].name)) {
+                if (form.elements[i].type === 'radio') {
+                    if (form.elements[i].checked)
+                        formData[form.elements[i].name] = form.elements[i].value;
+                } else {
+                    formData[form.elements[i].name] = form.elements[i].value;
+                }
+            }
+        }
+        this.setState({formData: formData})
     }
 
     componentDidMount() {
-        this.props.init();
+        this.init();
     }
 
+    handleChange(event) {
+        let stateData = {};
+        if (isDate(event)) {
+            stateData = {
+                formData: {
+                    ...this.state.formData,
+                    joining : event.toISOString().split('T')[0],
+                },
+                date: event,
+            };
+        } else {
+            stateData = {
+                formData: {
+                    ...this.state.formData,
+                    [event.target.name]: event.target.value,
+                },
+            };
+        }
+        this.props.handleChange(stateData.formData);
+        this.setState(stateData);
+    };
+
     render() {
-        const {formName, errors, date, info} = this.props;
+        const {formName, errors, user_groups} = this.props;
+        const {formData} = this.state;
         return (
             <form name={formName}>
                 <div className="form-row">
@@ -23,8 +68,8 @@ class Form extends Component {
                                 id="name"
                                 className={`form-control form-control-sm ${errors.name && 'is-invalid'}`}
                                 name="name"
-                                value={info.name}
-                                onChange={this.props.handleChange}
+                                value={formData.name}
+                                onChange={this.handleChange}
                                 placeholder="Enter user name.."/>
                             {errors.name &&
                             <div className="invalid-feedback">{errors.name}</div>
@@ -33,23 +78,43 @@ class Form extends Component {
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="group_id">User Group :</label>
+                            <label htmlFor="group">User Group : <span className="text-danger">*</span></label>
                             <select
                                 className="form-control form-control-sm"
-                                name="group_id"
-                                id="group_id">
-                                <option value="Normal">Normal</option>
-                                <option value="AC">AC</option>
-                                <option value="VIP">VIP</option>
-                                <option value="Cabin">Cabin</option>
+                                name="group"
+                                value={formData.group}
+                                onChange={this.handleChange}
+                                id="group">
+                                {
+                                    user_groups.map((group) => (
+                                        <option key={group._id} value={group._id}>{group.name}</option>
+                                    ))
+                                }
+
                             </select>
-                            {errors.group_id &&
-                            <div className="invalid-feedback">{errors.group_id}</div>
+                            {errors.group &&
+                            <div className="invalid-feedback">{errors.group}</div>
                             }
                         </div>
                     </div>
                 </div>
                 <div className="form-row">
+                    <div className="col">
+                        <div className="form-group">
+                            <label htmlFor="email">Email Address : </label>
+                            <input
+                                type="text"
+                                id="email"
+                                className={`form-control form-control-sm ${errors.email && 'is-invalid'}`}
+                                name="email"
+                                value={formData.email}
+                                onChange={this.handleChange}
+                                placeholder="Enter email.."/>
+                            {errors.email &&
+                            <div className="invalid-feedback">{errors.email}</div>
+                            }
+                        </div>
+                    </div>
                     <div className="col">
                         <div className="form-group">
                             <label htmlFor="department">Department : </label>
@@ -58,8 +123,8 @@ class Form extends Component {
                                 id="department"
                                 className={`form-control form-control-sm ${errors.department && 'is-invalid'}`}
                                 name="department"
-                                value={info.department}
-                                onChange={this.props.handleChange}
+                                value={formData.department}
+                                onChange={this.handleChange}
                                 placeholder="Enter department.."/>
                             {errors.department &&
                             <div className="invalid-feedback">{errors.department}</div>
@@ -74,8 +139,8 @@ class Form extends Component {
                                 id="designation"
                                 className={`form-control form-control-sm ${errors.designation && 'is-invalid'}`}
                                 name="designation"
-                                value={info.designation}
-                                onChange={this.props.handleChange}
+                                value={formData.designation}
+                                onChange={this.handleChange}
                                 placeholder="Enter designation.."/>
                             {errors.designation &&
                             <div className="invalid-feedback">{errors.designation}</div>
@@ -88,11 +153,12 @@ class Form extends Component {
                         <div className="form-group">
                             <label htmlFor="mobile_no">Mobile No : <span className="text-danger">*</span></label>
                             <input
+                                type="text"
                                 id="mobile_no"
                                 className={`form-control form-control-sm ${errors.mobile_no && 'is-invalid'}`}
                                 name="mobile_no"
-                                value={info.mobile_no}
-                                onChange={this.props.handleChange}
+                                value={formData.mobile_no}
+                                onChange={this.handleChange}
                                 placeholder="Enter mobile no..."/>
                             {errors.mobile_no &&
                             <div className="invalid-feedback">{errors.mobile_no}</div>
@@ -101,16 +167,16 @@ class Form extends Component {
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="joining_date">Joining Date :</label>
+                            <label htmlFor="joining">Joining Date :</label>
                             <DatePicker
-                                id="joining_date"
-                                name="joining_date"
-                                className={`form-control form-control-sm ${errors.joining_date && 'is-invalid'}`}
-                                onChange={this.props.handleChange}
-                                selected={info.joining_date ? new Date(info.joining_date) : date}
+                                id="joining"
+                                name="joining"
+                                className={`form-control form-control-sm ${errors.joining && 'is-invalid'}`}
+                                onChange={this.handleChange}
+                                selected={formData.joining ? new Date(formData.joining) : this.state.date}
                                 placeholder="Joining date..."/>
-                            {errors.joining_date &&
-                            <div className="invalid-feedback">{errors.joining_date}</div>
+                            {errors.joining &&
+                            <div className="invalid-feedback">{errors.joining}</div>
                             }
                         </div>
                     </div>
@@ -123,9 +189,9 @@ class Form extends Component {
                                     id="inlineRadio1"
                                     className="form-check-input"
                                     name="gender"
-                                    checked={info.gender && info.gender === 'male'}
-                                    onChange={this.props.handleChange}
-                                    value="male"/>
+                                    value="male"
+                                    checked={formData.gender && formData.gender === 'male'}
+                                    onChange={this.handleChange}/>
                                 <label className="form-check-label"
                                        htmlFor="inlineRadio1">Male</label>
                             </div>
@@ -135,8 +201,8 @@ class Form extends Component {
                                     id="inlineRadio2"
                                     className="form-check-input"
                                     name="gender"
-                                    checked={info.gender && info.gender === 'female'}
-                                    onChange={this.props.handleChange}
+                                    checked={formData.gender && formData.gender === 'female'}
+                                    onChange={this.handleChange}
                                     value="female"/>
                                 <label className="form-check-label"
                                        htmlFor="inlineRadio2">Female</label>
@@ -147,8 +213,8 @@ class Form extends Component {
                                     id="inlineRadio3"
                                     className="form-check-input"
                                     name="gender"
-                                    checked={info.gender && info.gender === 'other'}
-                                    onChange={this.props.handleChange}
+                                    checked={formData.gender && formData.gender === 'other'}
+                                    onChange={this.handleChange}
                                     value="other"/>
                                 <label className="form-check-label"
                                        htmlFor="inlineRadio3">Other</label>
@@ -159,13 +225,14 @@ class Form extends Component {
                 <div className="form-row">
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="username">User Name :</label>
+                            <label htmlFor="username">User Name : <span className="text-danger">*</span></label>
                             <input
+                                type="text"
                                 id="username"
                                 className={`form-control form-control-sm ${errors.username && 'is-invalid'}`}
                                 name="username"
-                                value={info.username}
-                                onChange={this.props.handleChange}
+                                value={formData.username}
+                                onChange={this.handleChange}
                                 placeholder="Enter Username..."/>
                             {errors.username &&
                             <div className="invalid-feedback">{errors.username}</div>
@@ -174,13 +241,14 @@ class Form extends Component {
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="password">Password :</label>
+                            <label htmlFor="password">Password : <span className="text-danger">*</span></label>
                             <input
+                                type="password"
                                 id="password"
                                 className={`form-control form-control-sm ${errors.password && 'is-invalid'}`}
                                 name="password"
-                                value={info.password}
-                                onChange={this.props.handleChange}
+                                value={formData.password}
+                                onChange={this.handleChange}
                                 placeholder="Enter password..."/>
                             {errors.password &&
                             <div className="invalid-feedback">{errors.password}</div>
@@ -189,13 +257,14 @@ class Form extends Component {
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="confirm_password">Confirm Password :</label>
+                            <label htmlFor="confirm_password">Confirm Password : <span className="text-danger">*</span></label>
                             <input
+                                type="password"
                                 id="confirm_password"
                                 className={`form-control form-control-sm ${errors.confirm_password && 'is-invalid'}`}
                                 name="confirm_password"
-                                value={info.confirm_password}
-                                onChange={this.props.handleChange}
+                                value={formData.confirm_password}
+                                onChange={this.handleChange}
                                 placeholder="Enter confirm password..."/>
                             {errors.confirm_password &&
                             <div className="invalid-feedback">{errors.confirm_password}</div>
@@ -211,8 +280,8 @@ class Form extends Component {
                                 id="address"
                                 className={`form-control form-control-sm ${errors.address && 'is-invalid'}`}
                                 name="address"
-                                value={info.address}
-                                onChange={this.props.handleChange}
+                                value={formData.address}
+                                onChange={this.handleChange}
                                 placeholder="Enter address..."/>
                             {errors.address &&
                             <div className="invalid-feedback">{errors.address}</div>

@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-
 import EditButton from './button/edit';
 import ViewButton from './button/view';
 import DeleteButton from './button/delete';
+import {isObject, get} from 'lodash';
 
 class Table extends Component {
     constructor(props) {
@@ -58,14 +58,17 @@ class Table extends Component {
 
 
 function TableBodyTd(props) {
-    return <td>{props.value}</td>
+    const value = get(props.data, props.column);
+    return <td>{value}</td>
 }
 
 const TableBodyTr = (props) => {
     return (<tr>
         <td>{props.tr}</td>
         { props.columns.map((column,td) => (
-            <TableBodyTd key={`${props.tr}${td}`} value={props.data[column]} />
+            <TableBodyTd key={`${props.tr}${td}`}
+                         data={props.data}
+                         column={column} />
         ))}
         <td>
             { (props.onEdit || props.onEdit || props.onDelete) &&

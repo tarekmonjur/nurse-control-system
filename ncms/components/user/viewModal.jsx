@@ -8,7 +8,7 @@ class ViewModal extends Component {
         this.state = {
             modal: false,
             modalId: "view-user-modal",
-            doctor: null,
+            user: null,
             response: null
         };
         this.onView = this.onView.bind(this);
@@ -16,11 +16,11 @@ class ViewModal extends Component {
 
     async onView(id) {
         this.setState({ response: null });
-        const doctor = await api.showDoctor(id);
-        if (doctor.status === 'error') {
-            this.setState({ response: doctor });
+        const user = await api.showUser(id);
+        if (user.status === 'error') {
+            this.setState({ response: user });
         } else {
-            this.setState( { modal:true, doctor: doctor.results });
+            this.setState( { modal:true, user: user.results });
         }
     }
 
@@ -29,25 +29,25 @@ class ViewModal extends Component {
     }
 
     render() {
-        const { modal, modalId, doctor, response } = this.state;
+        const { modal, modalId, user, response } = this.state;
         return (
             <div>
                 { response &&
                 <Alert data={response} id="view-alert"/>
                 }
 
-                { modal && doctor &&
+                { modal && user &&
                 <Modal
                     id={modalId}
                     size="modal-lg"
-                    icon="doctor.png"
-                    title="Doctor Information"
+                    icon="user.png"
+                    title="User Information"
                     onClose={() => {
                         this.setState({
                             modal: false,
                         });
                     }}>
-                    <View result={doctor}/>
+                    <View result={user}/>
                 </Modal>
                 }
             </div>

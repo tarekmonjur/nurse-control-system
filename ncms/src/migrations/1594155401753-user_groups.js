@@ -7,7 +7,7 @@ async function up () {
 
     this('user_groups').insertMany([
         {
-            group_name: 'Admin',
+            name: 'Admin',
             permissions: [
                 'patient',
                 'bed',
@@ -20,7 +20,7 @@ async function up () {
             ]
         },
         {
-            group_name: 'Manager',
+            name: 'Manager',
             permissions: [
                 'patient',
                 'bed',
@@ -32,7 +32,7 @@ async function up () {
             ]
         },
         {
-            group_name: 'Doctor',
+            name: 'Doctor',
             permissions: [
                 'patient',
                 'call_history',
@@ -41,7 +41,7 @@ async function up () {
             ]
         },
         {
-            group_name: 'Nurse',
+            name: 'Nurse',
             permissions: [
                 'patient',
                 'call_history',

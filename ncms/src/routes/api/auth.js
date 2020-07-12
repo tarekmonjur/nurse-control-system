@@ -3,9 +3,9 @@ const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-const authService = require(`${appRoot}/services/auth.service`);
-const { initialize } = require(`${appRoot}/lib/passport`);
-initialize(passport, authService.getUserByEmail, authService.getUserById);
+const authService = require('./../../services/auth.service');
+const { initialize } = require('./../../lib/passport');
+initialize(passport, authService.getUserByUsername, authService.getUserById);
 
 router.post('/', async (req, res, next) => {
     try {
@@ -29,16 +29,14 @@ router.post('/', async (req, res, next) => {
                     });
                 }
 
-                const {name, mobile_no, email} = user;
-                const auth_user = {name, mobile_no, email};
-                const token = jwt.sign({...auth_user, id: user._id}, process.env.SECRET);
+                const token = jwt.sign({type: user.type, id: user._id}, process.env.SECRET);
                 authService.updateAuthTokenById(user._id, token);
 
                 return res.status(200).json({
                     code: 200,
                     status: 'success',
                     message: info,
-                    results: {...auth_user, token}
+                    results: {...user, token}
                 });
             });
         })(req, res);

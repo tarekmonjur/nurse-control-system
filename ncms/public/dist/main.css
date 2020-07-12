@@ -10844,7 +10844,7 @@ body {
 }
 
 #navbar .navbar-toggler, #navbar .navbar, #navbar {
-  height: 46px;
+  min-height: 46px;
   background-color: #17a2b8;
   color: #fff;
 }

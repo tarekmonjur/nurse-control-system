@@ -6,11 +6,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 require('dotenv').config();
-global.appRoot = path.resolve(__dirname, 'src');
-// console.log(appRoot);
-require(`${appRoot}/lib/db`);
-const pagesRoute = require(`${appRoot}/routes/pages`);
-const apiRoute = require(`${appRoot}/routes/api`);
+// global.appRoot = path.resolve(__dirname, 'src');
+require('./src/lib/db');
+const pagesRoute = require('./src/routes/pages');
+const apiRoute = require('./src/routes/api');
 
 
 app.disable('x-powered-by');

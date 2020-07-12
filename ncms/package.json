@@ -9,10 +9,11 @@
     "webpack-watch": "webpack --mode=development --watch",
     "build": "webpack --mode=development",
     "start": "npm-run-all --parallel build watch",
-    "start:dev": "npm-run-all --parallel webpack-watch watch",
+    "start:dev": "set NODE_ENV=webpack && npm-run-all --parallel webpack-watch watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "./node_modules/.bin/migrate",
-    "migrate-up": "./node_modules/.bin/migrate up --md ./src/migrations"
+    "migrate-up": "./node_modules/.bin/migrate up --md ./src/migrations",
+    "migrate-down": "./node_modules/.bin/migrate down --md ./src/migrations"
   },
   "author": "tarekmonjur@gmail.com",
   "license": "MIT",

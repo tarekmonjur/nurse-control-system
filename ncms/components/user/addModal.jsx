@@ -1,36 +1,24 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {isEmpty, isDate} from 'lodash';
 import {Alert, Modal} from "../common";
 import Form from "./form";
-import doctorService from './../../src/services/doctor.service';
+import userService from './../../src/services/user.service';
 import {getData} from './../../store/actions';
 import api from "../../store/api";
 
 class AddModal extends Component {
     constructor(props) {
         super(props);
+        this.formData = {};
         this.state = {
-            formData: {},
-            date: new Date(),
             errors: {},
             modal: false,
             loading: false,
             modalId: "add-user-modal",
             response: null,
-            info: {},
+            user: {},
         };
-    }
-
-    init() {
-        let formData = {};
-        const form = document.querySelector(`form[name="${this.state.modalId}"]`);
-        for (let i = 0; i < form.elements.length; i++) {
-            if (!isEmpty(form.elements[i].name)) {
-                formData[form.elements[i].name] = form.elements[i].value;
-            }
-        }
-        this.setState({ formData });
+        this.handleChange = this.handleChange.bind(this);
     }
 
     open() {
@@ -41,34 +29,16 @@ class AddModal extends Component {
         this.props.setChild(this);
     }
 
-    handleChange = (event) => {
-        let stateData = {};
-        if (isDate(event)) {
-            stateData = {
-                formData: {
-                    ...this.state.formData,
-                    joining_date : event.toISOString().split('T')[0],
-                },
-                date: event,
-            };
-        } else {
-            stateData = {
-                formData: {
-                    ...this.state.formData,
-                    [event.target.name]: event.target.value,
-                },
-            };
-        }
-        this.setState(stateData);
-    };
+    handleChange(formData) {
+        this.formData = formData;
+    }
 
-    async handleSubmit() {
+    handleSubmit() {
         this.setState({ loading: true, response: null });
-        const formData = this.state.formData;
-        const errors = doctorService.handleValidate(formData);
+        const errors = userService.handleValidate(this.formData);
 
         if (!errors) {
-            api.storeUser(formData)
+            api.storeUser(this.formData)
                 .then(result => {
                     this.setState({
                         loading: false,
@@ -92,7 +62,9 @@ class AddModal extends Component {
     };
 
     render() {
-        const { errors, response, modal, modalId, info, date } = this.state;
+        const { errors, response, modal, modalId, user } = this.state;
+        const {user_groups} = this.props;
+        console.log({user});
         return (
             <div>
                 { response &&
@@ -119,10 +91,9 @@ class AddModal extends Component {
                         }}>
                         <Form
                             formName={modalId}
-                            info={info}
-                            date={date}
+                            user_groups={user_groups}
+                            info={user}
                             errors={errors}
-                            init={() => { this.init() }}
                             handleChange={this.handleChange} />
                     </Modal>
                 }

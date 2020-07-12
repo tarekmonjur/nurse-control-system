@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { checkAuthenticated, checkJWTAuthenticated } = require(`${appRoot}/lib/passport`);
+const { checkAuthenticated, checkJWTAuthenticated } = require('./../../lib/passport');
 
 const authRoute = require('./auth');
 const usersRoute = require('./users');

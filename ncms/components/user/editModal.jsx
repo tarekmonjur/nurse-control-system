@@ -1,72 +1,53 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {isEmpty, isDate} from 'lodash';
 import {Alert, Modal} from "../common";
 import Form from "./form";
-import doctorService from './../../src/services/doctor.service';
+import userService from './../../src/services/user.service';
 import {getData} from './../../store/actions';
 import api from "../../store/api";
 
 class EditModal extends Component {
     constructor(props) {
         super(props);
+        this.formData = {};
         this.state = {
-            formData: {},
             errors: {},
             modal: false,
             loading: false,
             modalId: "edit-user-modal",
             response: null,
-            doctor: {},
+            user: {},
         };
         this.id = null;
         this.open = this.open.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    init() {
-        let formData = {};
-        const form = document.querySelector(`form[name="${this.state.modalId}"]`);
-        for (let i = 0; i < form.elements.length; i++) {
-            if (!isEmpty(form.elements[i].name)) {
-                formData[form.elements[i].name] = form.elements[i].value;
-            }
-        }
-        this.setState({ formData });
-    }
-
-    open(id) {
+    async open(id) {
         this.id = id;
-        api.showDoctor(id).then(result => {
-            if (result.status === 'error') {
-                this.setState({ response: result });
-            } else {
-                this.setState({ modal:true, doctor: result.results });
-            }
-        });
+        const result = await api.showUser(id);
+        if (result.status === 'error') {
+            this.setState({ response: result });
+        } else {
+            this.formData = result.results;
+            this.setState({ modal: true, user: result.results });
+        }
     }
 
     componentDidMount() {
         this.props.setChild(this);
     }
 
-    handleChange = (event) => {
-        const stateData = {
-            formData: {
-                ...this.state.formData,
-                [event.target.name]: event.target.value,
-            },
-        };
-        this.setState(stateData);
-    };
+    handleChange(formData) {
+        this.formData = formData;
+    }
 
     async handleSubmit() {
         this.setState({ loading: true, response: null });
-        const formData = this.state.formData;
-        const errors = doctorService.handleValidate(formData);
-
+        const errors = userService.handleValidate(this.formData, true);
+        console.log({errors});
         if (!errors) {
-            console.log({formData});
-            api.updateDoctor(this.id, formData)
+            api.updateUser(this.id, this.formData)
                 .then(result => {
                     this.setState({
                         loading: false,
@@ -92,8 +73,8 @@ class EditModal extends Component {
     };
 
     render() {
-        const {errors, response, modal, modalId, doctor, formData} = this.state;
-        const data = Object.assign(doctor, formData);
+        const {errors, response, modal, modalId, user} = this.state;
+        const {user_groups} = this.props;
         return (
             <div>
                 { response &&
@@ -104,16 +85,15 @@ class EditModal extends Component {
                     <Modal
                         id={modalId}
                         size="modal-lg"
-                        icon="bed-03.png"
-                        title="Edit Doctor"
-                        button="Submit Doctor Form"
+                        icon="user.png"
+                        title="Edit User"
+                        button="Submit User Form"
                         loading={this.state.loading}
                         onClose={() => {
                             this.setState({
                                 modal: false,
                                 errors: false,
                                 response: null,
-                                formData: {},
                             });
                         }}
                         onSubmit={() => {
@@ -121,9 +101,9 @@ class EditModal extends Component {
                         }}>
                         <Form
                             formName={modalId}
-                            info={data}
+                            user_groups={user_groups}
+                            info={user}
                             errors={errors}
-                            init={() => { this.init() }}
                             handleChange={this.handleChange} />
                     </Modal>
                 }

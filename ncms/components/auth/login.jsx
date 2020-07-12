@@ -39,11 +39,8 @@ class Login extends Component {
 
     validate(data) {
         const errors = {};
-        if (!validator.isEmail(data.email)) {
-            errors.email = 'Please enter valid email';
-        }
-        if (validator.isEmpty(data.email)) {
-            errors.email = 'The email is required';
+        if (validator.isEmpty(data.username)) {
+            errors.email = 'The username is required';
         }
         if (!validator.isLength(data.password, {min: 6, max: 20})) {
             errors.password = 'The password length must be min 6 and max 20'
@@ -113,7 +110,7 @@ class Login extends Component {
                                 <form name="form-login" onSubmit={this.handleSubmit}>
                                     <div className="form-row">
                                         <div className="col-md-12 col-sm-12 mb-3">
-                                            <label htmlFor="email">User Email</label>
+                                            <label htmlFor="username">User Name</label>
                                             <div className="input-group input-group-sm">
                                                 <div className="input-group-prepend">
                                                     <div className="input-group-text">
@@ -121,12 +118,12 @@ class Login extends Component {
                                                     </div>
                                                 </div>
                                                 <input type="text"
-                                                    className={`form-control ${errors.email?'is-invalid':''}`}
-                                                    name="email"
+                                                    className={`form-control ${errors.username?'is-invalid':''}`}
+                                                    name="username"
                                                     onChange={this.handleChange}
-                                                    id="email" />
-                                                { errors.email &&
-                                                <div className="invalid-feedback">{errors.email}</div>
+                                                    id="username" />
+                                                { errors.username &&
+                                                <div className="invalid-feedback">{errors.username}</div>
                                                 }
                                             </div>
                                         </div>

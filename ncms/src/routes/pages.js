@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { checkAuthenticated, checkNotAuthenticated } = require(`${appRoot}/lib/passport`);
+const { checkAuthenticated, checkNotAuthenticated } = require('./../lib/passport');
+const userService = require('./../services/user.service');
 
 router.use((req, res, next) => {
     if (req.path) {
@@ -51,7 +52,14 @@ router.get('/reports', checkAuthenticated, (req, res) => {
     return res.render('report');
 });
 
-router.get('/users', checkAuthenticated, (req, res) => {
+router.get('/users', checkAuthenticated, async (req, res) => {
+    try {
+        const user_groups = await userService.getUserGroups();
+        res.locals.data.user_groups = user_groups;
+    } catch (err) {
+        console.log(err.message);
+    }
+
     return res.render('user');
 });
 

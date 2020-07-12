@@ -35,7 +35,7 @@ class ValidationError extends Error {
             message: this.message,
             errors: this.errorMessages(),
         };
-        if (process.env.ENVIRONMENT === 'development') {
+        if (process.env.NODE_ENV === 'development') {
             response.stacktrace = this.stack;
         }
         return response;

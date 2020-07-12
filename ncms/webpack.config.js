@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -27,6 +28,10 @@ module.exports = {
         }),
         new Dotenv({
             path: './.env'
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': '"webpack"',
+            'global': {},
         })
     ],
     resolve: {
@@ -82,5 +87,18 @@ module.exports = {
                 ],
             },
         ],
-    }
+    },
+    // target: 'node',
+    externals: {
+        'aws-sdk': 'aws-sdk',
+        'fs':'fs',
+        'bcrypt':'bcrypt',
+        'mongodb-client-encryption': 'mongodb-client-encryption',
+        'require_optional': 'require_optional',
+    },
+    node: {
+        global: true,
+        fs: "empty",
+        bcrypt: "empty",
+    },
 };

@@ -1,39 +1,28 @@
-const bcrypt = require('bcrypt');
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
+        unique: true,
         require: true,
         minlength: 3,
-        maxlength: 50
+        maxlength: 20,
     },
-    email: {
+    type: {
         type: String,
-        require: true,
-        unique: true,
-        default: '',
+        enum: ['doctors', 'nurses', 'employees'],
     },
     password: {
         type: String,
         require: true,
         maxlength: 255,
     },
-    mobile_no: {
-        type: String,
-        unique: true,
-        require: true,
-        minlength: 11,
-        maxlength: 13,
-    },
-    group_id: {
-        type: mongoose.ObjectId,
-        ref: 'groups'
-    },
     token: {
         type: String,
         maxlength: 255,
+        index: true,
         default: ''
     }
 }, {
@@ -45,8 +34,19 @@ const userSchema = new Schema({
 });
 
 userSchema.path('password').set(v => {
+    const bcrypt = require('bcrypt');
     const salt = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(v, salt);
+});
+
+userSchema.pre('save', function(){
+    if (this.isNew) {
+        this.set({created_at: new Date()});
+        this.set('updated_at', '');
+    } else {
+        this.set({created_at: this.get('created_at')});
+        this.set('updated_at', new Date());
+    }
 });
 
 const User = mongoose.model('users', userSchema);

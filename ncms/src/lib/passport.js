@@ -5,10 +5,10 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;
 const bcrypt = require('bcrypt');
 
-const initialize = (passport, getUserByEmail, getUserById) => {
+const initialize = (passport, getUserByUsername, getUserById) => {
     const authenticateUser = async (username, password, done) => {
         try {
-            const user = await getUserByEmail(username);
+            const user = await getUserByUsername(username);
             if (user && await bcrypt.compare(password, user.password)) {
                 return done(null, user, 'Login Success.');
             } else {
@@ -21,7 +21,7 @@ const initialize = (passport, getUserByEmail, getUserById) => {
 
     passport.use(
         new LocalStrategy({
-            usernameField: 'email',
+            usernameField: 'username',
             passwordField: 'password'
         }, authenticateUser)
     );
