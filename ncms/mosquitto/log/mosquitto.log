@@ -1,0 +1,57 @@
+1594708108: mosquitto version 1.6.10 starting
+1594708108: Config loaded from /mosquitto/config/mosquitto.conf.
+1594708108: Opening ipv4 listen socket on port 1883.
+1594708108: Opening ipv6 listen socket on port 1883.
+1594708109: New connection from 192.168.160.1 on port 1883.
+1594708109: New client connected from 192.168.160.1 as mosqsub|15224-tarek-mon (p1, c1, k60).
+1594708124: New connection from 192.168.160.1 on port 1883.
+1594708124: New client connected from 192.168.160.1 as mosqpub|22750-tarek-mon (p1, c1, k60).
+1594708124: Client mosqpub|22750-tarek-mon disconnected.
+1594708128: New connection from 192.168.160.1 on port 1883.
+1594708128: New client connected from 192.168.160.1 as mosqpub|22892-tarek-mon (p1, c1, k60).
+1594708128: Client mosqpub|22892-tarek-mon disconnected.
+1594708128: New connection from 192.168.160.1 on port 1883.
+1594708128: New client connected from 192.168.160.1 as mosqpub|22894-tarek-mon (p1, c1, k60).
+1594708128: Client mosqpub|22894-tarek-mon disconnected.
+1594708129: New connection from 192.168.160.1 on port 1883.
+1594708129: New client connected from 192.168.160.1 as mosqpub|22895-tarek-mon (p1, c1, k60).
+1594708129: Client mosqpub|22895-tarek-mon disconnected.
+1594708133: mosquitto version 1.6.10 terminating
+1594708133: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1594708160: mosquitto version 1.6.10 starting
+1594708160: Config loaded from /mosquitto/config/mosquitto.conf.
+1594708160: Opening ipv4 listen socket on port 1883.
+1594708160: Opening ipv6 listen socket on port 1883.
+1594708160: New connection from 192.168.176.1 on port 1883.
+1594708160: New client connected from 192.168.176.1 as mosqsub|15224-tarek-mon (p1, c1, k60).
+1594708165: New connection from 192.168.176.1 on port 1883.
+1594708165: New client connected from 192.168.176.1 as mosqpub|23861-tarek-mon (p1, c1, k60).
+1594708165: Client mosqpub|23861-tarek-mon disconnected.
+1594708165: New connection from 192.168.176.1 on port 1883.
+1594708165: New client connected from 192.168.176.1 as mosqpub|23862-tarek-mon (p1, c1, k60).
+1594708165: Client mosqpub|23862-tarek-mon disconnected.
+1594708166: New connection from 192.168.176.1 on port 1883.
+1594708166: New client connected from 192.168.176.1 as mosqpub|23863-tarek-mon (p1, c1, k60).
+1594708166: Client mosqpub|23863-tarek-mon disconnected.
+1594708166: New connection from 192.168.176.1 on port 1883.
+1594708166: New client connected from 192.168.176.1 as mosqpub|23864-tarek-mon (p1, c1, k60).
+1594708166: Client mosqpub|23864-tarek-mon disconnected.
+1594708167: New connection from 192.168.176.1 on port 1883.
+1594708167: New client connected from 192.168.176.1 as mosqpub|23865-tarek-mon (p1, c1, k60).
+1594708167: Client mosqpub|23865-tarek-mon disconnected.
+1594708185: mosquitto version 1.6.10 terminating
+1594708185: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1594708265: mosquitto version 1.6.10 starting
+1594708265: Config loaded from /mosquitto/config/mosquitto.conf.
+1594708265: Opening ipv4 listen socket on port 1883.
+1594708265: Opening ipv6 listen socket on port 1883.
+1594708266: New connection from 192.168.176.1 on port 1883.
+1594708266: New client connected from 192.168.176.1 as mosqsub|15224-tarek-mon (p1, c1, k60).
+1594708278: New connection from 192.168.176.1 on port 1883.
+1594708278: New client connected from 192.168.176.1 as mosqpub|25038-tarek-mon (p1, c1, k60).
+1594708278: Client mosqpub|25038-tarek-mon disconnected.
+1594708280: New connection from 192.168.176.1 on port 1883.
+1594708280: New client connected from 192.168.176.1 as mosqpub|25054-tarek-mon (p1, c1, k60).
+1594708280: Client mosqpub|25054-tarek-mon disconnected.
+1594708292: mosquitto version 1.6.10 terminating
+1594708292: Saving in-memory database to /mosquitto/data/mosquitto.db.

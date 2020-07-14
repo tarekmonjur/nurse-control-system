@@ -1,0 +1,28 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'stat:dev' ]
+2 info using npm@6.14.5
+3 info using node@v12.18.2
+4 verbose stack Error: missing script: stat:dev
+4 verbose stack
+4 verbose stack Did you mean this?
+4 verbose stack     start:dev
+4 verbose stack     at run (/usr/local/lib/node_modules/npm/lib/run-script.js:155:19)
+4 verbose stack     at /usr/local/lib/node_modules/npm/lib/run-script.js:63:5
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:116:5
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:436:5
+4 verbose stack     at checkBinReferences_ (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:391:45)
+4 verbose stack     at final (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:434:3)
+4 verbose stack     at then (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:161:5)
+4 verbose stack     at ReadFileContext.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:350:20)
+4 verbose stack     at ReadFileContext.callback (/usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:123:16)
+4 verbose stack     at FSReqCallback.readFileAfterOpen [as oncomplete] (fs.js:257:13)
+5 verbose cwd /app
+6 verbose Linux 4.15.0-109-generic
+7 verbose argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "stat:dev"
+8 verbose node v12.18.2
+9 verbose npm  v6.14.5
+10 error missing script: stat:dev
+10 error
+10 error Did you mean this?
+10 error     start:dev
+11 verbose exit [ 1, true ]

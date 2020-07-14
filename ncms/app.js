@@ -55,5 +55,5 @@ app.use((err, req, res, next) => {
    });
 });
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.EXPRESS_PORT || 8000;
 app.listen(PORT, () => console.log(`server listen on PORT ${PORT}`));
