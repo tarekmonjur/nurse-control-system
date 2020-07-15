@@ -55,3 +55,21 @@
 1594708280: Client mosqpub|25054-tarek-mon disconnected.
 1594708292: mosquitto version 1.6.10 terminating
 1594708292: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1594784382: mosquitto version 1.6.10 starting
+1594784382: Config loaded from /mosquitto/config/mosquitto.conf.
+1594784382: Opening ipv4 listen socket on port 1883.
+1594784382: Opening ipv6 listen socket on port 1883.
+1594784452: New connection from 192.168.176.1 on port 1883.
+1594784452: New client connected from 192.168.176.1 as mosqsub|18051-tarek-mon (p1, c1, k60).
+1594784495: New connection from 192.168.176.1 on port 1883.
+1594784495: New client connected from 192.168.176.1 as mosqpub|18364-tarek-mon (p1, c1, k60).
+1594784495: Client mosqpub|18364-tarek-mon disconnected.
+1594786113: Socket error on client mosqsub|18051-tarek-mon, disconnecting.
+1594786183: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1594787984: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1594789785: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1594791586: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1594793387: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1594793585: mosquitto version 1.6.10 starting
+1594793713: mosquitto version 1.6.10 starting
+1594794628: mosquitto version 1.6.10 starting

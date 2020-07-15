@@ -9,11 +9,12 @@ import $ from 'jquery';
 import Doctor from './doctor/doctor';
 
 const sagaMiddleware = createSagaMiddleware();
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const store = createStore(
     doctors,
     compose(
         applyMiddleware(sagaMiddleware),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        composeEnhancers
     )
 );
 sagaMiddleware.run(sagaWorker);

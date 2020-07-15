@@ -9,11 +9,12 @@ import $ from 'jquery';
 import Bed from './bed/bed';
 
 const sagaMiddleware = createSagaMiddleware();
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const store = createStore(
     beds,
     compose(
         applyMiddleware(sagaMiddleware),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        composeEnhancers
     )
 );
 sagaMiddleware.run(sagaWorker);

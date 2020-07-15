@@ -12,8 +12,9 @@
     "start:dev": "set NODE_ENV=webpack && npm-run-all --parallel webpack-watch watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "./node_modules/.bin/migrate",
-    "migrate-up": "./node_modules/.bin/migrate up --md ./src/migrations",
-    "migrate-down": "./node_modules/.bin/migrate down --md ./src/migrations"
+    "migrate-create": "migrate create ${name} --md ./src/migrations",
+    "migrate-up": "migrate up --md ./src/migrations",
+    "migrate-down": "migrate down --md ./src/migrations"
   },
   "author": "tarekmonjur@gmail.com",
   "license": "MIT",

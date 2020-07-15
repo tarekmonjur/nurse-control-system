@@ -9,11 +9,12 @@ import $ from 'jquery';
 import List from './call_history/list';
 
 const sagaMiddleware = createSagaMiddleware();
+const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const store = createStore(
     callHistories,
     compose(
         applyMiddleware(sagaMiddleware),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        composeEnhancers
     )
 );
 sagaMiddleware.run(sagaWorker);

@@ -11,7 +11,7 @@ services:
   broker:
     image: eclipse-mosquitto
     ports:
-      - 1883:1883
+      - 1884:1883
       - 9001:9001
     networks:
       - ncms
@@ -24,7 +24,7 @@ services:
     image: node:12.18
     restart: always
     working_dir: "/app"
-    command: "npm run start"
+    command: "npm run start:dev"
     ports:
       - 3000:8080
     networks:
