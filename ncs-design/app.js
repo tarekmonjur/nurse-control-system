@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const helper = require('./src/helper');
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
     const filePath = helper.getFilePath(req.url);
