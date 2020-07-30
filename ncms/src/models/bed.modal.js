@@ -55,4 +55,5 @@ bedSchema.pre('save', function(){
 
 const Bed = mongoose.model('beds', bedSchema);
 
-module.exports = Bed;
+module.exports.Bed = Bed;
+module.exports.bedSchema = bedSchema;

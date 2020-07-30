@@ -6,7 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import sagaWorker from './../store/saga/report';
 import { dailyPatientNurseCall, monthlyPatientNurseCall } from './../store/reducers';
 import $ from 'jquery';
-import List from './report/list';
+import Report from './report/report';
 
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -25,7 +25,7 @@ sagaMiddleware.run(sagaWorker);
 $(function(){
    ReactDOM.render(
        <Provider store={store}>
-           <List><div className="banner" /></List>
+           <Report><div className="banner" /></Report>
        </Provider>,
        document.getElementById('content')
    )

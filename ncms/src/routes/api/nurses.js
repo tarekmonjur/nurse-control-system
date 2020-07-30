@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const { param, validationResult } = require('express-validator');
 const NurseController = require('./../../controllers/nurse.controller');
 const nurseService = require('./../../services/nurse.service');
-const { param, validationResult } = require('express-validator');
 const ValidationError = require('./../../lib/validationError');
 
 router.get('/', async (req, res) => {

@@ -1,18 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const PatientNurseCallController = require('./../../controllers/patient_nurse_call.controller');
 const patientNurseCallService = require('./../../services/patient_nurse_call.service');
-const ValidationError = require('./../../lib/validationError');
+const List = require('./../../lib/list');
 
 router.get('/', async (req, res) => {
-    const filter = patientNurseCallService.makeFilter(req);
-    const results = await PatientNurseCallController.index(filter);
-    return res.status(200).json({
-        code: 200,
-        status: 'success',
-        message: 'Real time call get success.',
-        results: results
-    });
+    try {
+        const todate = new Date();
+        const date = new Date(todate.setHours(todate.getHours() - 24));
+        req.filter = {
+            created_at: {$gt: date},
+        };
+        const filters = patientNurseCallService.makeFilter(req);
+        const all_calls = await patientNurseCallService.getAllRealCall(filters);
+        const list = new List(filters, all_calls).generate();
+
+        return res.status(200).json({
+            code: 200,
+            status: 'success',
+            message: 'Real time call get success.',
+            results: list
+        });
+    } catch (err) {
+        const statusCode = err.code < 599 ? err.code : 500;
+        return res.status(statusCode).json({
+            code: err.code,
+            status: 'error',
+            message: err.message,
+            errors: err.errors,
+        });
+    }
+
 });
 
 module.exports = router;

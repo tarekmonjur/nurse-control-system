@@ -1,17 +1,19 @@
 const Validator = require('./../lib/validator');
 const ValidationError = require('./../lib/validationError');
-const Patient = require('./../models/patient.modal');
+const { Patient } = require('./../models/patient.modal');
+const { Bed } = require('./../models/bed.modal');
 
 module.exports = {
     defaultColumns: {
         name: 'Patient Name',
-        bed_no: 'Bed No',
+        ['bed.bed_no']: 'Bed No',
         patient_mobile_no: 'Patient Mobile',
         gender: 'Gender',
         guardian_name: 'Guardian',
         guardian_mobile_no: 'Guardian Mobile',
         address: 'Address',
         admitted_date:'Admitted',
+        release_date:'Released',
     },
 
     makePayload(data) {
@@ -22,7 +24,7 @@ module.exports = {
     handleValidate(data) {
         const rules = {
             name: 'require|min:3|max:50',
-            bed_no: 'require|min:3|max:10',
+            bed: 'require',
             patient_mobile_no: 'mobile:bn-BD',
             guardian_name: 'min:3|max:50',
             guardian_mobile_no: 'mobile:bn-BD',
@@ -97,5 +99,17 @@ module.exports = {
         }
         patient.isNew = isNew;
         return await patient.save();
+    },
+
+    async getAllBeds() {
+      return await Bed.find({}).sort({created_at: -1});
+    },
+
+    async getBedById(id) {
+        return await Bed.findOne({_id: id});
+    },
+
+    async getBedByDeviceId(id) {
+        return await Bed.findOne({device_no: id});
     }
 };

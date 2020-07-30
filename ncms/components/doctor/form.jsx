@@ -4,14 +4,21 @@ import DatePicker from "react-datepicker";
 class Form extends Component {
     constructor(props) {
         super(props);
+        this.state = { set_auth: false };
     }
 
     componentDidMount() {
         this.props.init();
     }
 
+    setupAuth() {
+        const set_auth = !this.state.set_auth;
+        this.setState({set_auth});
+        setTimeout(() => {this.props.init()}, 300)
+    }
+
     render() {
-        const {formName, errors, date, info} = this.props;
+        const {formName, errors, date, info, nurses} = this.props;
         return (
             <form name={formName}>
                 <div className="form-row">
@@ -33,23 +40,42 @@ class Form extends Component {
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="assistant">Assistant of Doctor (Nurse) :</label>
+                            <label htmlFor="nurse">Assistant of Doctor (Nurse) :</label>
                             <select
-                                className="form-control form-control-sm"
-                                name="assistant"
-                                id="assistant">
-                                <option value="Normal">Normal</option>
-                                <option value="AC">AC</option>
-                                <option value="VIP">VIP</option>
-                                <option value="Cabin">Cabin</option>
+                                className={`form-control form-control-sm ${errors.nurse && 'is-invalid'}`}
+                                name="nurse"
+                                id="nurse"
+                                value={info.nurse}
+                                onChange={this.props.handleChange}>
+                                <option value="">-- Select Assistant--</option>
+                                { nurses && nurses.map((nurse, index) => (
+                                    <option key={index} value={nurse._id}>{nurse.name}</option>
+                                    ))
+                                }
                             </select>
-                            {errors.assistant &&
-                            <div className="invalid-feedback">{errors.assistant}</div>
+                            {errors.nurse &&
+                            <div className="invalid-feedback">{errors.nurse}</div>
                             }
                         </div>
                     </div>
                 </div>
                 <div className="form-row">
+                    <div className="col">
+                        <div className="form-group">
+                            <label htmlFor="email">Email Address : </label>
+                            <input
+                                type="text"
+                                id="email"
+                                className={`form-control form-control-sm ${errors.email && 'is-invalid'}`}
+                                name="email"
+                                value={info.email}
+                                onChange={this.props.handleChange}
+                                placeholder="Enter email.."/>
+                            {errors.email &&
+                            <div className="invalid-feedback">{errors.email}</div>
+                            }
+                        </div>
+                    </div>
                     <div className="col">
                         <div className="form-group">
                             <label htmlFor="department">Department : </label>
@@ -101,16 +127,16 @@ class Form extends Component {
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="joining_date">Joining Date :</label>
+                            <label htmlFor="joining">Joining Date :</label>
                             <DatePicker
-                                id="joining_date"
-                                name="joining_date"
-                                className={`form-control form-control-sm ${errors.joining_date && 'is-invalid'}`}
+                                id="joining"
+                                name="joining"
+                                className={`form-control form-control-sm ${errors.joining && 'is-invalid'}`}
                                 onChange={this.props.handleChange}
-                                selected={info.joining_date ? new Date(info.joining_date) : date}
+                                selected={info.joining ? new Date(info.joining) : date}
                                 placeholder="Joining date..."/>
-                            {errors.joining_date &&
-                            <div className="invalid-feedback">{errors.joining_date}</div>
+                            {errors.joining &&
+                            <div className="invalid-feedback">{errors.joining}</div>
                             }
                         </div>
                     </div>
@@ -156,53 +182,69 @@ class Form extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="form-row">
-                    <div className="col">
-                        <div className="form-group">
-                            <label htmlFor="username">User Name :</label>
+                <div className="col">
+                    <div className="form-group">
+                        <div className="form-check form-check-inline">
                             <input
-                                id="username"
-                                className={`form-control form-control-sm ${errors.username && 'is-invalid'}`}
-                                name="username"
-                                value={info.username}
-                                onChange={this.props.handleChange}
-                                placeholder="Enter Username..."/>
-                            {errors.username &&
-                            <div className="invalid-feedback">{errors.username}</div>
-                            }
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="form-group">
-                            <label htmlFor="password">Password :</label>
-                            <input
-                                id="password"
-                                className={`form-control form-control-sm ${errors.password && 'is-invalid'}`}
-                                name="password"
-                                value={info.password}
-                                onChange={this.props.handleChange}
-                                placeholder="Enter password..."/>
-                            {errors.password &&
-                            <div className="invalid-feedback">{errors.password}</div>
-                            }
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="form-group">
-                            <label htmlFor="confirm_password">Confirm Password :</label>
-                            <input
-                                id="confirm_password"
-                                className={`form-control form-control-sm ${errors.confirm_password && 'is-invalid'}`}
-                                name="confirm_password"
-                                value={info.confirm_password}
-                                onChange={this.props.handleChange}
-                                placeholder="Enter confirm password..."/>
-                            {errors.confirm_password &&
-                            <div className="invalid-feedback">{errors.confirm_password}</div>
-                            }
+                                type="checkbox"
+                                id="inlineCheckbox1"
+                                className="form-check-input"
+                                onChange={() => this.setupAuth()}
+                                />
+                            <label className="form-check-label"
+                                   htmlFor="inlineCheckbox1">Setup Auth</label>
                         </div>
                     </div>
                 </div>
+                {this.state.set_auth &&
+                    <div className="form-row">
+                        <div className="col">
+                            <div className="form-group">
+                                <label htmlFor="username">User Name :</label>
+                                <input
+                                    id="username"
+                                    className={`form-control form-control-sm ${errors.username && 'is-invalid'}`}
+                                    name="username"
+                                    value={info.username}
+                                    onChange={this.props.handleChange}
+                                    placeholder="Enter Username..."/>
+                                {errors.username &&
+                                <div className="invalid-feedback">{errors.username}</div>
+                                }
+                            </div>
+                        </div>
+                        <div className="col">
+                            <div className="form-group">
+                                <label htmlFor="password">Password :</label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    className={`form-control form-control-sm ${errors.password && 'is-invalid'}`}
+                                    name="password"
+                                    onChange={this.props.handleChange}
+                                    placeholder="Enter password..."/>
+                                {errors.password &&
+                                <div className="invalid-feedback">{errors.password}</div>
+                                }
+                            </div>
+                        </div>
+                        <div className="col">
+                            <div className="form-group">
+                                <label htmlFor="confirm_password">Confirm Password :</label>
+                                <input
+                                    type="password"
+                                    id="confirm_password"
+                                    className={`form-control form-control-sm ${errors.confirm_password && 'is-invalid'}`}
+                                    name="confirm_password"
+                                    onChange={this.props.handleChange}
+                                    placeholder="Enter confirm password..."/>
+                                {errors.confirm_password &&
+                                <div className="invalid-feedback">{errors.confirm_password}</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
                 <div className="form-row">
                     <div className="col">
                         <div className="form-group">

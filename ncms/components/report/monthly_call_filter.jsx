@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Monthly_filter extends Component {
+class MonthlyCallFilter extends Component {
     constructor(props) {
         super(props);
     }
@@ -47,4 +47,4 @@ class Monthly_filter extends Component {
     }
 }
 
-export default Monthly_filter;
+export default MonthlyCallFilter;

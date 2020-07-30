@@ -1,6 +1,6 @@
 const Validator = require('./../lib/validator');
 const ValidationError = require('./../lib/validationError');
-const Bed = require('./../models/bed.modal');
+const { Bed } = require('./../models/bed.modal');
 
 module.exports = {
     defaultColumns: {
@@ -92,5 +92,5 @@ module.exports = {
         }
         bed.isNew = isNew;
         return await bed.save();
-    }
+    },
 };

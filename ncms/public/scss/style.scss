@@ -31,6 +31,10 @@ body {
   overflow-y: auto;
 }
 
+.bg-teal {
+  background-color: $teal;
+}
+
 @import "header";
 
 @import "navbar";
@@ -170,4 +174,9 @@ body {
       }
     }
   }
+}
+
+
+@media (min-width: 1000px) and (max-width: 1265px) {
+   h3, .h3 { font-size: 1.65rem}
 }

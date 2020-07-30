@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const authService = require('./../../services/auth.service');
 const { initialize } = require('./../../lib/passport');
-initialize(passport, authService.getUserByUsername, authService.getUserById);
+initialize(passport, authService.getUserByUsername, authService.getUserByIdAndType);
 
 router.post('/', async (req, res, next) => {
     try {

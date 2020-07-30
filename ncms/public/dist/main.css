@@ -10798,6 +10798,10 @@ body {
   overflow-y: auto;
 }
 
+.bg-teal {
+  background-color: #20c997;
+}
+
 #header .user h6, #header .logo-title h3 {
   line-height: 0.9;
   margin-bottom: 0rem;
@@ -11185,4 +11189,10 @@ body {
   padding: 10px;
   margin: 10px;
   border-radius: 0;
+}
+
+@media (min-width: 1000px) and (max-width: 1265px) {
+  h3, .h3 {
+    font-size: 1.65rem;
+  }
 }

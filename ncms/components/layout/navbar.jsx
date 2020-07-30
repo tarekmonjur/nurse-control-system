@@ -79,7 +79,7 @@ class Navbar extends Component {
                                 </div>
                             </li>
                         </ul>
-                        <span className="navbar-text">Date: 2/2/2020, HotLine - 01780292737</span>
+                        <span className="navbar-text">HotLine - 01780292737</span>
                     </div>
                 </nav>
             </div>

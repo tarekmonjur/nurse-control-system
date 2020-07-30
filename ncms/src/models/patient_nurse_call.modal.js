@@ -1,31 +1,47 @@
 const mongoose = require('mongoose');
+const moment = require('moment-timezone');
 const Schema = mongoose.Schema;
+const Nurse = require('./nurse.modal');
+const Patient = require('./patient.modal');
+const Bed = require('./bed.modal');
 
 const patientNurseCallSchema = new Schema({
     nurse: {
-        type: String,
+        type: Nurse.nurseSchema,
+        default: null
     },
     patient: {
-        type: String,
+        type: Patient.patientSchema,
+        default: null
     },
     bed: {
-        type: String,
+        type: Bed.bedSchema,
+        default: null
     },
     call: {
         type: Date,
-        default: Date.now
+        default: null,
+        get: getDate
     },
     receive: {
         type: Date,
-        default: Date.now
+        default: null,
+        get: getDate
     },
     present: {
         type: Date,
-        default: Date.now
+        default: null,
+        get: getDate
     },
     emergency: {
         type: Date,
-        default: Date.now
+        default: null,
+        get: getDate
+    },
+    complete: {
+        type: Date,
+        default: null,
+        get: getDate
     },
 },{
     timestamps: {
@@ -33,7 +49,18 @@ const patientNurseCallSchema = new Schema({
         updatedAt: 'updated_at'
     },
     versionKey: false,
+    toJSON: { getters: true },
 });
+
+patientNurseCallSchema.virtual('date').get(function () {
+    return moment.tz(this.created_at.toISOString(), 'Asia/Dhaka').format('ddd YYYY-MM-DD');
+});
+
+function getDate(date) {
+    if (date) {
+        return moment.tz(date.toISOString(), 'Asia/Dhaka').format('hh:mm:ss a');
+    }
+}
 
 patientNurseCallSchema.pre('save', function(){
     if (this.isNew) {

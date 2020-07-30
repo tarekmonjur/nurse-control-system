@@ -18,7 +18,6 @@ class AddModal extends Component {
             loading: false,
             modalId: "add-patient-modal",
             response: null,
-            info: {},
         };
     }
 
@@ -41,13 +40,14 @@ class AddModal extends Component {
         this.props.setChild(this);
     }
 
-    handleChange = (event) => {
+    handleChange = (event, field = null) => {
         let stateData = {};
+        console.log(event);
         if (isDate(event)) {
             stateData = {
                 formData: {
                     ...this.state.formData,
-                    admitted_date : event.toISOString().split('T')[0],
+                    [field] : event.toISOString().split('T')[0],
                 },
                 date: event,
             };
@@ -96,7 +96,8 @@ class AddModal extends Component {
     };
 
     render() {
-        const {errors, response, date, modal, modalId, info} = this.state;
+        const {errors, response, date, modal, modalId, formData} = this.state;
+        const {beds} = this.props;
         return (
             <div>
                 { response &&
@@ -115,7 +116,8 @@ class AddModal extends Component {
                             this.setState({
                                 modal: false,
                                 errors: false,
-                                response: null
+                                response: null,
+                                formData: {},
                             });
                         }}
                         onSubmit={() => {
@@ -123,7 +125,8 @@ class AddModal extends Component {
                         }}>
                         <Form
                             formName={modalId}
-                            info={info}
+                            beds={beds}
+                            info={formData}
                             errors={errors}
                             date={date}
                             init={() => { this.init() }}

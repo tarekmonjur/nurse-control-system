@@ -28,10 +28,15 @@ class EditModal extends Component {
         const form = document.querySelector(`form[name="${this.state.modalId}"]`);
         for (let i = 0; i < form.elements.length; i++) {
             if (!isEmpty(form.elements[i].name)) {
-                formData[form.elements[i].name] = form.elements[i].value;
+                if (form.elements[i].type === 'radio') {
+                    if (form.elements[i].checked)
+                        formData[form.elements[i].name] = form.elements[i].value;
+                } else {
+                    formData[form.elements[i].name] = form.elements[i].value;
+                }
             }
         }
-        this.setState({ formData });
+        this.setState({formData: formData});
     }
 
     open(id) {
@@ -49,13 +54,33 @@ class EditModal extends Component {
         this.props.setChild(this);
     }
 
-    handleChange = (event) => {
-        const stateData = {
-            formData: {
-                ...this.state.formData,
-                [event.target.name]: event.target.value,
-            },
-        };
+    handleChange = (event, field = null) => {
+        let stateData = {};
+        if (isDate(event)) {
+            stateData = {
+                formData: {
+                    ...this.state.formData,
+                    joining_date : event.toISOString().split('T')[0],
+                },
+                date: event,
+            };
+        }
+        else if (field === 'doctors') {
+            stateData = {
+                formData: {
+                    ...this.state.formData,
+                    [field]: event,
+                },
+            };
+        }
+        else {
+            stateData = {
+                formData: {
+                    ...this.state.formData,
+                    [event.target.name]: event.target.value,
+                },
+            };
+        }
         this.setState(stateData);
     };
 
@@ -73,7 +98,7 @@ class EditModal extends Component {
                         errors: result.errors || {},
                         response: result,
                         modal: !!result.errors,
-                        formData: {},
+                        formData: result.errors ? formData : {},
                     });
                     if (result.status !== 'error') {
                         this.props.dispatch(getData({ columns: this.props.columns }));
@@ -93,6 +118,7 @@ class EditModal extends Component {
 
     render() {
         const { errors, response, modal, modalId, nurse, formData } = this.state;
+        const {doctors} = this.props;
         const data = Object.assign(nurse, formData);
         return (
             <div>
@@ -121,6 +147,7 @@ class EditModal extends Component {
                         }}>
                         <Form
                             formName={modalId}
+                            doctors={doctors}
                             info={data}
                             errors={errors}
                             init={() => { this.init() }}

@@ -7,7 +7,8 @@ class Form extends Component {
         super(props);
         this.state = {
             date: new Date(),
-            formData: this.props.info
+            formData: this.props.info,
+            set_auth: false,
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -30,6 +31,12 @@ class Form extends Component {
 
     componentDidMount() {
         this.init();
+    }
+
+    setupAuth() {
+        const set_auth = !this.state.set_auth;
+        this.setState({set_auth});
+        setTimeout(() => {this.props.init()}, 300)
     }
 
     handleChange(event) {
@@ -80,7 +87,7 @@ class Form extends Component {
                         <div className="form-group">
                             <label htmlFor="group">User Group : <span className="text-danger">*</span></label>
                             <select
-                                className="form-control form-control-sm"
+                                className={`form-control form-control-sm ${errors.group && 'is-invalid'}`}
                                 name="group"
                                 value={formData.group}
                                 onChange={this.handleChange}
@@ -222,6 +229,21 @@ class Form extends Component {
                         </div>
                     </div>
                 </div>
+                <div className="col">
+                    <div className="form-group">
+                        <div className="form-check form-check-inline">
+                            <input
+                                type="checkbox"
+                                id="inlineCheckbox1"
+                                className="form-check-input"
+                                onChange={() => this.setupAuth()}
+                            />
+                            <label className="form-check-label"
+                                   htmlFor="inlineCheckbox1">Setup Authentication</label>
+                        </div>
+                    </div>
+                </div>
+                {this.state.set_auth &&
                 <div className="form-row">
                     <div className="col">
                         <div className="form-group">
@@ -272,6 +294,7 @@ class Form extends Component {
                         </div>
                     </div>
                 </div>
+                }
                 <div className="form-row">
                     <div className="col">
                         <div className="form-group">

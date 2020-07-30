@@ -20,6 +20,6 @@ router.use('/doctors', checkJWTAuthenticated, doctorsRoute);
 router.use('/nurses', checkJWTAuthenticated, nursesRoute);
 router.use('/call-histories', checkJWTAuthenticated, callHistoryRoute);
 router.use('/real-time-call', checkJWTAuthenticated, RealTimeCallRoute);
-router.use('/reports', checkJWTAuthenticated, ReportRoute);
+router.use('/reports', ReportRoute);
 
 module.exports = router;

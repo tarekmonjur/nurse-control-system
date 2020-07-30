@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {doctorSchema} = require('./doctor.modal');
 const Schema = mongoose.Schema;
 
 const nurseSchema = new Schema({
@@ -10,8 +11,15 @@ const nurseSchema = new Schema({
         maxlength: 50,
         default: ''
     },
+    email: {
+        type: String,
+        require: true,
+        index: true,
+        default: '',
+    },
     mobile_no: {
         type: String,
+        unique: true,
         maxlength: 13,
         default: '',
     },
@@ -30,14 +38,14 @@ const nurseSchema = new Schema({
         enum: ['male', 'female', 'other'],
         default: 'other'
     },
-    assistant: {
-        type: String,
-        minlength: 3,
-        default: '',
+    doctors: {
+        type: [doctorSchema],
+        default: [],
     },
     joining: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        get: getJoining
     },
     address: {
         type: String,
@@ -50,7 +58,13 @@ const nurseSchema = new Schema({
         updatedAt: 'updated_at'
     },
     versionKey: false,
+    toJSON: { getters: true },
 });
+
+function getJoining(joining) {
+    return joining.toISOString()
+        .split('T')[0].toString();
+}
 
 nurseSchema.pre('save', function(){
     if (this.isNew) {
@@ -64,4 +78,5 @@ nurseSchema.pre('save', function(){
 
 const Nurse = mongoose.model('nurses', nurseSchema);
 
-module.exports = Nurse;
+module.exports.Nurse = Nurse;
+module.exports.nurseSchema = nurseSchema;

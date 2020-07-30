@@ -3,6 +3,7 @@ const ValidationError = require('./../lib/validationError');
 const UserGroup = require('./../models/user_group.model');
 const User = require('./../models/user.model');
 const Employee = require('./../models/employee.model');
+const {isEmpty} = require('lodash');
 
 module.exports = {
     defaultColumns: {
@@ -14,6 +15,7 @@ module.exports = {
         email: 'Email',
         gender: 'Gender',
         joining: 'Joining',
+        address: 'Address',
     },
 
     getFields() {
@@ -33,7 +35,7 @@ module.exports = {
         return payload;
     },
 
-    handleValidate(data, update = false) {
+    handleValidate(data) {
         const rules = {
             name: 'require|min:3|max:50',
             group: 'require',
@@ -41,18 +43,13 @@ module.exports = {
             designation: 'max:50',
             email: 'email|max:100',
             mobile_no: 'require|mobile:bn-BD',
+            address: 'max:255',
+            username: 'min:3|max:20',
+            password: 'min:6|max:20',
+            confirm_password: 'equal:password',
         };
-        if (!update) {
-            rules['username'] = 'require|min:3|max:20';
-            rules['password'] = 'require|min:6|max:20';
-            rules['confirm_password'] = 'equal:password';
-        } else {
-            rules['username'] = 'min:3|max:20';
-            rules['password'] = 'min:6|max:20';
-            rules['confirm_password'] = 'equal:password';
-        }
+
         const payload = this.makePayload(data);
-        console.log({payload});
         const validate = new Validator(payload, rules);
         return validate.getErrors();
     },
@@ -102,6 +99,10 @@ module.exports = {
         return await UserGroup.find({});
     },
 
+    async getGroupByName(name) {
+        return await UserGroup.findOne({name});
+    },
+
     async upsertUser(payload, isNew = true) {
         const user = new User(payload);
         const error = user.validateSync();
@@ -129,6 +130,6 @@ module.exports = {
     async deleteUserById(id) {
         const employee = await Employee.findById(id, '-id');
         await Employee.deleteOne({_id: id});
-        return await User.deleteOne({_id: employee._id});
+        return await User.deleteOne({_id: employee.user});
     },
 };

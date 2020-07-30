@@ -1,32 +1,45 @@
 const Validator = require('./../lib/validator');
 const ValidationError = require('./../lib/validationError');
-const Nurse = require('./../models/nurse.modal');
+const { Nurse } = require('./../models/nurse.modal');
+const { Doctor } = require('./../models/doctor.modal');
+const User = require('./../models/user.model');
+const {isEmpty, unset} = require('lodash');
 
 module.exports = {
     defaultColumns: {
         name: 'Nurse Name',
-        mobile_no: 'Mobile No',
         department: 'Department',
         designation: 'Designation',
+        mobile_no: 'Mobile No',
+        email: 'Email',
         gender: 'Gender',
-        assistant: 'Assistant',
+        ['doctors[*].name']: 'Assist to Doctors',
         joining: 'Joining',
         address: 'Address',
     },
 
     makePayload(data) {
-        const payload = Object.assign(this.getFields(), data);
+        const payload = Object.assign(this.getFields(), {
+            username: '',
+            password: '',
+            confirm_password: '',
+        }, data);
         return payload;
     },
 
     handleValidate(data) {
         const rules = {
             name: 'require|min:3|max:20',
+            email: 'email|max:100',
             department: 'min:3|max:50',
             designation: 'min:3|max:50',
             mobile_no: 'require|mobile:bn-BD',
             address: 'max:255',
+            username: 'min:3|max:20',
+            password: 'min:6|max:20',
+            confirm_password: 'equal:password',
         };
+
         const payload = this.makePayload(data);
         const validate = new Validator(payload, rules);
         return validate.getErrors();
@@ -78,20 +91,31 @@ module.exports = {
         return await Nurse.find(filters.filter, filters.select).sort({created_at: -1});
     },
 
+    async getAllDcotors(filters = {}) {
+        return await Doctor.find(filters.filter, filters.select).sort({created_at: -1});
+    },
+
     async getNurseById(id) {
         return await Nurse.findById(id);
     },
 
     async deleteNurseById(id) {
-        return await Nurse.deleteOne({_id: id});
+        const nurse = await Nurse.findById(id);
+        await Nurse.deleteOne({_id: id});
+        return await User.deleteOne({_id: nurse.user});
     },
 
     async upsertNurse(payload, isNew = true) {
+        if (isEmpty(payload.doctors)) {
+            unset(payload, 'doctors')
+        }
+
         const nurse = new Nurse(payload);
         const error = nurse.validateSync();
         if (error && error.errors) {
             throw new ValidationError('Nurse fields error', error.errors);
         }
+
         nurse.isNew = isNew;
         return await nurse.save();
     }

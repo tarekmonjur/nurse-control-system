@@ -12,10 +12,10 @@ class UserController {
 
     static async store(payload) {
         try {
-            console.debug('payload', JSON.stringify(payload));
-            payload['type'] = 'employees';
-            const user = await userService.upsertUser(payload);
-            payload['user'] = user;
+            if (!isEmpty(payload.username) && !isEmpty(payload.password)) {
+                payload['type'] = 'employees';
+                payload['user'] = await userService.upsertUser(payload);
+            }
             // const {name, group, user: {id: user_id}, email, department, designation, mobile_no, joining, gender, address} = payload;
             return await userService.upsertEmployee(payload);
         } catch (err) {
@@ -30,27 +30,34 @@ class UserController {
 
     static async update(payload) {
         try {
-            console.debug('payload', JSON.stringify(payload));
-
-            let employee_payload = payload;
             const employee = await userService.getEmployeeById(payload._id);
             if (!employee) {
                 throw new ValidationError('User not found', {}, 404);
             }
-            employee_payload = Object.assign(employee, employee_payload);
-            await userService.upsertEmployee(employee_payload, false);
 
             const user_payload = {};
             if (!isEmpty(payload.username)) {
                 user_payload['username'] = payload.username;
             }
+
             if (!isEmpty(payload.password)) {
                 user_payload['password'] = payload.password;
             }
+
             if (!isEmpty(user_payload)) {
-                user_payload['_id'] = employee.user;
-                await userService.upsertUser(user_payload, false);
+                let isNew;
+                if (isEmpty(employee.user)) {
+                    isNew = true;
+                } else {
+                    isNew = false;
+                    user_payload['_id'] = employee.user;
+                }
+                user_payload['type'] = 'employees';
+                payload['user'] = await userService.upsertUser(user_payload, isNew);
             }
+
+            payload = Object.assign(employee, payload);
+            return await userService.upsertEmployee(payload, false);
         } catch (err) {
             console.log('Data Not Store', {err});
             throw err;

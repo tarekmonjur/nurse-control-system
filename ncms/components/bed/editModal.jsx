@@ -73,7 +73,7 @@ class EditModal extends Component {
                         errors: result.errors || {},
                         response: result,
                         modal: !!result.errors,
-                        formData: {},
+                        formData: result.errors ? this.formData : {},
                     });
                     if (result.status !== 'error') {
                         this.props.dispatch(getData({ columns: this.props.columns }));

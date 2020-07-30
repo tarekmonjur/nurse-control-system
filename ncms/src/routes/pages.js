@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { checkAuthenticated, checkNotAuthenticated } = require('./../lib/passport');
 const userService = require('./../services/user.service');
+const patientService = require('./../services/patient.service');
+const nurseService = require('./../services/nurse.service');
+const doctorService = require('./../services/doctor.service');
 
 router.use((req, res, next) => {
     if (req.path) {
@@ -24,7 +27,13 @@ router.get('/', checkAuthenticated, (req, res) => {
     return res.render('home');
 });
 
-router.get('/patients', checkAuthenticated, (req, res) => {
+router.get('/patients', checkAuthenticated, async (req, res) => {
+    try {
+        const beds = await patientService.getAllBeds();
+        res.locals.data.beds = beds;
+    } catch (err) {
+        console.log(err.message);
+    }
     return res.render('patient');
 });
 
@@ -32,11 +41,23 @@ router.get('/beds', checkAuthenticated, (req, res) => {
     return res.render('bed');
 });
 
-router.get('/doctors', checkAuthenticated, (req, res) => {
+router.get('/doctors', checkAuthenticated, async (req, res) => {
+    try {
+        const nurses = await doctorService.getAllNurses();
+        res.locals.data.nurses = nurses;
+    } catch (err) {
+        console.log(err.message);
+    }
     return res.render('doctor');
 });
 
-router.get('/nurses', checkAuthenticated, (req, res) => {
+router.get('/nurses', checkAuthenticated, async (req, res) => {
+    try {
+        const doctors = await nurseService.getAllDcotors();
+        res.locals.data.doctors = doctors;
+    } catch (err) {
+        console.log(err.message);
+    }
     return res.render('nurse');
 });
 
@@ -48,7 +69,7 @@ router.get('/real-time-call', checkAuthenticated, (req, res) => {
     return res.render('real_time_call');
 });
 
-router.get('/reports', checkAuthenticated, (req, res) => {
+router.get('/reports', (req, res) => {
     return res.render('report');
 });
 

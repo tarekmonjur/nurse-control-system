@@ -5,7 +5,7 @@ const ValidationError = require('./../../lib/validationError');
 
 router.get('/daily-patient-nurse-call-summary', async (req, res) => {
     try {
-        const filters = {};
+        const filters = {filter: {}};
         const list = await NurseCallReportController.dailyPatientNurseCallReport(filters);
         return res.status(200).json({
             code: 200,
@@ -27,7 +27,8 @@ router.get('/daily-patient-nurse-call-summary', async (req, res) => {
 
 router.get('/monthly-patient-nurse-call-summary', async (req, res) => {
     try {
-        const filters = {};
+        // const filters = {filter: {nurse: {$ne: null}}};
+        const filters = {filter: {}};
         const list = await NurseCallReportController.monthlyPatientNurseCallReport(filters);
         return res.status(200).json({
             code: 200,

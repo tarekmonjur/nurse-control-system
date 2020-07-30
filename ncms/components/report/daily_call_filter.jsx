@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Daily_filter extends Component {
+class DailyCallFilter extends Component {
     constructor(props) {
         super(props);
     }
@@ -64,4 +64,4 @@ class Daily_filter extends Component {
     }
 }
 
-export default Daily_filter;
+export default DailyCallFilter;

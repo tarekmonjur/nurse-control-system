@@ -10,6 +10,11 @@ volumes:
 services:
   broker:
     image: eclipse-mosquitto
+#    command: "/bin/sh /mosquitto/mqrun.sh"
+#    command: "mosquitto_passwd -U /mosquitto/etc/passwd"
+#    command: >
+#      sh -c "mosquitto_passwd -c /mosquitto/etc/passwd tarek21
+#      && mosquitto_passwd -b /mosquitto/etc/passwd tarek21 tarek21"
     ports:
       - 1884:1883
       - 9001:9001
@@ -19,6 +24,7 @@ services:
       - "./mosquitto:/mosquitto"
       - "./mosquitto/log:/mosquitto/log"
       - "./mosquitto/data/:/mosquitto/data/"
+      - "./mosquitto/etc/passwd:/mosquitto/etc/passwd"
 
   app:
     image: node:12.18
@@ -38,11 +44,11 @@ services:
       NO_SSL_MODE: 1
       APP_NAME: NCSM
       EXPRESS_PORT: 8080
-      HOST: http://localhost
-      DB_NAME: ncms
       DB_URL: mongodb://root:root@mongo:27017/ncms?authSource=admin
       SECRET: mytestapp!!
       MIGRATE_dbConnectionUri: mongodb://root:root@mongo:27017/ncms?authSource=admin
+      MQTT_HOST: ncms_broker_1
+      IO_HOST: localhost:3000
     volumes:
       - "./:/app"
       - "./logs:/root/.npm/_logs"

@@ -1,17 +1,25 @@
 import React, {Component} from "react";
 import DatePicker from "react-datepicker";
+import { Multiselect } from 'multiselect-react-dropdown';
 
 class Form extends Component {
     constructor(props) {
         super(props);
+        this.state = { set_auth: false };
     }
 
     componentDidMount() {
         this.props.init();
     }
 
+    setupAuth() {
+        const set_auth = !this.state.set_auth;
+        this.setState({set_auth});
+        setTimeout(() => {this.props.init()}, 300)
+    }
+
     render() {
-        const {formName, errors, date, info} = this.props;
+        const {formName, errors, date, info, doctors} = this.props;
         return (
             <form name={formName}>
                 <div className="form-row">
@@ -33,23 +41,65 @@ class Form extends Component {
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="assistant">Assistant of Doctor (Nurse) :</label>
-                            <select
-                                className="form-control form-control-sm"
-                                name="assistant"
-                                id="assistant">
-                                <option value="Normal">Normal</option>
-                                <option value="AC">AC</option>
-                                <option value="VIP">VIP</option>
-                                <option value="Cabin">Cabin</option>
-                            </select>
-                            {errors.assistant &&
-                            <div className="invalid-feedback">{errors.assistant}</div>
+                            <label htmlFor="doctors">Assist to doctors :</label>
+                            <Multiselect
+                                className={`form-control form-control-sm ${errors.name && 'is-invalid'}`}
+                                options={doctors}
+                                selectedValues={info.doctors}
+                                onSelect={(data) => this.props.handleChange(data, 'doctors')}
+                                onRemove={(data) => this.props.handleChange(data, 'doctors')}
+                                displayValue="name"
+                                showCheckbox={true}
+                                selectionLimit={2}
+                                placeholder="-- Select Doctor--"
+                                hidePlaceholder={true}
+                                closeIcon="circle"
+                                id="doctors"
+                                style={
+                                    {
+                                        searchBox: { // To change search box element look
+                                            minHeight: 'calc(1.5em + 0.5rem + 2px)',
+                                            padding: '0rem 0.25rem',
+                                            fontSize: '0.875rem',
+                                            lineHeight: '1.2',
+                                            borderRadius: '0.2rem',
+                                        },
+                                        inputField: { // To change input field position or margin
+                                            margin: '5px',
+                                            width: '100px'
+                                        },
+                                        chips: { // To change css chips(Selected options)
+                                            marginBottom: '2px',
+                                        },
+                                        optionContainer: { // To change css for option container
+                                            border: '1px solid #ccc'
+                                        },
+                                    }
+                                }
+                            />
+                            {errors.doctors &&
+                            <div className="invalid-feedback">{errors.doctors}</div>
                             }
                         </div>
                     </div>
                 </div>
                 <div className="form-row">
+                    <div className="col">
+                        <div className="form-group">
+                            <label htmlFor="email">Email Address : </label>
+                            <input
+                                type="text"
+                                id="email"
+                                className={`form-control form-control-sm ${errors.email && 'is-invalid'}`}
+                                name="email"
+                                value={info.email}
+                                onChange={this.props.handleChange}
+                                placeholder="Enter email.."/>
+                            {errors.email &&
+                            <div className="invalid-feedback">{errors.email}</div>
+                            }
+                        </div>
+                    </div>
                     <div className="col">
                         <div className="form-group">
                             <label htmlFor="department">Department : </label>
@@ -93,7 +143,7 @@ class Form extends Component {
                                 name="mobile_no"
                                 value={info.mobile_no}
                                 onChange={this.props.handleChange}
-                                placeholder="Doctor mobile no..."/>
+                                placeholder="Nurse mobile no..."/>
                             {errors.mobile_no &&
                             <div className="invalid-feedback">{errors.mobile_no}</div>
                             }
@@ -101,16 +151,16 @@ class Form extends Component {
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="joining_date">Joining Date :</label>
+                            <label htmlFor="joining">Joining Date :</label>
                             <DatePicker
-                                id="joining_date"
-                                name="joining_date"
-                                className={`form-control form-control-sm ${errors.joining_date && 'is-invalid'}`}
+                                id="joining"
+                                name="joining"
+                                className={`form-control form-control-sm ${errors.joining && 'is-invalid'}`}
                                 onChange={this.props.handleChange}
-                                selected={info.joining_date ? new Date(info.joining_date) : date}
+                                selected={info.joining ? new Date(info.joining) : date}
                                 placeholder="Joining date..."/>
-                            {errors.joining_date &&
-                            <div className="invalid-feedback">{errors.joining_date}</div>
+                            {errors.joining &&
+                            <div className="invalid-feedback">{errors.joining}</div>
                             }
                         </div>
                     </div>
@@ -156,6 +206,21 @@ class Form extends Component {
                         </div>
                     </div>
                 </div>
+                <div className="col">
+                    <div className="form-group">
+                        <div className="form-check form-check-inline">
+                            <input
+                                type="checkbox"
+                                id="inlineCheckbox1"
+                                className="form-check-input"
+                                onChange={() => this.setupAuth()}
+                            />
+                            <label className="form-check-label"
+                                   htmlFor="inlineCheckbox1">Setup Auth</label>
+                        </div>
+                    </div>
+                </div>
+                {this.state.set_auth &&
                 <div className="form-row">
                     <div className="col">
                         <div className="form-group">
@@ -176,10 +241,10 @@ class Form extends Component {
                         <div className="form-group">
                             <label htmlFor="password">Password :</label>
                             <input
+                                type="password"
                                 id="password"
                                 className={`form-control form-control-sm ${errors.password && 'is-invalid'}`}
                                 name="password"
-                                value={info.password}
                                 onChange={this.props.handleChange}
                                 placeholder="Enter password..."/>
                             {errors.password &&
@@ -191,10 +256,10 @@ class Form extends Component {
                         <div className="form-group">
                             <label htmlFor="confirm_password">Confirm Password :</label>
                             <input
+                                type="password"
                                 id="confirm_password"
                                 className={`form-control form-control-sm ${errors.confirm_password && 'is-invalid'}`}
                                 name="confirm_password"
-                                value={info.confirm_password}
                                 onChange={this.props.handleChange}
                                 placeholder="Enter confirm password..."/>
                             {errors.confirm_password &&
@@ -203,6 +268,7 @@ class Form extends Component {
                         </div>
                     </div>
                 </div>
+                }
                 <div className="form-row">
                     <div className="col">
                         <div className="form-group">

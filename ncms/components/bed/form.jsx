@@ -54,6 +54,8 @@ class Form extends Component {
                             <select
                                 className="form-control form-control-sm"
                                 name="bed_type"
+                                value={info.bed_type}
+                                onChange={this.props.handleChange}
                                 id="bed_type">
                                 <option value="Normal">Normal</option>
                                 <option value="AC">AC</option>

@@ -44,7 +44,7 @@ class EditModal extends Component {
 
     async handleSubmit() {
         this.setState({ loading: true, response: null });
-        const errors = userService.handleValidate(this.formData, true);
+        const errors = userService.handleValidate(this.formData);
         console.log({errors});
         if (!errors) {
             api.updateUser(this.id, this.formData)
@@ -54,7 +54,7 @@ class EditModal extends Component {
                         errors: result.errors || {},
                         response: result,
                         modal: !!result.errors,
-                        formData: {},
+                        formData: result.errors ? this.formData : {},
                     });
                     if (result.status !== 'error') {
                         this.props.dispatch(getData({ columns: this.props.columns }));

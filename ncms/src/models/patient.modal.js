@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Bed = require('./bed.modal');
 const Schema = mongoose.Schema;
 
 const patientSchema = new Schema({
@@ -10,10 +11,9 @@ const patientSchema = new Schema({
         maxlength: 50,
         default: ''
     },
-    bed_no: {
-        type: String,
-        minlength: 3,
-        default: '',
+    bed: {
+        type: Bed.bedSchema,
+        default: null,
     },
     gender: {
         type: String,
@@ -38,6 +38,10 @@ const patientSchema = new Schema({
     admitted_date: {
         type: Date,
         default: Date.now
+    },
+    release_date: {
+        type: Date,
+        default: null
     },
     address: {
         type: String,
@@ -71,4 +75,5 @@ patientSchema.pre('save', function(){
 
 const Patient = mongoose.model('patients', patientSchema);
 
-module.exports = Patient;
+module.exports.Patient = Patient;
+module.exports.patientSchema = patientSchema;

@@ -83,7 +83,7 @@ class AddModal extends Component {
                             this.setState({
                                 modal: false,
                                 errors: false,
-                                response: null
+                                response: null,
                             });
                         }}
                         onSubmit={() => {

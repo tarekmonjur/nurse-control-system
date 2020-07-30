@@ -5,7 +5,7 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;
 const bcrypt = require('bcrypt');
 
-const initialize = (passport, getUserByUsername, getUserById) => {
+const initialize = (passport, getUserByUsername, getUserByIdAndType) => {
     const authenticateUser = async (username, password, done) => {
         try {
             const user = await getUserByUsername(username);
@@ -27,11 +27,11 @@ const initialize = (passport, getUserByUsername, getUserById) => {
     );
 
     passport.serializeUser((user, done) => {
-        done(null, user._id);
+        done(null, {id: user._id, type: user.type});
     });
 
-    passport.deserializeUser(async (id, done) => {
-        done(null, await getUserById(id))
+    passport.deserializeUser(async (user, done) => {
+        done(null, await getUserByIdAndType(user.id, user.type));
     });
 
     passport.use(
@@ -44,9 +44,9 @@ const initialize = (passport, getUserByUsername, getUserById) => {
             ])
         }, async (jwtPayload, done) => {
             try {
-                if (jwtPayload.id && jwtPayload.email) {
-                    const user = await getUserById(jwtPayload.id);
-                    if (user && user.token !=='') {
+                if (jwtPayload.id && jwtPayload.type) {
+                    const user = await getUserByIdAndType(jwtPayload.id, jwtPayload.type);
+                    if (user && user.user.token !=='') {
                         return done(null, user);
                     }
                 }

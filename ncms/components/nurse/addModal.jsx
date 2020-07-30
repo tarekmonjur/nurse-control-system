@@ -18,7 +18,6 @@ class AddModal extends Component {
             loading: false,
             modalId: "add-nurse-modal",
             response: null,
-            info: {},
         };
     }
 
@@ -27,21 +26,26 @@ class AddModal extends Component {
         const form = document.querySelector(`form[name="${this.state.modalId}"]`);
         for (let i = 0; i < form.elements.length; i++) {
             if (!isEmpty(form.elements[i].name)) {
-                formData[form.elements[i].name] = form.elements[i].value;
+                if (form.elements[i].type === 'radio') {
+                    if (form.elements[i].checked)
+                        formData[form.elements[i].name] = form.elements[i].value;
+                } else {
+                    formData[form.elements[i].name] = form.elements[i].value;
+                }
             }
         }
-        this.setState({ formData });
+        this.setState({formData: formData});
     }
 
     open() {
-        this.setState({ modal:true });
+        this.setState({ modal:true, formData: {} });
     }
 
     componentDidMount() {
         this.props.setChild(this);
     }
 
-    handleChange = (event) => {
+    handleChange = (event, field = null) => {
         let stateData = {};
         if (isDate(event)) {
             stateData = {
@@ -51,7 +55,16 @@ class AddModal extends Component {
                 },
                 date: event,
             };
-        } else {
+        }
+        else if (field === 'doctors') {
+            stateData = {
+                formData: {
+                    ...this.state.formData,
+                    [field]: event,
+                },
+            };
+        }
+        else {
             stateData = {
                 formData: {
                     ...this.state.formData,
@@ -75,6 +88,7 @@ class AddModal extends Component {
                         errors: result.errors || {},
                         response: result,
                         modal: !!result.errors,
+                        formData: result.errors ? formData : {},
                     });
                     if (result.status !== 'error') {
                         this.props.dispatch(getData({ columns: this.props.columns }));
@@ -92,7 +106,8 @@ class AddModal extends Component {
     };
 
     render() {
-        const { errors, response, modal, modalId, info, date } = this.state;
+        const { errors, response, modal, modalId, formData, date } = this.state;
+        const {doctors} = this.props;
         return (
             <div>
                 { response &&
@@ -111,7 +126,8 @@ class AddModal extends Component {
                             this.setState({
                                 modal: false,
                                 errors: false,
-                                response: null
+                                response: null,
+                                formData: {},
                             });
                         }}
                         onSubmit={() => {
@@ -119,7 +135,8 @@ class AddModal extends Component {
                         }}>
                         <Form
                             formName={modalId}
-                            info={info}
+                            doctors={doctors}
+                            info={formData}
                             date={date}
                             errors={errors}
                             init={() => { this.init() }}

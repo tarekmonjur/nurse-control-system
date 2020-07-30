@@ -1,6 +1,9 @@
 const { body, validationResult } = require('express-validator');
 const ValidationError = require('./../lib/validationError');
 const User = require('./../models/user.model');
+const Employee = require('./../models/employee.model');
+const Doctor = require('./../models/doctor.modal');
+const { Nurse } = require('./../models/nurse.modal');
 
 module.exports = {
     async loginValidate(req) {
@@ -25,6 +28,20 @@ module.exports = {
 
     async getUserById(id) {
         return await User.findById(id, {'_id': 0}).select('username type token');
+    },
+
+    async getUserByIdAndType(id, type) {
+        let user;
+        if (type === 'employees') {
+            user = await Employee.findOne({user: id});
+        }
+        if (type === 'doctors') {
+            user = await Doctor.findOne({user: id});
+        }
+        if (type === 'nurses') {
+            user = await Nurse.findOne({user: id});
+        }
+        return user;
     },
 
     async updateAuthTokenById(id, token) {

@@ -17,7 +17,7 @@ class HeaderRight extends Component {
                     <div className="col-md-10 col-md-10">
                         <h6 className="font-weight-bold">{this.user.name}
                             <br />
-                            <small> {this.user.name}</small>
+                            <small> {this.user.designation}</small>
                             <br />
                             <small> {this.user.mobile_no}</small>
                             <br />

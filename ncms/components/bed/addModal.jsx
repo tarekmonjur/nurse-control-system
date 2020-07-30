@@ -17,7 +17,6 @@ class AddModal extends Component {
             loading: false,
             modalId: "add-bed-modal",
             response: null,
-            info: {},
         };
     }
 
@@ -80,7 +79,7 @@ class AddModal extends Component {
     };
 
     render() {
-        const { errors, response, modal, modalId, info } = this.state;
+        const { errors, response, modal, modalId, formData } = this.state;
         return (
             <div>
                 { response &&
@@ -99,7 +98,8 @@ class AddModal extends Component {
                             this.setState({
                                 modal: false,
                                 errors: false,
-                                response: null
+                                response: null,
+                                formData: {},
                             });
                         }}
                         onSubmit={() => {
@@ -107,7 +107,7 @@ class AddModal extends Component {
                         }}>
                         <Form
                             formName={modalId}
-                            info={info}
+                            info={formData}
                             errors={errors}
                             init={() => { this.init() }}
                             handleChange={this.handleChange} />

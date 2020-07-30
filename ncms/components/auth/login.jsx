@@ -61,7 +61,7 @@ class Login extends Component {
         if (isEmpty(errors)) {
             console.log(formData);
 
-            fetch(`${process.env.HOST}:${process.env.PORT}/api/login`, {
+            fetch('/api/login', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {

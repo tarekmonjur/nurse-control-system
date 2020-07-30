@@ -11,7 +11,7 @@ class Form extends Component {
     }
 
     render() {
-        const {formName, errors, date, info} = this.props;
+        const {formName, errors, date, info, beds} = this.props;
         return (
             <form name={formName}>
                 <div className="form-row">
@@ -33,17 +33,21 @@ class Form extends Component {
                     </div>
                     <div className="col">
                         <div className="form-group">
-                            <label htmlFor="bed_no">Patient Bed No : <span className="text-danger">*</span></label>
-                            <input
-                                type="text"
-                                id="bed_no"
-                                className={`form-control form-control-sm ${errors.bed_no && 'is-invalid'}`}
-                                name="bed_no"
-                                value={info.bed_no}
+                            <label htmlFor="bed">Patient Bed No : <span className="text-danger">*</span></label>
+                            <select
+                                className={`form-control form-control-sm ${errors.bed && 'is-invalid'}`}
+                                name="bed"
+                                value={info.bed}
                                 onChange={this.props.handleChange}
-                                placeholder="Enter patient bed no.."/>
-                            {errors.bed_no &&
-                            <div className="invalid-feedback">{errors.bed_no}</div>
+                                id="bed">
+                                {
+                                    beds.map( bed => (
+                                        <option key={bed._id} value={bed._id}>{bed.bed_no}</option>
+                                    ))
+                                }
+                            </select>
+                            {errors.bed &&
+                            <div className="invalid-feedback">{errors.bed}</div>
                             }
                         </div>
                     </div>
@@ -113,7 +117,7 @@ class Form extends Component {
                                 id="admitted_date"
                                 name="admitted_date"
                                 className={`form-control form-control-sm ${errors.admitted_date && 'is-invalid'}`}
-                                onChange={this.props.handleChange}
+                                onChange={(event) => this.props.handleChange(event, 'admitted_date')}
                                 selected={info.admitted_date ? new Date(info.admitted_date) : date}
                                 placeholder="Admit date..."/>
                             {errors.admitted_date &&
@@ -155,6 +159,23 @@ class Form extends Component {
                             }
                         </div>
                     </div>
+                    {info &&
+                    <div className="col">
+                        <div className="form-group">
+                            <label htmlFor="release_date">Release Date :</label>
+                            <DatePicker
+                                id="release_date"
+                                name="release_date"
+                                className={`form-control form-control-sm ${errors.admitted_date && 'is-invalid'}`}
+                                onChange={(event) => this.props.handleChange(event, 'release_date')}
+                                selected={info.release_date && new Date(info.release_date)}
+                                placeholder="Release date..."/>
+                            {errors.release_date &&
+                            <div className="invalid-feedback">{errors.release_date}</div>
+                            }
+                        </div>
+                    </div>
+                    }
                 </div>
                 <div className="form-row">
                     <div className="col">

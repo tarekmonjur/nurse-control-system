@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -10,10 +11,33 @@ const doctorSchema = new Schema({
         maxlength: 50,
         default: ''
     },
+    group: {
+        type: Schema.Types.ObjectId,
+        ref: 'user_groups',
+        require: true,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+        default: null
+    },
+    nurse: {
+        type:  Schema.Types.ObjectId,
+        ref: 'nurses',
+        default: null
+    },
+    email: {
+        type: String,
+        require: true,
+        index: true,
+        default: '',
+    },
     mobile_no: {
         type: String,
+        unique: true,
+        require: true,
+        minlength: 11,
         maxlength: 13,
-        default: '',
     },
     department: {
         type: String,
@@ -30,13 +54,9 @@ const doctorSchema = new Schema({
         enum: ['male', 'female', 'other'],
         default: 'other'
     },
-    assistant: {
-        type: String,
-        minlength: 3,
-        default: '',
-    },
     joining: {
         type: Date,
+        get: getJoining,
         default: Date.now
     },
     address: {
@@ -45,12 +65,19 @@ const doctorSchema = new Schema({
         default: '',
     }
 },{
+    excludeIndexes: true,
     timestamps: {
         createdAt: 'created_at',
         updatedAt: 'updated_at'
     },
     versionKey: false,
+    toJSON: { getters: true },
 });
+
+function getJoining(joining) {
+    return joining.toISOString()
+        .split('T')[0].toString();
+}
 
 doctorSchema.pre('save', function(){
     if (this.isNew) {
@@ -64,4 +91,5 @@ doctorSchema.pre('save', function(){
 
 const Doctor = mongoose.model('doctors', doctorSchema);
 
-module.exports = Doctor;
+module.exports.Doctor = Doctor;
+module.exports.doctorSchema = doctorSchema;

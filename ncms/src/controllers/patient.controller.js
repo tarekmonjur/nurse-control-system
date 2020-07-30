@@ -10,6 +10,12 @@ class PatientController {
     }
 
     static async store(payload) {
+        console.debug({payload});
+        const bed = await patientService.getBedById(payload.bed);
+        if (!bed) {
+            throw new ValidationError('Bed not found', {}, 404);
+        }
+        payload.bed = bed;
         return await patientService.upsertPatient(payload);
     }
 
@@ -22,6 +28,11 @@ class PatientController {
         if (!patient) {
             throw new ValidationError('Patient not found', {}, 404);
         }
+        const bed = await patientService.getBedById(payload.bed);
+        if (!bed) {
+            throw new ValidationError('Bed not found', {}, 404);
+        }
+        payload.bed = bed;
         payload = Object.assign(patient, payload);
         return await patientService.upsertPatient(payload, false);
     }

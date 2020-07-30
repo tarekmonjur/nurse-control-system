@@ -28,10 +28,15 @@ class EditModal extends Component {
         const form = document.querySelector(`form[name="${this.state.modalId}"]`);
         for (let i = 0; i < form.elements.length; i++) {
             if (!isEmpty(form.elements[i].name)) {
-                formData[form.elements[i].name] = form.elements[i].value;
+                if (form.elements[i].type === 'radio') {
+                    if (form.elements[i].checked)
+                        formData[form.elements[i].name] = form.elements[i].value;
+                } else {
+                    formData[form.elements[i].name] = form.elements[i].value;
+                }
             }
         }
-        this.setState({ formData });
+        this.setState({formData: formData});
     }
 
     open(id) {
@@ -73,7 +78,7 @@ class EditModal extends Component {
                         errors: result.errors || {},
                         response: result,
                         modal: !!result.errors,
-                        formData: {},
+                        formData: result.errors ? formData : {},
                     });
                     if (result.status !== 'error') {
                         this.props.dispatch(getData({ columns: this.props.columns }));
@@ -93,6 +98,7 @@ class EditModal extends Component {
 
     render() {
         const {errors, response, modal, modalId, doctor, formData} = this.state;
+        const { nurses } = this.props;
         const data = Object.assign(doctor, formData);
         return (
             <div>
@@ -121,6 +127,7 @@ class EditModal extends Component {
                         }}>
                         <Form
                             formName={modalId}
+                            nurses={nurses}
                             info={data}
                             errors={errors}
                             init={() => { this.init() }}

@@ -29,14 +29,18 @@ class EditModal extends Component {
         const form = document.querySelector(`form[name="${this.state.modalId}"]`);
         for (let i = 0; i < form.elements.length; i++) {
             if (!isEmpty(form.elements[i].name)) {
-                formData[form.elements[i].name] = form.elements[i].value;
+                if (form.elements[i].type === 'radio') {
+                    if (form.elements[i].checked)
+                        formData[form.elements[i].name] = form.elements[i].value;
+                } else {
+                    formData[form.elements[i].name] = form.elements[i].value;
+                }
             }
         }
         this.setState({formData});
     }
 
     open(id) {
-        console.log('edit', id);
         this.id = id;
         api.showPatient(id).then(result => {
             if (result.status === 'error') {
@@ -85,7 +89,7 @@ class EditModal extends Component {
                         errors: result.errors || {},
                         response: result,
                         modal: !!result.errors,
-                        formData: {},
+                        formData: result.errors ? this.formData : {},
                     });
                     if (result.status !== 'error') {
                         api.getPatients({columns: this.props.columns})
@@ -108,6 +112,7 @@ class EditModal extends Component {
 
     render() {
         const {errors, response, date, modal, modalId, patient, formData} = this.state;
+        const {beds} = this.props;
         const info = Object.assign(patient, formData);
         return (
             <div>
@@ -136,6 +141,7 @@ class EditModal extends Component {
                         }}>
                         <Form
                             formName={modalId}
+                            beds={beds}
                             info={info}
                             errors={errors}
                             date={date}
