@@ -56,17 +56,28 @@ class Navbar extends Component {
                                     <img src="../img/ecg.png" alt="" />
                                     &nbsp;Real Time Call</a>
                             </li>
-                            <li className={`nav-item ${route === 'reports' && 'active'}`}>
-                                <a className="nav-link" href="/reports">
+                            <li className={`nav-item dropdown ${route === 'reports' && 'active'}`}>
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
                                     <img src="../img/report-01.png" alt="" />
-                                    &nbsp;Report</a>
+                                    &nbsp;Reports
+                                </a>
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a className={`dropdown-item ${route === 'daily-patient-nurse-call-reports' && 'active'}`}
+                                       href="/daily-patient-nurse-call-reports">
+                                        <img src="../img/report.png" alt="" />
+                                        &nbsp;Daily Report</a>
+                                    <a className={`dropdown-item ${route === 'monthly-patient-nurse-call-reports' && 'active'}`}
+                                       href="/monthly-patient-nurse-call-reports">
+                                        <img src="../img/report-02.png" alt="" />
+                                        &nbsp;Monthly Report</a>
+                                </div>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown2" data-toggle="dropdown">
                                     <img src="../img/administration.png" alt="" />
                                     &nbsp;Administration
                                 </a>
-                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdown2">
                                     <a className="dropdown-item" href="/news">
                                         <img src="../img/news.png" alt="" />
                                         &nbsp;News</a>

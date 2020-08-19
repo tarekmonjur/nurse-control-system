@@ -14,7 +14,8 @@ module.exports = {
         nurse: ['./components/nurse.js'],
         call_history: ['./components/call_history.js'],
         real_time_call: ['./components/real_time_call.js'],
-        report: ['./components/report.js'],
+        daily_patient_nurse_report: ['./components/daily_patient_nurse_report.js'],
+        monthly_patient_nurse_report: ['./components/monthly_patient_nurse_report.js'],
         user: ['./components/user.js'],
     },
     output: {

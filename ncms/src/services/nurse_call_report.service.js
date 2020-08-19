@@ -1,4 +1,5 @@
 
+const {isArray, get} = require('lodash');
 const PatientNurseCall = require('./../models/patient_nurse_call.modal');
 
 module.exports = class NurseCallReport {
@@ -11,7 +12,7 @@ module.exports = class NurseCallReport {
     static init(report_type, filters) {
         let defaultColumns = {};
         switch(report_type) {
-            case 'daily_report':
+            case 'daily_date_wise_report':
                 defaultColumns = {
                     date: 'Date',
                     call: 'Call',
@@ -19,29 +20,42 @@ module.exports = class NurseCallReport {
                     receive: 'Receive',
                     present: 'Present',
                     emergency: 'Emergency',
-                    complete: 'Completed'
+                    complete: 'Complete'
                 };
                 break;
-            case 'monthly_report':
-                defaultColumns = {
-                    date: 'Date',
-                    call: 'Call',
-                    miss: 'Miss',
-                    receive: 'Receive',
-                    present: 'Present',
-                    emergency: 'Emergency',
-                    complete: 'Completed'
-                };
-                break;
-            case 'nurse_report':
+            case 'daily_nurse_wise_report':
                 defaultColumns = {
                     nurse: 'Nurse',
-                    date: 'Date',
-                    call: 'Call',
+                    total_call: 'T.Call',
+                    total_miss: 'T.Miss',
+                    total_receive: 'T.Receive',
                     receive: 'Receive',
                     present: 'Present',
                     emergency: 'Emergency',
-                    complete: 'Completed'
+                    complete: 'Complete',
+                };
+                break;
+            case 'monthly_date_wise_report':
+                defaultColumns = {
+                    date: 'Date',
+                    call: 'Call',
+                    miss: 'Miss',
+                    receive: 'Receive',
+                    present: 'Present',
+                    emergency: 'Emergency',
+                    complete: 'Complete'
+                };
+                break;
+            case 'monthly_nurse_wise_report':
+                defaultColumns = {
+                    nurse: 'Nurse',
+                    total_call: 'T.Call',
+                    total_miss: 'T.Miss',
+                    total_receive: 'T.Receive',
+                    receive: 'Receive',
+                    present: 'Present',
+                    emergency: 'Emergency',
+                    complete: 'Complete'
                 };
                 break;
         }
@@ -92,7 +106,7 @@ module.exports = class NurseCallReport {
         };
     }
 
-    async getDailyPatientNurseCallSummary() {
+    async getDailyDateWisePatientNurseCallSummary() {
         return await PatientNurseCall.aggregate()
             .match(this.filters.filter)
             .project({
@@ -122,11 +136,79 @@ module.exports = class NurseCallReport {
                 emergency: 1,
                 complete: 1
             })
-            .sort({'date': 1})
+            .sort({'date': 1});
+    }
+
+    async getDailyNurseWisePatientNurseCallSummary() {
+        let total_call = 0;
+        let total_miss = 0;
+        let total_receive = 0;
+
+        const receive = await PatientNurseCall.aggregate()
+            .match({...this.filters.filter, receive: {$ne: null}})
+            .count('total')
+            .exec();
+
+        if (isArray(receive)) {
+            total_receive = get(receive, '[0].total', 0);
+        } else if (receive) {
+            total_receive = get(receive, 'total', 0);
+        }
+
+        const miss = await PatientNurseCall.aggregate()
+            .match({...this.filters.filter, receive: {$eq: null}})
+            .count('total')
+            .exec();
+
+        if (isArray(miss)) {
+            total_miss = get(miss, '[0].total', 0);
+        } else if (miss){
+            total_miss = get(miss, 'total', 0);
+        }
+        total_call = total_receive + total_miss;
+
+        return await PatientNurseCall.aggregate()
+            .match({...this.filters.filter, nurse: {$ne: null}})
+            .project({
+                nurse: 1,
+                created_at: {$dateToString: {format: "%Y-%m-%d", date: "$created_at"}},
+                call_value: {$cond: [ {$eq: ["$call", null] }, 0, 1]},
+                receive_value: {$cond: [ {$eq: ["$receive", null] }, 0, 1]},
+                present_value: {$cond: [ {$eq: ["$present", null] }, 0, 1]},
+                emergency_value: {$cond: [ {$eq: ["$emergency", null] }, 0, 1]},
+                complete_value: {$cond: [ {$eq: ["$complete", null] }, 0, 1]},
+                total_call: {$add: [total_call, 0]},
+                total_miss: {$add: [total_miss, 0]},
+                total_receive: {$add: [total_receive, 0]},
+            })
+            .group({
+                _id: '$nurse._id',
+                nurse: {$first: "$nurse.name"},
+                call: {$sum: "$call_value"},
+                receive: {$sum: "$receive_value"},
+                present: {$sum: "$present_value"},
+                emergency: {$sum: "$emergency_value"},
+                complete: {$sum: "$complete_value"},
+                total_call: {$first: "$total_call"},
+                total_miss: {$first: "$total_miss"},
+                total_receive: {$first: "$total_receive"},
+            })
+            .project({
+                _id: 1,
+                nurse: 1,
+                total_call: 1,
+                total_miss: 1,
+                total_receive: 1,
+                receive: 1,
+                present: 1,
+                emergency: 1,
+                complete: 1,
+            })
+            .sort({'receive': -1})
             .exec();
     }
 
-    async getMonthlyPatientNurseCallSummary() {
+    async getMonthlyDateWisePatientNurseCallSummary() {
         return await PatientNurseCall.aggregate()
             .match(this.filters.filter)
             .project({
@@ -159,6 +241,75 @@ module.exports = class NurseCallReport {
                 complete: 1
             })
             .sort({"_id": 1})
+            .exec();
+    }
+
+    async getMonthlyNurseWisePatientNurseCallSummary() {
+        let total_call = 0;
+        let total_miss = 0;
+        let total_receive = 0;
+
+        const receive = await PatientNurseCall.aggregate()
+            .match({...this.filters.filter, receive: {$ne: null}})
+            .count('total')
+            .exec();
+
+        if (isArray(receive)) {
+            total_receive = get(receive, '[0].total', 0);
+        } else if (receive) {
+            total_receive = get(receive, 'total', 0);
+        }
+
+        const miss = await PatientNurseCall.aggregate()
+            .match({...this.filters.filter, receive: {$eq: null}})
+            .count('total')
+            .exec();
+
+        if (isArray(miss)) {
+            total_miss = get(miss, '[0].total', 0);
+        } else if (miss){
+            total_miss = get(miss, 'total', 0);
+        }
+        total_call = total_receive + total_miss;
+
+        return await PatientNurseCall.aggregate()
+            .match({...this.filters.filter, nurse: {$ne: null}})
+            .project({
+                nurse: 1,
+                created_at: {$dateToString: {format: "%Y-%m-%d", date: "$created_at"}},
+                call_value: {$cond: [ {$eq: ["$call", null] }, 0, 1]},
+                receive_value: {$cond: [ {$eq: ["$receive", null] }, 0, 1]},
+                present_value: {$cond: [ {$eq: ["$present", null] }, 0, 1]},
+                emergency_value: {$cond: [ {$eq: ["$emergency", null] }, 0, 1]},
+                complete_value: {$cond: [ {$eq: ["$complete", null] }, 0, 1]},
+                total_call: {$add: [total_call, 0]},
+                total_miss: {$add: [total_miss, 0]},
+                total_receive: {$add: [total_receive, 0]},
+            })
+            .group({
+                _id: '$nurse._id',
+                nurse: {$first: "$nurse.name"},
+                call: {$sum: "$call_value"},
+                receive: {$sum: "$receive_value"},
+                present: {$sum: "$present_value"},
+                emergency: {$sum: "$emergency_value"},
+                complete: {$sum: "$complete_value"},
+                total_call: {$first: "$total_call"},
+                total_miss: {$first: "$total_miss"},
+                total_receive: {$first: "$total_receive"},
+            })
+            .project({
+                _id: 1,
+                nurse: 1,
+                total_call: 1,
+                total_miss: 1,
+                total_receive: 1,
+                receive: 1,
+                present: 1,
+                emergency: 1,
+                complete: 1,
+            })
+            .sort({'receive': -1})
             .exec();
     }
 

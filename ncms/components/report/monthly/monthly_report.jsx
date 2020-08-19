@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import DailyCallReport from "./daily_call_report";
-import MonthlyCallReport from "./monthly_call_report";
+import MonthlyDateWiseCallReport from "./monthly_date_wise_call_report";
+import MonthlyNurseWiseCallReport from "./monthly_nurse_wise_call_report";
 
-class Report extends Component {
+class MonthlyReport extends Component {
     constructor(props) {
         super(props);
         this.user = props.user;
@@ -11,15 +11,14 @@ class Report extends Component {
     }
 
     render() {
-        console.log('reports..');
         return (
             <div className="row">
                 {this.props.children}
                 <div className="col-md-6 col-sm-6">
-                    <DailyCallReport />
+                    <MonthlyDateWiseCallReport />
                 </div>
                 <div className="col-md-6 col-sm-6">
-                    <MonthlyCallReport />
+                    <MonthlyNurseWiseCallReport />
                 </div>
             </div>
         );
@@ -30,4 +29,4 @@ const mapStateToProps = (state, ownProps = {}) => {
     return {...state, ...ownProps};
 };
 
-export default connect(mapStateToProps)(Report);
+export default connect(mapStateToProps)(MonthlyReport);

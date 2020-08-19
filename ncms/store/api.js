@@ -201,14 +201,32 @@ module.exports = {
     },
 
     /********REPORT CALL API**********/
-    async getDailyPatientNurseCall(payload = {}) {
+    async getDailyDateWisePatientNurseCall(payload = {}) {
+        payload = {...payload, report: 'date_wise'};
         return await makeRequest(
             `${REPORT_URL}/daily-patient-nurse-call-summary`,
             'get',
             payload);
     },
 
-    async getMonthlyPatientNurseCall(payload = {}) {
+    async getDailyNurseWisePatientNurseCall(payload = {}) {
+        payload = {...payload, report: 'nurse_wise'};
+        return await makeRequest(
+            `${REPORT_URL}/daily-patient-nurse-call-summary`,
+            'get',
+            payload);
+    },
+
+    async getMonthlyDateWisePatientNurseCall(payload = {}) {
+        payload = {...payload, report: 'date_wise'};
+        return await makeRequest(
+            `${REPORT_URL}/monthly-patient-nurse-call-summary`,
+            'get',
+            payload);
+    },
+
+    async getMonthlyNurseWisePatientNurseCall(payload = {}) {
+        payload = {...payload, report: 'nurse_wise'};
         return await makeRequest(
             `${REPORT_URL}/monthly-patient-nurse-call-summary`,
             'get',

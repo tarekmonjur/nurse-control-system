@@ -11001,6 +11001,10 @@ body {
 #content .card .btn:not(:disabled):not(.disabled):active:focus, #content .card .btn:not(:disabled):not(.disabled).active:focus, .show > #content .card .btn.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
 }
+#content .card .filter-date {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 #content #login {
   background-color: #fff;
 }

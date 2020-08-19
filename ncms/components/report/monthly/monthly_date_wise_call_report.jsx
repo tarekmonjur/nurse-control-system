@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import {
     getResponse,
-    getDailyPatientNurseCall,
-} from './../../store/actions';
-import DailyCallFilter from "./daily_call_filter";
+    getMonthlyDateWisePatientNurseCall,
+} from './../../../store/actions';
+import MonthlyDateWiseCallFilter from "./monthly_date_wise_call_filter";
 import {
     Table,
     Paginate,
@@ -14,51 +14,50 @@ import {
     PdfButton,
     ExcelButton,
     Alert
-} from './../common';
+} from './../../common';
 
 
-class DailyCallReport extends Component {
+class MonthlyDateWiseCallReport extends Component {
     constructor(props) {
         super(props);
         this.user = props.user;
-        this.state = { response: null }
+        this.state = { response: null };
+        this.store = this.props.monthly_date_wise_patient_nurse_call;
     }
 
     async componentDidMount() {
-        this.props.getDailyPatientNurseCall({ columns: this.props.daily_patient_nurse_call.columns });
+        this.props.getMonthlyDateWisePatientNurseCall({ columns: this.store.columns });
     }
 
     render() {
-        const { data: daily_report, response } = this.props.daily_patient_nurse_call;
-        console.log('reports..');
+        const { data: monthly_report, response } = this.props.monthly_date_wise_patient_nurse_call;
         return (
             <div>
                 <div className="card">
                     <div className="card-header">
                         <div className="d-flex">
                             <ListTitle
-                                title="Daily Call Summary"
-                                icon="report.png"
+                                title="Monthly Date Wise Call Summary"
+                                icon="report-02.png"
                             />
                             <ExcelButton />
                             <PdfButton />
-                            <FilterButton id="#daily" />
+                            <FilterButton id="#dateWise" />
                         </div>
                     </div>
                     <div className="card-body"
                          style={{maxHeight: 'calc(100vh - 300px)', overflowY: 'auto'}}>
-                        <DailyCallFilter />
-                        {daily_report &&
-                            <Table
-                                data={daily_report}
-                            />
+                        <MonthlyDateWiseCallFilter />
+                        {monthly_report &&
+                        <Table
+                            data={monthly_report}
+                        />
                         }
                     </div>
                     <div className="card-footer">
                         <Paginate />
                     </div>
                 </div>
-
                 { response &&
                     <Alert data={response} id="alert"/>
                 }
@@ -71,10 +70,10 @@ const mapStateToProps = (state, ownProps = {}) => {
     return {...state, ...ownProps};
 };
 
-const actionCreators = {getResponse, getDailyPatientNurseCall};
+const actionCreators = {getResponse, getMonthlyDateWisePatientNurseCall};
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators(actionCreators, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DailyCallReport);
+export default connect(mapStateToProps, mapDispatchToProps)(MonthlyDateWiseCallReport);

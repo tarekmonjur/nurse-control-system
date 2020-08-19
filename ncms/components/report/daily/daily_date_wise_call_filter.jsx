@@ -1,16 +1,56 @@
 import React, {Component} from 'react';
+import DatePicker from "react-datepicker";
 
-class DailyCallFilter extends Component {
+class DailyDateWiseCallFilter extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            date: new Date()
+        };
+    }
+
+    handleChange(event) {
+
     }
 
     render() {
         return (
-            <div className="collapse" id="daily">
+            <div className="collapse" id="dateWise">
                 <div className="card">
                     <form action="">
                         <div className="form-row">
+                            <div className="form-group col-md-4">
+                                <div className="input-group input-group-sm">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text" style={{padding: '0rem 0.4rem'}}>
+                                            From Date
+                                        </div>
+                                    </div>
+                                    <DatePicker
+                                        id="form_date"
+                                        name="form_date"
+                                        className="form-control form-control-sm filter-date"
+                                        onChange={this.handleChange}
+                                        selected={this.state.date}
+                                        placeholder="Form Date..."/>
+                                </div>
+                            </div>
+                            <div className="form-group col-md-4">
+                                <div className="input-group input-group-sm">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">
+                                            To Date
+                                        </div>
+                                    </div>
+                                    <DatePicker
+                                        id="to_date"
+                                        name="to_date"
+                                        className="form-control form-control-sm filter-date"
+                                        onChange={this.handleChange}
+                                        selected={this.state.date}
+                                        placeholder="To date..."/>
+                                </div>
+                            </div>
                             <div className="form-group col-md-4">
                                 <div className="input-group input-group-sm">
                                     <div className="input-group-prepend">
@@ -24,28 +64,6 @@ class DailyCallFilter extends Component {
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div className="form-group col-md-4">
-                                <div className="input-group input-group-sm">
-                                    <div className="input-group-prepend">
-                                        <div className="input-group-text">
-                                            From Date
-                                        </div>
-                                    </div>
-                                    <input type="text" className="form-control"
-                                           aria-label="Amount (to the nearest dollar)" />
-                                </div>
-                            </div>
-                            <div className="form-group col-md-4">
-                                <div className="input-group input-group-sm">
-                                    <div className="input-group-prepend">
-                                        <div className="input-group-text">
-                                            To Date
-                                        </div>
-                                    </div>
-                                    <input type="text" className="form-control"
-                                           aria-label="Amount (to the nearest dollar)" />
                                 </div>
                             </div>
                         </div>
@@ -64,4 +82,4 @@ class DailyCallFilter extends Component {
     }
 }
 
-export default DailyCallFilter;
+export default DailyDateWiseCallFilter;

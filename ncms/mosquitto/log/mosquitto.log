@@ -7665,3 +7665,354 @@
 1596047183: New client connected from 172.24.0.2 as broker1 (p2, c1, k60, u'tarek').
 1596047237: mosquitto version 1.6.10 terminating
 1596047237: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596103763: mosquitto version 1.6.10 starting
+1596103763: Config loaded from /mosquitto/config/mosquitto.conf.
+1596103763: Opening ipv4 listen socket on port 1883.
+1596103763: Opening ipv6 listen socket on port 1883.
+1596103769: New connection from 172.24.0.4 on port 1883.
+1596103769: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596103779: Socket error on client broker1, disconnecting.
+1596103782: New connection from 172.24.0.4 on port 1883.
+1596103782: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596103834: Socket error on client broker1, disconnecting.
+1596103835: New connection from 172.24.0.4 on port 1883.
+1596103835: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596103845: Socket error on client broker1, disconnecting.
+1596103846: New connection from 172.24.0.4 on port 1883.
+1596103846: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596103928: Socket error on client broker1, disconnecting.
+1596103929: New connection from 172.24.0.4 on port 1883.
+1596103929: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596103938: Socket error on client broker1, disconnecting.
+1596103939: New connection from 172.24.0.4 on port 1883.
+1596103939: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596103950: Socket error on client broker1, disconnecting.
+1596103950: New connection from 172.24.0.4 on port 1883.
+1596103950: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596103954: Socket error on client broker1, disconnecting.
+1596103957: New connection from 172.24.0.4 on port 1883.
+1596103957: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596104585: Socket error on client broker1, disconnecting.
+1596104586: New connection from 172.24.0.4 on port 1883.
+1596104586: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596105204: Socket error on client broker1, disconnecting.
+1596105205: New connection from 172.24.0.4 on port 1883.
+1596105205: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596105431: Socket error on client broker1, disconnecting.
+1596105432: New connection from 172.24.0.4 on port 1883.
+1596105432: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596105441: Socket error on client broker1, disconnecting.
+1596105442: New connection from 172.24.0.4 on port 1883.
+1596105442: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596105488: Socket error on client broker1, disconnecting.
+1596105489: New connection from 172.24.0.4 on port 1883.
+1596105489: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596105564: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596107192: Socket error on client broker1, disconnecting.
+1596107194: New connection from 172.24.0.4 on port 1883.
+1596107194: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596107365: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596109166: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596110967: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596112768: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596114569: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596116370: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596118173: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596119975: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596121032: Socket error on client broker1, disconnecting.
+1596121033: mosquitto version 1.6.10 terminating
+1596121033: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596121040: mosquitto version 1.6.10 starting
+1596121040: Config loaded from /mosquitto/config/mosquitto.conf.
+1596121040: Opening ipv4 listen socket on port 1883.
+1596121040: Opening ipv6 listen socket on port 1883.
+1596121043: New connection from 172.24.0.4 on port 1883.
+1596121043: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596121051: Socket error on client broker1, disconnecting.
+1596121053: New connection from 172.24.0.4 on port 1883.
+1596121053: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596122841: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596124642: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596126443: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596127957: Socket error on client broker1, disconnecting.
+1596127960: New connection from 172.24.0.4 on port 1883.
+1596127960: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596128249: Socket error on client broker1, disconnecting.
+1596128251: New connection from 172.24.0.4 on port 1883.
+1596128251: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596128270: Socket error on client broker1, disconnecting.
+1596128271: New connection from 172.24.0.4 on port 1883.
+1596128271: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596128311: Socket error on client broker1, disconnecting.
+1596128312: New connection from 172.24.0.4 on port 1883.
+1596128312: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596128380: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596128447: Socket error on client broker1, disconnecting.
+1596128448: New connection from 172.24.0.4 on port 1883.
+1596128448: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596128793: Socket error on client broker1, disconnecting.
+1596128794: New connection from 172.24.0.4 on port 1883.
+1596128794: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596129768: Socket error on client broker1, disconnecting.
+1596129769: New connection from 172.24.0.4 on port 1883.
+1596129769: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596129962: Socket error on client broker1, disconnecting.
+1596129964: New connection from 172.24.0.4 on port 1883.
+1596129964: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596129980: Socket error on client broker1, disconnecting.
+1596129981: mosquitto version 1.6.10 terminating
+1596129981: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596129987: mosquitto version 1.6.10 starting
+1596129987: Config loaded from /mosquitto/config/mosquitto.conf.
+1596129987: Opening ipv4 listen socket on port 1883.
+1596129987: Opening ipv6 listen socket on port 1883.
+1596129991: New connection from 172.24.0.4 on port 1883.
+1596129991: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130002: Socket error on client broker1, disconnecting.
+1596130003: New connection from 172.24.0.4 on port 1883.
+1596130003: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130124: Socket error on client broker1, disconnecting.
+1596130125: New connection from 172.24.0.4 on port 1883.
+1596130125: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130384: Socket error on client broker1, disconnecting.
+1596130385: New connection from 172.24.0.4 on port 1883.
+1596130385: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130455: Socket error on client broker1, disconnecting.
+1596130457: New connection from 172.24.0.4 on port 1883.
+1596130457: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130513: Socket error on client broker1, disconnecting.
+1596130514: New connection from 172.24.0.4 on port 1883.
+1596130514: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130576: Socket error on client broker1, disconnecting.
+1596130577: New connection from 172.24.0.4 on port 1883.
+1596130577: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130680: Socket error on client broker1, disconnecting.
+1596130681: New connection from 172.24.0.4 on port 1883.
+1596130681: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130693: Socket error on client broker1, disconnecting.
+1596130694: mosquitto version 1.6.10 terminating
+1596130694: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596130697: mosquitto version 1.6.10 starting
+1596130697: Config loaded from /mosquitto/config/mosquitto.conf.
+1596130697: Opening ipv4 listen socket on port 1883.
+1596130697: Opening ipv6 listen socket on port 1883.
+1596130701: New connection from 172.24.0.4 on port 1883.
+1596130701: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130711: Socket error on client broker1, disconnecting.
+1596130713: New connection from 172.24.0.4 on port 1883.
+1596130713: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130835: Socket error on client broker1, disconnecting.
+1596130837: New connection from 172.24.0.4 on port 1883.
+1596130837: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130846: Socket error on client broker1, disconnecting.
+1596130847: New connection from 172.24.0.4 on port 1883.
+1596130847: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130946: Socket error on client broker1, disconnecting.
+1596130947: mosquitto version 1.6.10 terminating
+1596130947: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596130954: mosquitto version 1.6.10 starting
+1596130954: Config loaded from /mosquitto/config/mosquitto.conf.
+1596130954: Opening ipv4 listen socket on port 1883.
+1596130954: Opening ipv6 listen socket on port 1883.
+1596130957: New connection from 172.25.0.4 on port 1883.
+1596130957: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596130966: Socket error on client broker1, disconnecting.
+1596130968: New connection from 172.25.0.4 on port 1883.
+1596130968: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596131020: Socket error on client broker1, disconnecting.
+1596131021: New connection from 172.25.0.4 on port 1883.
+1596131021: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596131041: Socket error on client broker1, disconnecting.
+1596131042: New connection from 172.25.0.4 on port 1883.
+1596131042: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596131052: Socket error on client broker1, disconnecting.
+1596131052: mosquitto version 1.6.10 terminating
+1596131052: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596131057: mosquitto version 1.6.10 starting
+1596131057: Config loaded from /mosquitto/config/mosquitto.conf.
+1596131057: Opening ipv4 listen socket on port 1883.
+1596131057: Opening ipv6 listen socket on port 1883.
+1596131061: New connection from 172.25.0.4 on port 1883.
+1596131061: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596131071: Socket error on client broker1, disconnecting.
+1596131072: New connection from 172.25.0.4 on port 1883.
+1596131072: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596131274: Socket error on client broker1, disconnecting.
+1596131274: New connection from 172.25.0.4 on port 1883.
+1596131274: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596131357: Socket error on client broker1, disconnecting.
+1596131359: New connection from 172.25.0.4 on port 1883.
+1596131359: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596131707: Socket error on client broker1, disconnecting.
+1596131709: New connection from 172.25.0.4 on port 1883.
+1596131709: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596132067: Socket error on client broker1, disconnecting.
+1596132068: New connection from 172.25.0.4 on port 1883.
+1596132068: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596132858: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596133056: Socket error on client broker1, disconnecting.
+1596133059: New connection from 172.25.0.4 on port 1883.
+1596133059: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133120: Socket error on client broker1, disconnecting.
+1596133121: New connection from 172.25.0.4 on port 1883.
+1596133121: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133201: Socket error on client broker1, disconnecting.
+1596133203: New connection from 172.25.0.4 on port 1883.
+1596133203: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133487: Socket error on client broker1, disconnecting.
+1596133489: New connection from 172.25.0.4 on port 1883.
+1596133489: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133529: Socket error on client broker1, disconnecting.
+1596133530: New connection from 172.25.0.4 on port 1883.
+1596133530: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133607: Socket error on client broker1, disconnecting.
+1596133608: New connection from 172.25.0.4 on port 1883.
+1596133608: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133629: Socket error on client broker1, disconnecting.
+1596133630: New connection from 172.25.0.4 on port 1883.
+1596133630: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133657: Socket error on client broker1, disconnecting.
+1596133658: New connection from 172.25.0.4 on port 1883.
+1596133658: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133666: Socket error on client broker1, disconnecting.
+1596133667: New connection from 172.25.0.4 on port 1883.
+1596133667: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133798: Socket error on client broker1, disconnecting.
+1596133799: New connection from 172.25.0.4 on port 1883.
+1596133799: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133869: Socket error on client broker1, disconnecting.
+1596133870: New connection from 172.25.0.4 on port 1883.
+1596133870: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133913: Socket error on client broker1, disconnecting.
+1596133914: New connection from 172.25.0.4 on port 1883.
+1596133914: New client connected from 172.25.0.4 as broker1 (p2, c1, k60, u'tarek').
+1596133947: Socket error on client broker1, disconnecting.
+1596133947: mosquitto version 1.6.10 terminating
+1596133947: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596208875: mosquitto version 1.6.10 starting
+1596208875: Config loaded from /mosquitto/config/mosquitto.conf.
+1596208875: Opening ipv4 listen socket on port 1883.
+1596208875: Opening ipv6 listen socket on port 1883.
+1596208875: New connection from 172.25.0.2 on port 1883.
+1596208875: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596208888: Socket error on client broker1, disconnecting.
+1596208889: New connection from 172.25.0.2 on port 1883.
+1596208889: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596208905: Socket error on client broker1, disconnecting.
+1596208906: New connection from 172.25.0.2 on port 1883.
+1596208906: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596208944: Socket error on client broker1, disconnecting.
+1596208945: New connection from 172.25.0.2 on port 1883.
+1596208945: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596209093: Socket error on client broker1, disconnecting.
+1596209093: New connection from 172.25.0.2 on port 1883.
+1596209093: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596209118: Socket error on client broker1, disconnecting.
+1596209119: New connection from 172.25.0.2 on port 1883.
+1596209119: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596209190: Socket error on client broker1, disconnecting.
+1596209191: New connection from 172.25.0.2 on port 1883.
+1596209191: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596209235: Socket error on client broker1, disconnecting.
+1596209236: New connection from 172.25.0.2 on port 1883.
+1596209236: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596209322: Socket error on client broker1, disconnecting.
+1596209322: New connection from 172.25.0.2 on port 1883.
+1596209322: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596209441: Socket error on client broker1, disconnecting.
+1596209442: New connection from 172.25.0.2 on port 1883.
+1596209442: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596210060: Socket error on client broker1, disconnecting.
+1596210062: New connection from 172.25.0.2 on port 1883.
+1596210062: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596210113: Socket error on client broker1, disconnecting.
+1596210114: New connection from 172.25.0.2 on port 1883.
+1596210114: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596210347: Socket error on client broker1, disconnecting.
+1596210347: New connection from 172.25.0.2 on port 1883.
+1596210347: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596210351: Socket error on client broker1, disconnecting.
+1596210352: New connection from 172.25.0.2 on port 1883.
+1596210352: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596210675: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596212476: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596214285: Socket error on client broker1, disconnecting.
+1596214286: New connection from 172.25.0.2 on port 1883.
+1596214286: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596214796: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596215138: Socket error on client broker1, disconnecting.
+1596215139: New connection from 172.25.0.2 on port 1883.
+1596215139: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596215225: Socket error on client broker1, disconnecting.
+1596215226: New connection from 172.25.0.2 on port 1883.
+1596215226: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596215410: Socket error on client broker1, disconnecting.
+1596215411: New connection from 172.25.0.2 on port 1883.
+1596215411: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596216306: Socket error on client broker1, disconnecting.
+1596216307: New connection from 172.25.0.2 on port 1883.
+1596216307: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596216476: Socket error on client broker1, disconnecting.
+1596216477: New connection from 172.25.0.2 on port 1883.
+1596216477: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596216597: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596216968: Socket error on client broker1, disconnecting.
+1596216969: mosquitto version 1.6.10 terminating
+1596216969: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596380152: mosquitto version 1.6.10 starting
+1596380152: Config loaded from /mosquitto/config/mosquitto.conf.
+1596380152: Opening ipv4 listen socket on port 1883.
+1596380152: Opening ipv6 listen socket on port 1883.
+1596380154: New connection from 172.25.0.2 on port 1883.
+1596380154: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596380212: Socket error on client broker1, disconnecting.
+1596380213: New connection from 172.25.0.2 on port 1883.
+1596380213: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596380228: Socket error on client broker1, disconnecting.
+1596380229: New connection from 172.25.0.2 on port 1883.
+1596380229: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596380372: Socket error on client broker1, disconnecting.
+1596380374: New connection from 172.25.0.2 on port 1883.
+1596380374: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596380439: Socket error on client broker1, disconnecting.
+1596380440: New connection from 172.25.0.2 on port 1883.
+1596380440: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596380656: Socket error on client broker1, disconnecting.
+1596380657: New connection from 172.25.0.2 on port 1883.
+1596380657: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596380899: Socket error on client broker1, disconnecting.
+1596380900: New connection from 172.25.0.2 on port 1883.
+1596380900: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596380976: Socket error on client broker1, disconnecting.
+1596380977: New connection from 172.25.0.2 on port 1883.
+1596380977: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596382963: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596383034: Socket error on client broker1, disconnecting.
+1596383036: New connection from 172.25.0.2 on port 1883.
+1596383036: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596383279: Socket error on client broker1, disconnecting.
+1596383280: New connection from 172.25.0.2 on port 1883.
+1596383280: New client connected from 172.25.0.2 as broker1 (p2, c1, k60, u'tarek').
+1596384764: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1596654129: mosquitto version 1.6.10 terminating
+1596654129: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1597775748: mosquitto version 1.6.10 starting
+1597775748: Config loaded from /mosquitto/config/mosquitto.conf.
+1597775748: Opening ipv4 listen socket on port 1883.
+1597775748: Opening ipv6 listen socket on port 1883.
+1597775754: New connection from 172.24.0.4 on port 1883.
+1597775754: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1597775776: Socket error on client broker1, disconnecting.
+1597775779: New connection from 172.24.0.4 on port 1883.
+1597775779: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1597777548: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1597808923: mosquitto version 1.6.10 starting
+1597808923: Config loaded from /mosquitto/config/mosquitto.conf.
+1597808923: Opening ipv4 listen socket on port 1883.
+1597808923: Opening ipv6 listen socket on port 1883.
+1597808923: New connection from 172.24.0.2 on port 1883.
+1597808923: New client connected from 172.24.0.2 as broker1 (p2, c1, k60, u'tarek').
+1597810723: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1597812524: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1597814325: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1597816126: Saving in-memory database to /mosquitto/data/mosquitto.db.

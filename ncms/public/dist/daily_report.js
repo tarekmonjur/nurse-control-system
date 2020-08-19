@@ -81,30 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./components/report.js":
-/*!******************************!*\
-  !*** ./components/report.js ***!
-  \******************************/
+/***/ "./components/daily_report.js":
+/*!************************************!*\
+  !*** ./components/daily_report.js ***!
+  \************************************/
 /*! no exports provided */
 /***/ (function(module, exports) {
 
-eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nError: ENOENT: no such file or directory, open '/app/components/report.js'\");\n\n//# sourceURL=webpack:///./components/report.js?");
+eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nError: ENOENT: no such file or directory, open '/app/components/daily_report.js'\");\n\n//# sourceURL=webpack:///./components/daily_report.js?");
 
 /***/ }),
 
-/***/ 10:
-/*!************************************!*\
-  !*** multi ./components/report.js ***!
-  \************************************/
+/***/ 11:
+/*!******************************************!*\
+  !*** multi ./components/daily_report.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! ./components/report.js */\"./components/report.js\");\n\n\n//# sourceURL=webpack:///multi_./components/report.js?");
+eval("module.exports = __webpack_require__(/*! ./components/daily_report.js */\"./components/daily_report.js\");\n\n\n//# sourceURL=webpack:///multi_./components/daily_report.js?");
 
 /***/ })
 

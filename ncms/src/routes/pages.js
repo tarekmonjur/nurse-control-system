@@ -69,8 +69,16 @@ router.get('/real-time-call', checkAuthenticated, (req, res) => {
     return res.render('real_time_call');
 });
 
-router.get('/reports', (req, res) => {
-    return res.render('report');
+// router.get('/reports', checkAuthenticated, (req, res) => {
+//     return res.render('report');
+// });
+
+router.get('/daily-patient-nurse-call-reports', (req, res) => {
+    return res.render('daily_patient_nurse_report');
+});
+
+router.get('/monthly-patient-nurse-call-reports', (req, res) => {
+    return res.render('monthly_patient_nurse_report');
 });
 
 router.get('/users', checkAuthenticated, async (req, res) => {
