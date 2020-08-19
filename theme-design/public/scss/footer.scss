@@ -1,0 +1,24 @@
+
+#footer {
+  height: 40px;
+  margin-top: 8px;
+  color: $theme-color;
+  background-color: $theme-bg-color;
+  font-size: 1.5rem;
+
+  .news-title {
+    position: relative;
+    overflow: hidden;
+
+    p {
+      position: absolute;
+      animation: news 25s infinite linear;
+      transform: translateX(50%);
+    }
+
+    @keyframes news {
+      to {transform: translateX(-100%)}
+    }
+  }
+
+}

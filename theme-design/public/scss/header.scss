@@ -1,0 +1,67 @@
+
+%header-text {
+	line-height: .9;
+	margin-bottom: 0rem;
+	color: $theme-color;
+	text-transform: uppercase;
+}
+
+#header {
+	background-color: $theme-bg-color;
+	min-height: 95px;
+	color: rgba($theme-color, 100);
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	.logo-title {
+		h3 {
+			@extend %header-text;
+		}
+
+		img {
+			max-height: 75px;
+		}
+	}
+
+	.status {
+		line-height: 1;
+		text-transform: uppercase;
+		font-size: .8rem;
+		color: $theme-color;
+
+		img {
+			vertical-align: middle;
+			width: 18px;
+			padding-right: 5px;
+		}
+
+		:nth-of-type(3).row {
+			color: #204ed8 !important;
+		}
+
+		:nth-of-type(4).row {
+			color: #1bde0a!important;
+		}
+
+		.row div{
+			color: $theme-color;
+		}
+	}
+
+	.user {
+
+		img {
+			max-height: 55px;
+		}
+
+		h6 {
+			@extend %header-text;
+		}
+
+		a {
+			color: $menu-color;
+			text-decoration: none;
+		}
+	}
+
+}
