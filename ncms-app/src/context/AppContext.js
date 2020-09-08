@@ -16,9 +16,21 @@ export const AppMemo = (appStore, dispatch) => {
     app.PATIENT_UI_UPDATE_TOPIC = PATIENT_UI_UPDATE_TOPIC;
     app.PATIENT_MOBILE_TOPIC = PATIENT_MOBILE_TOPIC;
 
+    app.initHandle = async (host) => {
+      let result = true;
+      try {
+        await AsyncStorage.setItem('api_host', host);
+        dispatch({type: 'INIT', host: host});
+      } catch (err) {
+        console.log('init storage failed: ', err);
+        result = false;
+      }
+      return result;
+    };
+
     app.logIn = async (username, password) => {
       try {
-        return fetch(`${app.appStore.settings.api_host}/api/login`, {
+        return fetch(`http://${app.appStore.settings.api_host}/api/login`, {
           method: 'POST',
           body: JSON.stringify({username, password}),
           headers: {
@@ -28,7 +40,7 @@ export const AppMemo = (appStore, dispatch) => {
         })
           .then(response => response.json())
           .then(async (result) => {
-            console.log('login: ', JSON.stringify(result));
+            // console.log('login: ', JSON.stringify(result));
             if (result.status === 'success') {
               try {
                 await AsyncStorage.setItem('userToken', result.results.token);
@@ -42,6 +54,7 @@ export const AppMemo = (appStore, dispatch) => {
           });
       } catch (err) {
         console.log('login request failed: ', err);
+        throw err;
       }
     };
 
@@ -57,7 +70,7 @@ export const AppMemo = (appStore, dispatch) => {
 
     app.getPatientCalls = async (data, setData) => {
       try {
-        return fetch(`${app.appStore.settings.api_host}/api/real-time-call`, {
+        return fetch(`http://${app.appStore.settings.api_host}/api/real-time-call`, {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -132,7 +145,7 @@ export const AppMemo = (appStore, dispatch) => {
       if (!isEmpty(app.clientIO)) {
         return app.clientIO;
       }
-      app.clientIO = socketIOClient(`${appStore.settings.io_host}/patient?token=${appStore.user_token}`, {
+      app.clientIO = socketIOClient(`ws://${appStore.settings.api_host}/patient?token=${appStore.user_token}`, {
         path: '/ncms',
         reconnectionAttempts: 15
       });

@@ -57,6 +57,11 @@ export default function LoginScreen({navigation}) {
         }
       } catch (err) {
         console.log('login failed: ', err);
+        setFormData({
+          ...formData,
+          unauthorized: err.message || 'login failed',
+          loading: false
+        });
       }
     } else {
       setFormData({

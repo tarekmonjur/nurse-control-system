@@ -6,8 +6,7 @@ export const initialLoginState = {
       title: 'Nurse Control Management System',
       address: 'Dhaka, Bangladesh',
     },
-    api_host: 'http://172.21.0.1:3000',
-    io_host: 'ws://172.21.0.1:3000',
+    api_host: null, //'172.21.0.1:3000',
   },
   user: {},
   user_token: null,
@@ -17,11 +16,23 @@ export const initialLoginState = {
 
 export default (prevState, action) => {
   switch (action.type) {
-    case 'RETRIEVE_TOKEN':
+    case 'INIT':
+      return {
+        ...prevState,
+        settings: {
+          ...prevState.settings,
+          api_host: action.host
+        }
+      }
+    case 'RETRIEVE_DATA':
       return {
         ...prevState,
         user: action.user,
         user_token: action.token,
+        settings: {
+          ...prevState.settings,
+          api_host: action.host
+        },
         is_loading: false,
       }
     case 'LOGIN':

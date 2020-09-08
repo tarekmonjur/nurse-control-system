@@ -18,46 +18,37 @@ import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AppContext} from './../context/AppContext';
 import Loading from "../components/Loading";
 
-export default function InitScreen({navigation}) {
+export default function InitScreen() {
   const [formData, setFormData] = React.useState({
     api_host: null,
     errors: {},
     loading: false,
   });
-  const {logIn, appStore: {settings}} = React.useContext(AppContext);
+  const {initHandle} = React.useContext(AppContext);
 
-  const handleLogin = async () => {
+  const handleInit = async () => {
     const api_host = formData.api_host;
     const errors = {};
     setFormData({
       ...formData,
       loading: true
     });
+
     if (!api_host) {
       errors['api_host'] = 'api host is required';
     }
 
     if (isEmpty(errors)) {
-      try {
-        const result = await logIn(username, password);
-        if (result.status === 'error') {
-          setFormData({
-            ...formData,
-            errors: result.errors || {},
-            unauthorized: result.message,
-            loading: false
-          });
-        }
-      } catch (err) {
-        console.log('login failed: ', err);
+      const result = await initHandle(api_host);
+      if (!result) {
+        errors['error'] = 'host config failed'
       }
-    } else {
-      setFormData({
-        ...formData,
-        errors: errors,
-        loading: false
-      });
     }
+    setFormData({
+      ...formData,
+      errors: errors,
+      loading: false
+    });
   }
 
   const handleChange = (field, value) => {
@@ -85,8 +76,8 @@ export default function InitScreen({navigation}) {
       <View style={styles.content}>
         <View style={{alignItems: 'center'}}>
           <Text style={[styles.title, {color: 'dimgray', textShadowRadius: .5, fontSize: 21}]}>Host Setup!</Text>
-          { formData.unauthorized ?
-            <Text style={styles.error}>{formData.unauthorized}</Text>
+          { formData.errors.error ?
+            <Text style={styles.error}>{formData.errors.error}</Text>
             : null
           }
 
@@ -99,8 +90,7 @@ export default function InitScreen({navigation}) {
               <FIcon name="user" size={25} />
               <TextInput
                 style={styles.input_text}
-                placeholder="Enter Username"
-                autoCompleteType="api_host"
+                placeholder="Enter Host"
                 autoCapitalize="none"
                 onChangeText={(value) => handleChange('api_host', value)}
               />
@@ -115,38 +105,9 @@ export default function InitScreen({navigation}) {
             }
           </View>
 
-          <View style={styles.input}>
-            <Text style={styles.input_label}>Password: </Text>
-            <View style={styles.input_field}>
-              <FIcon name="lock" size={25} />
-              <TextInput
-                style={styles.input_text}
-                placeholder="Enter Password"
-                autoCompleteType="password"
-                autoCapitalize="none"
-                secureTextEntry={formData.secure}
-                onChangeText={(value) => handleChange('password', value)}
-              />
-              { formData.password ?
-                <TouchableOpacity onPress={() => handleChange('secure', true)}>
-                  {formData.secure ?
-                    <FIcon name="eye-slash" size={20}/>
-                    :
-                    <FIcon name="eye" size={20}/>
-                  }
-                </TouchableOpacity>
-                : null
-              }
-            </View>
-            { formData.errors.password ?
-              <Text style={styles.error}>{formData.errors.password}</Text>
-              : null
-            }
-          </View>
-
-          <TouchableOpacity onPress={handleLogin} style={styles.button}>
+          <TouchableOpacity onPress={handleInit} style={styles.button}>
             <MIcon name="login" color="white" size={25} />
-            <Text style={styles.button_text}>Login</Text>
+            <Text style={styles.button_text}>Save</Text>
           </TouchableOpacity>
         </View>
 
