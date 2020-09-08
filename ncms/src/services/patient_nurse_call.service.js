@@ -91,7 +91,7 @@ module.exports = {
         const model = PatientNurseCall(payload);
         const error = model.validateSync();
         if (error && error.errors) {
-            throw new ValidationError('Patient fields error', error.errors);
+            throw new ValidationError('Patient call fields error', error.errors);
         }
         model.isNew = isNew;
         return model.save();
@@ -140,7 +140,7 @@ module.exports = {
                 }
             } else if (_.get(last_call, 'call', null)) {
                 const call_time = _.get(last_call, 'call', null);
-                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + 2);
+                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + 1);
                 if ( current_time < last_call_tiem) {
                     return result;
                 }
@@ -277,16 +277,15 @@ module.exports = {
         try {
             const nurse = await this.getNurseById(nurse_id);
             const call = await this.getCallById(call_id);
-            console.debug({call});
 
-            if (_.isEmpty(call)) {
+            if (_.isEmpty(call) || _.isEmpty(nurse)) {
                 return null;
             }
+            const payload = call.toObject();
+            payload.receive = new Date();
+            payload.nurse = nurse;
 
-            call.receive = new Date();
-            call.nurse = nurse;
-
-            const data = await this.upsertPatientDeviceCall(call);
+            const data = await this.upsertPatientDeviceCall(payload);
             const result = {
                 code: 200,
                 status: 'success',
@@ -294,7 +293,6 @@ module.exports = {
                 message: `Bed No - ${data.bed.device_no}, Location - ${data.bed.bed_location}`,
                 results: data
             };
-
             return result;
         } catch (err) {
             console.log('error: ', err.message);

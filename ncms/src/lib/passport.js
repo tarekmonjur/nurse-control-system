@@ -10,12 +10,19 @@ const initialize = (passport, getUserByUsername, getUserByIdAndType) => {
         try {
             const user = await getUserByUsername(username);
             if (user && await bcrypt.compare(password, user.password)) {
-                return done(null, user, 'Login Success.');
+                const user_info = await getUserByIdAndType(user._id, user.type);
+                const user_data = {
+                    ...user_info,
+                    user_id: user._id,
+                    type: user.type,
+                    token: user.token,
+                }
+                return done(null, user_data, 'Login Success.');
             } else {
                 return done(null, false, 'username / password incorrect.')
             }
         } catch(err) {
-            return done(err, false, err.message);
+            return done(err, false, err.message || 'Internal Error');
         }
     };
 
@@ -27,11 +34,17 @@ const initialize = (passport, getUserByUsername, getUserByIdAndType) => {
     );
 
     passport.serializeUser((user, done) => {
-        done(null, {id: user._id, type: user.type});
+        done(null, {id: user.user_id, type: user.type, token: user.token});
     });
 
     passport.deserializeUser(async (user, done) => {
-        done(null, await getUserByIdAndType(user.id, user.type));
+        const user_info = await getUserByIdAndType(user.id, user.type);
+        const user_data = {
+            ...user_info,
+            type: user.type,
+            token: user.token,
+        }
+        done(null, user_data);
     });
 
     passport.use(

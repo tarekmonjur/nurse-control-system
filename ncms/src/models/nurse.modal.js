@@ -11,6 +11,16 @@ const nurseSchema = new Schema({
         maxlength: 50,
         default: ''
     },
+    group: {
+        type: Schema.Types.ObjectId,
+        ref: 'user_groups',
+        require: true,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+        default: null
+    },
     email: {
         type: String,
         require: true,
@@ -53,6 +63,7 @@ const nurseSchema = new Schema({
         default: '',
     }
 },{
+    excludeIndexes: true,
     timestamps: {
         createdAt: 'created_at',
         updatedAt: 'updated_at'

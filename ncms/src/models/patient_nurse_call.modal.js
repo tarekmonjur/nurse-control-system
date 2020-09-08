@@ -20,27 +20,27 @@ const patientNurseCallSchema = new Schema({
     },
     call: {
         type: Date,
-        default: null,
+        default: '',
         get: getDate
     },
     receive: {
         type: Date,
-        default: null,
+        default: '',
         get: getDate
     },
     present: {
         type: Date,
-        default: null,
+        default: '',
         get: getDate
     },
     emergency: {
         type: Date,
-        default: null,
+        default: '',
         get: getDate
     },
     complete: {
         type: Date,
-        default: null,
+        default: '',
         get: getDate
     },
 },{

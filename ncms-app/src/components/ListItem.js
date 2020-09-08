@@ -1,24 +1,51 @@
 import React from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {isEmpty, get} from 'lodash';
 
-export default function ListItem ({item, onPress, style}) {
+const getStatusAndDate = (item) => {
+  let status = null;
+  let date = null;
+  if (get(item, 'complete', null)) {
+    status = 'complete';
+    date = get(item, 'complete');
+  } else if (get(item, 'emergency', null)) {
+    status = 'emergency';
+    date = get(item, 'emergency');
+  } else if (get(item, 'present', null)) {
+    status = 'present';
+    date = get(item, 'present');
+  } else if (get(item, 'receive', null)) {
+    status = 'receive';
+    date = get(item, 'receive');
+  } else if (get(item, 'call', null)) {
+    status = 'call';
+    date = get(item, 'call');
+  }
+  return {status, date};
+}
+
+export default function ListItem ({item, onPress, style, user}) {
+  const status = item.status || getStatusAndDate(item).status;
+  const bed_no = item.bed_no || get(item, 'bed.bed_no', '');
+  const date = getStatusAndDate(item).date || item.date;
+
   return (
     <View style={[styles.item, style]}>
       <View style={styles.item_cell}>
-        <Text style={[styles.text, style]}>{item.bed_no}</Text>
+        <Text style={[styles.text, style]}>{bed_no}</Text>
       </View>
       <View style={styles.item_cell}>
-        <Text style={[styles.text, style]}>{item.date}</Text>
+        <Text style={[styles.text, style]}>{date}</Text>
       </View>
       <View style={styles.item_cell}>
-       { item.status === 'call' ?
-         <TouchableOpacity style={styles.button} onPress={onPress}>
+       { status === 'call' && user.type === 'nurses' ?
+         <TouchableOpacity style={styles.button} onPress={() => onPress(item.id)}>
            <Icon name="account-arrow-right-outline" size={18} color="white" />
            <Text style={styles.button_text}>Call Receive</Text>
          </TouchableOpacity>
          :
-         <Text style={[styles.text, style]}>{item.status}</Text>
+         <Text style={[styles.text, style]}>{status}</Text>
        }
       </View>
     </View>

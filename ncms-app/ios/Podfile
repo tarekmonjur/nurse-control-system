@@ -88,6 +88,10 @@ target 'ncmsapp' do
   add_flipper_pods!
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'react-native-native-mqtt', :path => '../node_modules/react-native-native-mqtt'
+
+  pod 'TcpSockets', :path => '../node_modules/react-native-tcp'
+
   post_install do |installer|
     flipper_post_install(installer)
   end

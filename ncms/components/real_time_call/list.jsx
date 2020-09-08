@@ -25,19 +25,19 @@ class List extends Component {
 
     async componentDidMount() {
 
-        const client = io(`ws://${process.env.IO_HOST}/patient?token=${this.user && this.user.token}`, {
+        const clientIO = io(`ws://${process.env.IO_HOST}/patient?token=${this.user && this.user.token}`, {
             path: '/ncms',
             reconnectionAttempts: 15
         });
 
-        client.on('connect', () => {
-            if (client.connected) {
+        clientIO.on('connect', () => {
+            if (clientIO.connected) {
                 console.log('client io connect');
                 this.props.getData({ columns: this.props.columns });
             }
         });
 
-        client.on(PATIENT_UI_UPDATE_TOPIC, (message) => {
+        clientIO.on(PATIENT_UI_UPDATE_TOPIC, (message) => {
             console.log('***********message***********',message);
             this.props.getData({ columns: this.props.columns });
             // this.setState({response: JSON.parse(message)});

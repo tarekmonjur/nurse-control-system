@@ -18,30 +18,23 @@ import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AppContext} from './../context/AppContext';
 import Loading from "../components/Loading";
 
-export default function LoginScreen({navigation}) {
+export default function InitScreen({navigation}) {
   const [formData, setFormData] = React.useState({
-    username: null,
-    password: null,
-    secure: true,
+    api_host: null,
     errors: {},
-    unauthorized: null,
     loading: false,
   });
   const {logIn, appStore: {settings}} = React.useContext(AppContext);
 
   const handleLogin = async () => {
-    const username = formData.username;
-    const password = formData.password;
+    const api_host = formData.api_host;
     const errors = {};
     setFormData({
       ...formData,
       loading: true
     });
-    if (!username) {
-      errors['username'] = 'username is required';
-    }
-    if (!password) {
-      errors['password'] = 'password is required';
+    if (!api_host) {
+      errors['api_host'] = 'api host is required';
     }
 
     if (isEmpty(errors)) {
@@ -70,7 +63,7 @@ export default function LoginScreen({navigation}) {
   const handleChange = (field, value) => {
     setFormData({
       ...formData,
-      [field]: field === 'secure' ? !formData.secure : value,
+      [field]: value,
     });
   }
 
@@ -82,18 +75,16 @@ export default function LoginScreen({navigation}) {
       }
       <View style={styles.header}>
         <Image
-          source={require('./../../assets/logo.png')}
+          source={require('./../../assets/icon.png')}
           style={styles.logo}
           resizeMode="stretch"
         />
-        <Text style={[styles.title]}>{settings.hospital.name}</Text>
-        <Text style={[styles.title, {fontSize: 17}]}>{settings.hospital.title}</Text>
-        <Text style={[styles.title, {fontSize: 16}]}>{settings.hospital.address}</Text>
+        <Text style={[styles.title]}>Nurse Call Management System</Text>
       </View>
 
       <View style={styles.content}>
         <View style={{alignItems: 'center'}}>
-          <Text style={[styles.title, {color: 'dimgray', textShadowRadius: .5, fontSize: 21}]}>Ncms Login!</Text>
+          <Text style={[styles.title, {color: 'dimgray', textShadowRadius: .5, fontSize: 21}]}>Host Setup!</Text>
           { formData.unauthorized ?
             <Text style={styles.error}>{formData.unauthorized}</Text>
             : null
@@ -103,23 +94,23 @@ export default function LoginScreen({navigation}) {
         <View style={styles.form}>
 
           <View style={styles.input}>
-            <Text style={styles.input_label}>Username: </Text>
+            <Text style={styles.input_label}>API Host: </Text>
             <View style={styles.input_field}>
               <FIcon name="user" size={25} />
               <TextInput
                 style={styles.input_text}
                 placeholder="Enter Username"
-                autoCompleteType="username"
+                autoCompleteType="api_host"
                 autoCapitalize="none"
-                onChangeText={(value) => handleChange('username', value)}
+                onChangeText={(value) => handleChange('api_host', value)}
               />
-              { formData.username ?
+              { formData.api_host ?
                 <FIcon name="check" size={20} color="mediumseagreen"/>
                 : null
               }
             </View>
-            { formData.errors.username ?
-              <Text style={styles.error}>{formData.errors.username}</Text>
+            { formData.errors.api_host ?
+              <Text style={styles.error}>{formData.errors.api_host}</Text>
               : null
             }
           </View>

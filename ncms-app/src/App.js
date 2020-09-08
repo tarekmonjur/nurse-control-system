@@ -8,70 +8,49 @@ import AuthStackNavigator from './navigators/AuthStackNavigator';
 import PatientCallStackNavigator from './navigators/PatientCallStackNavigator';
 import HomeStackNavigator from './navigators/HomeStackNavigator';
 import DrawerContentNavigator from './navigators/DrawerContentNavigator';
-import {AuthContext, AuthMemo} from './context/authContext';
 import SplashScreen from './screens/SplashScreen';
+import {AppContext, AppMemo} from './context/AppContext';
+import appReducer, {initialLoginState} from './context/appReducer';
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
-  const initialLoginState = {
-    user: null,
-    userToken: null,
-    isLoading: true,
-  }
-  const loginReducer = (prevState, action) => {
-    switch (action.type) {
-      case 'RETRIEVE_TOKEN':
-        return {
-          ...prevState,
-          userToken: action.token,
-          isLoading: false,
-        }
-      case 'LOGIN':
-        return {
-          ...prevState,
-          user: action.user,
-          userToken: action.token,
-          isLoading: false,
-        }
-      case 'LOGOUT':
-        return {
-          ...prevState,
-          user: null,
-          userToken: null,
-          isLoading: false
-        }
-      case 'LOADING':
-        return {
-          ...prevState,
-          isLoading: action.loading
-        }
-    }
-  }
 
-  const [ loginState, dispatch ] = useReducer(loginReducer, initialLoginState);
-  const authContext = React.useMemo(AuthMemo(dispatch));
+  const [ appStore, dispatch ] = useReducer(appReducer, initialLoginState);
+  const appContext = React.useMemo(AppMemo(appStore, dispatch));
+  appContext.configPushNotification();
+
+  if (appStore.user_token) {
+    appContext.configClientIO();
+  }
 
   useEffect(() => {
     setTimeout(async () => {
       let token = null;
+      let user = {};
       try {
         token = await AsyncStorage.getItem('userToken');
+        user = await AsyncStorage.getItem('user');
+        user = JSON.parse(user);
       } catch(err) {
         console.log('Get token failed', err);
       }
-      dispatch({type: 'RETRIEVE_TOKEN', token})
+      dispatch({type: 'RETRIEVE_TOKEN', token, user})
     }, 2000);
   }, []);
 
-  if (loginState.isLoading) {
-    return <SplashScreen />
+  if (appStore.is_loading) {
+    return <SplashScreen {...appStore} />
   }
 
+  // if (!appStore.api_host) {
+  //   return <SplashScreen {...appStore} />
+  // }
+
   return (
-    <AuthContext.Provider value={authContext}>
+    <AppContext.Provider value={appContext}>
       <NavigationContainer>
-        { !loginState.userToken ?
+        { !appStore.user_token ?
           (
             <AuthStackNavigator />
           )
@@ -81,7 +60,7 @@ export default function App() {
               initialRouteName="PatientCall"
               drawerContentOptions={{
                 labelStyle: {fontWeight: 'bold', fontSize: 16 },
-                itemStyle: { padding: 5, backgroundColor: 'white', borderBottomWidth: 1, borderBottomColor: 'lightgray'},
+                itemStyle: {padding: 5, backgroundColor: 'white', borderBottomWidth: 1, borderBottomColor: 'lightgray'},
                 activeTintColor: 'mediumseagreen',
                 // activeBackgroundColor: 'black',
                 inactiveTintColor: 'gray',
@@ -108,6 +87,6 @@ export default function App() {
           )
         }
       </NavigationContainer>
-    </AuthContext.Provider>
+    </AppContext.Provider>
   );
 }

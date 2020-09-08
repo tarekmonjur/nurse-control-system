@@ -112,6 +112,7 @@ module.exports = {
 
         const nurse = new Nurse(payload);
         const error = nurse.validateSync();
+
         if (error && error.errors) {
             throw new ValidationError('Nurse fields error', error.errors);
         }

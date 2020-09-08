@@ -6,52 +6,43 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {AuthContext} from "../context/authContext";
+import {AppContext} from "../context/AppContext";
 
 export default function DrawerContentNavigator (props) {
-  const {logOut} = React.useContext(AuthContext);
+  const {logOut, appStore} = React.useContext(AppContext);
   const handleLogout = () => {
     logOut();
   }
 
   return (
-    <View style={{
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'stretch'}}>
+    <View style={styles.container}>
 
-      <View style={{
-        flex: 2,
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingLeft: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: 'lightgray'
-      }}>
+      <View style={styles.header}>
         <Image source={require('./../../assets/logo.png')} style={{height: 80, width: 80}} />
-        <View style={{alignItems: 'stretch', marginLeft: 15,}}>
-          <Text style={{fontWeight: 'bold', fontSize: 16, color: 'white'}}>Tarek Ahammed</Text>
-          <Text style={{fontWeight: 'bold', color: 'lightgray'}}>Doctor</Text>
+        <View style={{alignItems: 'stretch', marginLeft: 15}}>
+          {appStore.user.name ?
+            <Text style={{fontWeight: 'bold', fontSize: 16, color: 'white'}}>{appStore.user.name}</Text>
+          : null
+          }
+          {appStore.user.designation ?
+            <Text style={{fontWeight: 'bold', color: 'lightgray'}}>{appStore.user.designation}</Text>
+            : null
+          }
+
+          { appStore.user.department ?
+            <Text style={{fontWeight: 'bold', color: 'lightgray'}}>{appStore.user.department}</Text>
+            : null
+          }
         </View>
       </View>
 
-      <View style={{flex: 8, backgroundColor: 'white'}}>
+      <View style={styles.content}>
         <DrawerContentScrollView>
             <DrawerItemList {...props} />
-            <DrawerItem
-              label="Help"
-              onPress={() => {}} />
         </DrawerContentScrollView>
       </View>
 
-      <View style={{
-        flex: 1,
-        // paddingLeft: 15,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        borderTopWidth: 1,
-        borderTopColor: 'lightgray',
-      }}>
+      <View style={styles.footer}>
         <DrawerItem
           icon={({color, size}) => (
             <Icon
@@ -68,8 +59,31 @@ export default function DrawerContentNavigator (props) {
   )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black'
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch'
+  },
+  header: {
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: 'lightgray'
+  },
+  content: {
+    flex: 8,
+    backgroundColor: 'white'
+  },
+  footer: {
+    flex: 1,
+    // paddingLeft: 15,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderTopColor: 'lightgray',
   }
+
 });

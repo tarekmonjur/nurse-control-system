@@ -4,5 +4,5 @@
 /public/uploads/*
 /logs
 
-/mosquitto/data/
-/mosquitto/log/
+/mosquitto/data/*
+/mosquitto/log/*

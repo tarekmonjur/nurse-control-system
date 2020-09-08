@@ -3,11 +3,25 @@ const patientNurseCallService = require('./../services/patient_nurse_call.servic
 
 const PATIENT_DEVICE_TOPIC = '$share/broker/device/+/status/+/patient';
 const PATIENT_UI_UPDATE_TOPIC = 'broker/ui/patient';
-const PATIENT_MOBILE_TOPIC = '$share/broker/mobile/+/nurse/+/patient';
+// const PATIENT_MOBILE_TOPIC = '$share/broker/mobile/+/nurse/+/patient';
+const PATIENT_MOBILE_TOPIC = 'broker/mobile/patient/call/receive';
 
 module.exports.patientNurseCallHandle = async (io) => {
     try {
         const patientIO = io.of('/patient');
+
+        patientIO.on('connection', (client) => {
+            console.log('patient connected');
+            client.on(PATIENT_MOBILE_TOPIC, async (data) => {
+                console.log({data});
+                const {call_id, nurse_id, message} = JSON.parse(data);
+                const result = await patientNurseCallService.patientMobileCallHandle(call_id, nurse_id, message);
+                console.log({result});
+                if (result) {
+                    patientIO.emit(PATIENT_UI_UPDATE_TOPIC, JSON.stringify(result));
+                }
+            });
+        });
 
         const client = mqtt.connect(`mqtt://${process.env.MQTT_HOST}`, {
             username: 'tarek',
@@ -62,7 +76,6 @@ module.exports.patientNurseCallHandle = async (io) => {
                     patientIO.emit(PATIENT_UI_UPDATE_TOPIC, JSON.stringify(result));
                 }
             }
-
         });
     } catch (err) {
         console.log('MQTT CLIENT: ', err);
