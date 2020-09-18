@@ -92,6 +92,8 @@ target 'ncmsapp' do
 
   pod 'TcpSockets', :path => '../node_modules/react-native-tcp'
 
+  pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
+
   post_install do |installer|
     flipper_post_install(installer)
   end

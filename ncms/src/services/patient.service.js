@@ -55,7 +55,7 @@ module.exports = {
     },
 
     makeFilter(req) {
-        console.log(req.user);
+        // console.log(req.user);
         const actions = req.user.actions || [];
         let select = req.query.columns || '';
         let columns = this.defaultColumns;

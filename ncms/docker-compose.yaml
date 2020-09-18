@@ -31,6 +31,9 @@ services:
     restart: always
     working_dir: "/app"
     command: "npm run start:dev"
+#    command: >
+#      sh -c "npm install
+#      && npm run start:dev"
     ports:
       - 3000:8080
     networks:
@@ -49,6 +52,10 @@ services:
       MIGRATE_dbConnectionUri: mongodb://root:root@mongo:27017/ncms?authSource=admin
       MQTT_HOST: ncms_broker_1
       IO_HOST: localhost:3000
+      CALLING_CALL_DELAY: 1
+      PRESENT_CALL_DELAY: 5
+      RECEIVE_CALL_DELAY: 3
+      COMPLETE_CALL_DELAY: 3
     volumes:
       - "./:/app"
       - "./logs:/root/.npm/_logs"

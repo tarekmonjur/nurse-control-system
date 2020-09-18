@@ -5,6 +5,10 @@ const {Bed} = require('./../models/bed.modal');
 const {Nurse} = require('./../models/nurse.modal');
 const {Patient} = require('./../models/patient.modal');
 const mongoose = require('mongoose');
+const PATIENT_CALLING_CALL_DELAY = process.env.CALLING_CALL_DELAY || 1;
+const PATIENT_PRESENT_CALL_DELAY = process.env.PRESENT_CALL_DELAY || 5;
+const PATIENT_RECEIVE_CALL_DELAY = process.env.RECEIVE_CALL_DELAY || 3;
+const PATIENT_COMPLETE_CALL_DELAY = process.env.COMPLETE_CALL_DELAY || 3;
 
 module.exports = {
     defaultColumns: {
@@ -120,27 +124,27 @@ module.exports = {
             const current_time = new Date().getTime();
             if (_.get(last_call, 'complete', null)) {
                 const call_time = _.get(last_call, 'complete', null);
-                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + 5);
+                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + PATIENT_COMPLETE_CALL_DELAY);
                 if ( current_time < last_call_tiem) {
                     return result;
                 }
             }
             else if (_.get(last_call, 'present', null)) {
                 const call_time = _.get(last_call, 'complete', null);
-                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + 15);
+                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + PATIENT_PRESENT_CALL_DELAY);
                 if ( current_time < last_call_tiem) {
                     return result;
                 }
             }
             else if (_.get(last_call, 'receive', null)) {
                 const call_time = _.get(last_call, 'receive', null);
-                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + 5);
+                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + PATIENT_RECEIVE_CALL_DELAY);
                 if ( current_time < last_call_tiem) {
                     return result;
                 }
             } else if (_.get(last_call, 'call', null)) {
                 const call_time = _.get(last_call, 'call', null);
-                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + 1);
+                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + PATIENT_CALLING_CALL_DELAY);
                 if ( current_time < last_call_tiem) {
                     return result;
                 }

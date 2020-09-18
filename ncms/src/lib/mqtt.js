@@ -13,10 +13,10 @@ module.exports.patientNurseCallHandle = async (io) => {
         patientIO.on('connection', (client) => {
             console.log('patient connected');
             client.on(PATIENT_MOBILE_TOPIC, async (data) => {
-                console.log({data});
+                // console.log({data});
                 const {call_id, nurse_id, message} = JSON.parse(data);
                 const result = await patientNurseCallService.patientMobileCallHandle(call_id, nurse_id, message);
-                console.log({result});
+                // console.log({result});
                 if (result) {
                     patientIO.emit(PATIENT_UI_UPDATE_TOPIC, JSON.stringify(result));
                 }
@@ -71,7 +71,7 @@ module.exports.patientNurseCallHandle = async (io) => {
                 const call_id = topic_segment[1];
                 const nurse_id = topic_segment[3];
                 const result = await patientNurseCallService.patientMobileCallHandle(call_id, nurse_id, message);
-                console.log({result});
+                // console.log({result});
                 if (result) {
                     patientIO.emit(PATIENT_UI_UPDATE_TOPIC, JSON.stringify(result));
                 }

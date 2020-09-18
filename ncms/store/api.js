@@ -7,6 +7,7 @@ const CALL_HISTORY_URL = '/call-histories';
 const REAL_TIME_CALL_URL = '/real-time-call';
 const REPORT_URL = '/reports';
 const USER_URL = '/users';
+const SETTINGS_URL = '/settings';
 
 async function makeRequest(url, method = 'GET', payload = null, headers = null) {
     url = `${API_PREFIX}${url}`;
@@ -265,5 +266,20 @@ module.exports = {
         return await makeRequest(
             `${USER_URL}/${id}`,
             'delete');
+    },
+
+    /********SETTINGS API**********/
+    async getSettings(payload = {}) {
+        return await makeRequest(
+          SETTINGS_URL,
+          'get',
+          payload);
+    },
+
+    async updateSettings(id, payload) {
+        return await makeRequest(
+          `${SETTINGS_URL}/${id}`,
+          'put',
+          payload);
     },
 };

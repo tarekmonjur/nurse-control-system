@@ -17,6 +17,7 @@ module.exports = {
         daily_patient_nurse_report: ['./components/daily_patient_nurse_report.js'],
         monthly_patient_nurse_report: ['./components/monthly_patient_nurse_report.js'],
         user: ['./components/user.js'],
+        settings: ['./components/settings.js'],
     },
     output: {
         filename: '[name].js',

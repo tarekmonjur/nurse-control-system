@@ -1,7 +1,7 @@
 import React from 'react';
 import AsyncStorage from "@react-native-community/async-storage";
 import PushNotification from 'react-native-push-notification';
-import {Alert, Platform} from "react-native";
+import {Alert, AppState, Platform} from "react-native";
 import {get, isEmpty} from "lodash";
 import socketIOClient from "socket.io-client";
 const PATIENT_UI_UPDATE_TOPIC = 'broker/ui/patient';
@@ -12,7 +12,7 @@ export const AppMemo = (appStore, dispatch) => {
   const app = Object.create({});
   return () => {
     app.appStore = appStore;
-    app.clientIO = null;
+    app.clientIO = get(appStore, 'clientIO', null);
     app.PATIENT_UI_UPDATE_TOPIC = PATIENT_UI_UPDATE_TOPIC;
     app.PATIENT_MOBILE_TOPIC = PATIENT_MOBILE_TOPIC;
 
@@ -68,7 +68,7 @@ export const AppMemo = (appStore, dispatch) => {
       dispatch({type: 'LOGOUT'})
     };
 
-    app.getPatientCalls = async (data, setData) => {
+    app.getPatientCalls = (data = null, setData = null) => {
       try {
         return fetch(`http://${app.appStore.settings.api_host}/api/real-time-call`, {
           method: 'GET',
@@ -80,14 +80,11 @@ export const AppMemo = (appStore, dispatch) => {
         })
           .then(response => response.json())
           .then(async (results) => {
+            console.log('got call data');
             if (get(results, 'code', null) === 401) {
               await app.logOut();
             } else {
-              setData({
-                ...data,
-                results: get(results, 'results.results', []),
-                loading: false
-              });
+              dispatch({type: 'GET_DATA', data: get(results, 'results.results', [])});
               return results;
             }
           })
@@ -142,27 +139,29 @@ export const AppMemo = (appStore, dispatch) => {
     };
 
     app.configClientIO = () => {
-      if (!isEmpty(app.clientIO)) {
+      if (!isEmpty(app.clientIO) && app.clientIO.connected) {
         return app.clientIO;
       }
       app.clientIO = socketIOClient(`ws://${appStore.settings.api_host}/patient?token=${appStore.user_token}`, {
         path: '/ncms',
-        reconnectionAttempts: 15
+        reconnectionAttempts: 50
       });
       app.clientIO.on('connect', () => {
         if (app.clientIO.connected) {
           console.log('client io connect');
+          app.appStore.clientIO = app.clientIO
         }
       });
 
       app.clientIO.on(PATIENT_UI_UPDATE_TOPIC, (message) => {
-        // console.log('***********message2***********', message);
+        // console.log('***********message2***********');
         app.setPushNotification(JSON.parse(message));
+        app.getPatientCalls();
       });
       return app.clientIO
     };
 
-    app.handleCallReceive = async (call_id, data, setData) => {
+    app.handleCallReceive = async (call_id) => {
       Alert.alert(
         'Are you sure?',
         'you receive the patient call. if you receive the you are responsive person for take care of this call.',
@@ -171,11 +170,8 @@ export const AppMemo = (appStore, dispatch) => {
             text: 'YES',
             onPress: () => {
               console.log('YES');
-              setData({
-                ...data,
-                loading: true
-              });
-              app.clientIO.emit(PATIENT_MOBILE_TOPIC, JSON.stringify({
+              dispatch({type: 'LOADING', loading: true});
+              app.configClientIO().emit(PATIENT_MOBILE_TOPIC, JSON.stringify({
                 call_id,
                 nurse_id: app.appStore.user.id,
                 message: 'success'

@@ -11,6 +11,7 @@ export const initialLoginState = {
   user: {},
   user_token: null,
   is_loading: true,
+  data: {loading: true, results: []}
 };
 
 
@@ -47,12 +48,23 @@ export default (prevState, action) => {
         ...prevState,
         user: null,
         user_token: null,
-        is_loading: false
+        is_loading: false,
       }
     case 'LOADING':
       return {
         ...prevState,
-        is_loading: action.loading
+        data: {
+          ...prevState.data,
+          loading: action.loading
+        },
+      }
+    case 'GET_DATA':
+      return {
+        ...prevState,
+        data: {
+          loading: false,
+          results: action.data
+        },
       }
   }
 }

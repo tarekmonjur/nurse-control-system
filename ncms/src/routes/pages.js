@@ -73,11 +73,11 @@ router.get('/real-time-call', checkAuthenticated, (req, res) => {
 //     return res.render('report');
 // });
 
-router.get('/daily-patient-nurse-call-reports', (req, res) => {
+router.get('/daily-patient-nurse-call-reports', checkAuthenticated, (req, res) => {
     return res.render('daily_patient_nurse_report');
 });
 
-router.get('/monthly-patient-nurse-call-reports', (req, res) => {
+router.get('/monthly-patient-nurse-call-reports', checkAuthenticated, (req, res) => {
     return res.render('monthly_patient_nurse_report');
 });
 
@@ -90,6 +90,10 @@ router.get('/users', checkAuthenticated, async (req, res) => {
     }
 
     return res.render('user');
+});
+
+router.get('/settings', (req, res) => {
+    return res.render('settings');
 });
 
 module.exports = router;

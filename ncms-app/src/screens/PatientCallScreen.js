@@ -1,34 +1,32 @@
 import React from 'react';
-import {SafeAreaView, Alert, ScrollView, FlatList, VirtualizedList, StyleSheet, Dimensions} from 'react-native';
-import {get} from 'lodash';
+import {SafeAreaView, ScrollView, FlatList, VirtualizedList, StyleSheet, Dimensions, AppState} from 'react-native';
+import BackgroundTimer from 'react-native-background-timer';
 import ListItem from './../components/ListItem';
 import Loading from "../components/Loading";
 import {AppContext} from "../context/AppContext";
 
 export default function PatientCallScreen() {
 
-  const [data, setData] = React.useState({results: [], loading: true});
   const {
-    appStore: {settings, user_token, user},
-    PATIENT_UI_UPDATE_TOPIC,
-    getPatientCalls,
+    appStore: {settings, user_token, user, data},
     configClientIO,
     handleCallReceive
   } = React.useContext(AppContext);
 
   const handleCall = async (call_id) => {
-    await handleCallReceive(call_id, data, setData);
+    await handleCallReceive(call_id);
   }
 
+
   React.useEffect(() => {
-    getPatientCalls(data, setData);
-    const clientIO = configClientIO();
-    clientIO.on(PATIENT_UI_UPDATE_TOPIC, (message) => {
-      // console.log('***********message***********', message);
-      getPatientCalls(data, setData);
-    });
-    return () => clientIO.disconnect();
-  },[]);
+    BackgroundTimer.runBackgroundTimer(() => {
+      if (AppState.currentState === 'background') {
+        configClientIO();
+      } else {
+        BackgroundTimer.stopBackgroundTimer();
+      }
+    }, 3000);
+  }, []);
 
   return (
     <SafeAreaView>

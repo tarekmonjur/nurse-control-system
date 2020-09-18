@@ -8,3 +8,4 @@ export * from './call_history';
 export * from './real_time_call';
 export * from './report';
 export * from './user';
+export * from './settings';

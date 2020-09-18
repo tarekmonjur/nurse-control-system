@@ -21,8 +21,7 @@ export default function App() {
   const [ appStore, dispatch ] = useReducer(appReducer, initialLoginState);
   const appContext = React.useMemo(AppMemo(appStore, dispatch));
   appContext.configPushNotification();
-
-  if (appStore.user_token) {
+  if (appContext.user_token) {
     appContext.configClientIO();
   }
 
