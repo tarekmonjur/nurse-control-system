@@ -1,9 +1,14 @@
 export const initialLoginState = {
   settings: {
     app_name: 'Nurse Control Management System',
+    company_name: 'Box Technology Solution Ltd.',
+    company_title: 'Your Trusted Partner',
     hospital: {
       name: 'Bangladesh Medical Hospital LTD',
       title: 'Nurse Control Management System',
+      email: '',
+      hotline: '',
+      logo: 'logo.png',
       address: 'Dhaka, Bangladesh',
     },
     api_host: null, //'172.21.0.1:3000',
@@ -24,6 +29,18 @@ export default (prevState, action) => {
           ...prevState.settings,
           api_host: action.host
         }
+      }
+    case 'SETTINGS':
+      if (action.settings) {
+        return {
+          ...prevState,
+          settings: {
+            ...prevState.settings,
+            hospital: action.settings,
+          }
+        }
+      } else {
+        return prevState;
       }
     case 'RETRIEVE_DATA':
       return {

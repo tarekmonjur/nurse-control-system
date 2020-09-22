@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const SettingsController = require('./../../controllers/settings.controller');
 const settingsService = require('./../../services/settings.service');
+const {multerUpload} = require('./../../lib/upload');
 
 router.get('/', async (req, res) => {
     try {
@@ -24,20 +25,20 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.put('/', async (req, res) => {
-
+router.put('/', multerUpload().single('logo'), async (req, res) => {
     try {
         const errors = settingsService.handleValidate(req.body, true);
         if (errors) {
             return res.status(errors.code).json(errors);
         }
-        const payload = {...req.body, _id: req.params.user_id};
+        const payload = {...req.body};
+        payload.logo = (req.file) ? req.file.filename : req.body.logo;
         const result = await SettingsController.update(payload);
 
         return res.status(200).json({
             code: 200,
             status: 'success',
-            message: 'User updated Successfully.',
+            message: 'Settings updated Successfully.',
             results: result
         });
     } catch (err) {

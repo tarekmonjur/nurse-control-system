@@ -7,18 +7,24 @@ class HeaderLeft extends Component {
     }
 
     render() {
+        const {settings} = this.props;
         return (
             <div className="col-md-6 col-sm-6 logo-title">
                 <div className="d-flex flex-row">
                     <div className="pr-2">
-                        <img src="../img/health.png" alt="" />
+                        {settings.logo ?
+                          <img src={`./uploads/${settings.logo}`} alt="" />
+                          :
+                          <img src="../img/health.png" alt="" />
+                        }
+
                     </div>
                     <div className="pl-2">
-                        <h3 className="font-weight-bold">Bangladesh Medical Hospital Ltd.
+                        <h3 className="font-weight-bold">{settings.name}
                             <br />
-                            <small> Health is Well, All is Well.</small>
+                            <small>{settings.title}</small>
                             <br />
-                            <small className="lead">Road-01, Sector-12, Uttara-Dhaka, Bangladesh.</small>
+                            <small className="lead">{settings.address}</small>
                         </h3>
                     </div>
                 </div>

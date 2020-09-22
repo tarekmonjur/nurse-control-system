@@ -56,6 +56,7 @@ services:
       PRESENT_CALL_DELAY: 5
       RECEIVE_CALL_DELAY: 3
       COMPLETE_CALL_DELAY: 3
+      REAL_TIME_CALL_DELAY: 2
     volumes:
       - "./:/app"
       - "./logs:/root/.npm/_logs"

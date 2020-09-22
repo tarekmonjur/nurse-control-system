@@ -10,7 +10,7 @@ module.exports = {
         title: 'Title',
         email: 'Email',
         hotline: 'Hotline',
-        logo: '',
+        logo: 'Logo',
         address: 'Address',
     },
 
@@ -23,26 +23,16 @@ module.exports = {
     },
 
     makePayload(data) {
-        const payload = Object.assign(this.getFields(),{
-            username: '',
-            password: '',
-            confirm_password: '',
-        }, data);
+        const payload = Object.assign(this.getFields(), data);
         return payload;
     },
 
     handleValidate(data) {
         const rules = {
-            name: 'require|min:3|max:50',
-            group: 'require',
-            department: 'max:50',
-            designation: 'max:50',
+            name: 'require|min:3|max:255',
+            title: 'require|min:3|max:255',
             email: 'email|max:100',
-            mobile_no: 'require|mobile:bn-BD',
             address: 'max:255',
-            username: 'min:3|max:20',
-            password: 'min:6|max:20',
-            confirm_password: 'equal:password',
         };
 
         const payload = this.makePayload(data);
@@ -88,15 +78,15 @@ module.exports = {
         return Settings.findOne();
     },
 
-    // async upsertUser(payload, isNew = true) {
-    //     const user = new User(payload);
-    //     const error = user.validateSync();
-    //     if (error && error.errors) {
-    //         throw new ValidationError('User fields error', error.errors);
-    //     }
-    //     user.isNew = isNew;
-    //     return await user.save();
-    // },
+    async updateSettings(payload) {
+        const settings = new Settings(payload);
+        const error = settings.validateSync();
+        if (error && error.errors) {
+            throw new ValidationError('Settings fields error', error.errors);
+        }
+        settings.isNew = false;
+        return await settings.save();
+    },
 
 
 

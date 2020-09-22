@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
   getResponse,
   getData,
+  updateSettings, loader,
 } from './../../store/actions';
 import {
   ListTitle,
@@ -11,98 +12,60 @@ import {
   Loading
 } from './../common';
 import {isDate, isEmpty} from "lodash";
-import userService from "../../src/services/user.service";
-import api from "../../store/api";
+import settingsService from "../../src/services/settings.service";
 
 
 class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date(),
       formData: {},
-      errors: {},
-      response: null,
       formName: 'settings',
-      loading: false,
     };
-  }
-
-  init() {
-    let formData = {};
-    const form = document.querySelector(`form[name="${this.state.formName}"]`);
-    for (let i = 0; i < form.elements.length; i++) {
-      if (!isEmpty(form.elements[i].name)) {
-        if (form.elements[i].type === 'radio') {
-          if (form.elements[i].checked)
-            formData[form.elements[i].name] = form.elements[i].value;
-        } else {
-          formData[form.elements[i].name] = form.elements[i].value;
-        }
-      }
-    }
-    this.setState({formData: formData});
+    this.errors = {};
+    this.formData = {};
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   async componentDidMount() {
     this.props.getData({ columns: this.props.columns });
   }
 
+  handleChange(event) {
+    const stateData = {
+      formData: {
+        ...this.state.formData,
+        [event.target.name]: event.target.name === 'logo' ? event.target.files[0] : event.target.value,
+      },
+    };
+    this.formData = stateData.formData;
+    this.setState(stateData);
+  };
+
   handleSubmit() {
-    this.setState({ loading: true, response: null });
-    const errors = userService.handleValidate(this.formData);
+    this.props.loader(true);
+    let data = this.formData;
+    const errors = settingsService.handleValidate(data);
 
     if (!errors) {
-      api.storeUser(this.formData)
-        .then(result => {
-          this.setState({
-            loading: false,
-            errors: result.errors || {},
-            response: result,
-            modal: !!result.errors,
-          });
-          if (result.status !== 'error') {
-            this.props.dispatch(getData({ columns: this.props.columns }));
-          }
-        });
+      const form = new FormData();
+      for(const key in data) {
+        form.append(key, data[key]);
+      }
+      this.formData = {};
+      this.props.updateSettings(form);
     } else {
-      setTimeout(() => {
-        this.setState({
-          loading: false,
-          errors: errors.errors,
-          response: errors,
-        });
-      }, 200)
+      this.errors = errors;
+      this.props.loader(false);
     }
   };
 
-  handleChange(event) {
-    // let stateData = {};
-    // if (isDate(event)) {
-    //   stateData = {
-    //     formData: {
-    //       ...this.state.formData,
-    //       joining : event.toISOString().split('T')[0],
-    //     },
-    //     date: event,
-    //   };
-    // } else {
-    //   stateData = {
-    //     formData: {
-    //       ...this.state.formData,
-    //       [event.target.name]: event.target.value,
-    //     },
-    //   };
-    // }
-    // this.props.handleChange(stateData.formData);
-    // this.setState(stateData);
-  };
-
   render() {
-    const { data, response } = this.props;
-    console.log('settings..', {data});
-    let {formData, errors, loading } = this.state;
-    formData = Object.assign(formData, data);
+    const { data, response, loading } = this.props;
+    const errors = this.errors;
+    const formData = Object.assign(data || {}, this.formData);
+    this.formData = formData;
 
     return (
       <div className="row">
@@ -119,7 +82,7 @@ class Settings extends Component {
             </div>
             <div className="card-body"
                  style={{maxHeight: 'calc(100vh - 300px)', overflowY: 'auto'}}>
-              <form name="settings">
+              <form name={this.state.formName} >
                 <div className="form-row">
                   <div className="col">
                     <div className="form-group">
@@ -129,8 +92,8 @@ class Settings extends Component {
                         id="name"
                         className={`form-control form-control-sm ${errors.name && 'is-invalid'}`}
                         name="name"
-                        value={formData.name}
                         onChange={this.handleChange}
+                        value={formData.name}
                         placeholder="Enter hospital name.."/>
                       {errors.name &&
                       <div className="invalid-feedback">{errors.name}</div>
@@ -140,14 +103,14 @@ class Settings extends Component {
 
                   <div className="col">
                     <div className="form-group">
-                      <label htmlFor="name">Hospital Title Name : </label>
+                      <label htmlFor="title">Hospital Title Name : </label>
                       <input
                         type="text"
                         id="title"
                         className={`form-control form-control-sm ${errors.title && 'is-invalid'}`}
-                        name="name"
-                        value={formData.title}
+                        name="title"
                         onChange={this.handleChange}
+                        value={formData.title}
                         placeholder="Enter hospital title.."/>
                       {errors.title &&
                       <div className="invalid-feedback">{errors.title}</div>
@@ -159,14 +122,14 @@ class Settings extends Component {
                 <div className="form-row">
                   <div className="col">
                     <div className="form-group">
-                      <label htmlFor="name">Hospital Hotline Number : </label>
+                      <label htmlFor="hotline">Hospital Hotline Number : </label>
                       <input
                         type="text"
                         id="hotline"
                         className={`form-control form-control-sm ${errors.hotline && 'is-invalid'}`}
                         name="hotline"
-                        value={formData.hotline}
                         onChange={this.handleChange}
+                        value={formData.hotline}
                         placeholder="Enter hotline number.."/>
                       {errors.hotline &&
                       <div className="invalid-feedback">{errors.hotline}</div>
@@ -176,13 +139,12 @@ class Settings extends Component {
 
                   <div className="col">
                     <div className="form-group">
-                      <label htmlFor="name">Hospital Logo : </label>
+                      <label htmlFor="logo">Hospital Logo : </label>
                       <input
                         type="file"
                         id="logo"
                         className={`form-control form-control-sm ${errors.logo && 'is-invalid'}`}
                         name="logo"
-                        value={formData.logo}
                         onChange={this.handleChange}
                         placeholder="chose logo.."/>
                       {errors.logo &&
@@ -193,7 +155,11 @@ class Settings extends Component {
 
                   <div className="col">
                     <div className="form-group">
-                      logo
+                      {formData.logo ?
+                        (<img src={`./uploads/${formData.logo}`} alt="" style={{width: '80px'}} />)
+                        :
+                        (<img src="./img/logo.png" alt="" style={{width: '80px'}} />)
+                      }
                     </div>
                   </div>
                 </div>
@@ -206,8 +172,8 @@ class Settings extends Component {
                         id="address"
                         className={`form-control form-control-sm ${errors.address && 'is-invalid'}`}
                         name="address"
-                        value={formData.address}
                         onChange={this.handleChange}
+                        value={formData.address}
                         placeholder="Enter hospital address..."/>
                       {errors.address &&
                       <div className="invalid-feedback">{errors.address}</div>
@@ -221,7 +187,7 @@ class Settings extends Component {
             <div className="card-footer">
               <button
                 type="submit"
-                onClick={this.props}
+                onClick={this.handleSubmit}
                 className="btn btn-sm btn-primary col-2"
                 disabled={loading} >
                 {loading ?
@@ -244,7 +210,7 @@ const mapStateToProps = (state, ownProps = {}) => {
   return {...state, ...ownProps};
 };
 
-const actionCreators = {getResponse, getData};
+const actionCreators = {getResponse, getData, updateSettings, loader};
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actionCreators, dispatch);

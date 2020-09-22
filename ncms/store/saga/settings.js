@@ -15,7 +15,7 @@ export function* fetchData(action) {
 export function* updateData(action) {
     try {
         yield put(getResponse(null));
-        const data = yield call(api.updateSettings, action.id, action.payload);
+        const data = yield call(api.updateSettings, action.payload);
         yield put(getResponse(data));
     } catch(err) {
         console.log(JSON.stringify(err));

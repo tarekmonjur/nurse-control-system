@@ -9,6 +9,7 @@ const PATIENT_CALLING_CALL_DELAY = process.env.CALLING_CALL_DELAY || 1;
 const PATIENT_PRESENT_CALL_DELAY = process.env.PRESENT_CALL_DELAY || 5;
 const PATIENT_RECEIVE_CALL_DELAY = process.env.RECEIVE_CALL_DELAY || 3;
 const PATIENT_COMPLETE_CALL_DELAY = process.env.COMPLETE_CALL_DELAY || 3;
+const REAL_TIME_CALL_DELAY = process.env.REAL_TIME_CALL_DELAY || 2;
 
 module.exports = {
     defaultColumns: {
@@ -103,9 +104,9 @@ module.exports = {
 
     async getDeviceLastCall(device_no) {
         const todate = new Date();
-        // const date = new Date(todate.setHours(todate.getHours() - 2)).toISOString();
-        // const filter = { 'bed.device_no': device_no, 'created_at': {$gt: date } };
-        const filter = { 'bed.device_no': device_no };
+        const date = new Date(todate.setHours(todate.getHours() - REAL_TIME_CALL_DELAY)).toISOString();
+        const filter = { 'bed.device_no': device_no, 'created_at': {$gt: date } };
+        // const filter = { 'bed.device_no': device_no };
         return await PatientNurseCall.findOne(filter)
             .sort({created_at: -1}).lean().exec();
     },
@@ -125,6 +126,7 @@ module.exports = {
             if (_.get(last_call, 'complete', null)) {
                 const call_time = _.get(last_call, 'complete', null);
                 const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + PATIENT_COMPLETE_CALL_DELAY);
+                console.log(current_time, '--',last_call_tiem);
                 if ( current_time < last_call_tiem) {
                     return result;
                 }

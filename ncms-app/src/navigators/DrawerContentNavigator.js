@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AppContext} from "../context/AppContext";
 
 export default function DrawerContentNavigator (props) {
-  const {logOut, appStore} = React.useContext(AppContext);
+  const {logOut, appStore, appStore: {settings}} = React.useContext(AppContext);
   const handleLogout = () => {
     logOut();
   }
@@ -21,16 +21,16 @@ export default function DrawerContentNavigator (props) {
         <Image source={require('./../../assets/logo.png')} style={{height: 80, width: 80}} />
         <View style={{alignItems: 'stretch', marginLeft: 15}}>
           {appStore.user.name ?
-            <Text style={{fontWeight: 'bold', fontSize: 16, color: 'white'}}>{appStore.user.name}</Text>
+            <Text style={[styles.header_text, { fontSize: 16, color: 'white'}]}>{appStore.user.name}</Text>
           : null
           }
           {appStore.user.designation ?
-            <Text style={{fontWeight: 'bold', color: 'lightgray'}}>{appStore.user.designation}</Text>
+            <Text style={styles.header_text}>{appStore.user.designation}</Text>
             : null
           }
 
           { appStore.user.department ?
-            <Text style={{fontWeight: 'bold', color: 'lightgray'}}>{appStore.user.department}</Text>
+            <Text style={styles.header_text}>{appStore.user.department}</Text>
             : null
           }
         </View>
@@ -40,6 +40,15 @@ export default function DrawerContentNavigator (props) {
         <DrawerContentScrollView>
             <DrawerItemList {...props} />
         </DrawerContentScrollView>
+        <View style={styles.details}>
+          <Text style={[styles.details_text, {color: 'mediumseagreen'}]}>{settings.hospital.name}</Text>
+          <Text style={[styles.details_text, {fontSize: 12}]}>{settings.hospital.title}</Text>
+          <Text style={[styles.details_text, {fontSize: 12}]}>Email: {settings.hospital.email}</Text>
+          <Text style={[styles.details_text, {fontSize: 12}]}>Hotline: {settings.hospital.hotline}</Text>
+          <Text style={[styles.details_text, {color: 'mediumseagreen'}]}>{settings.app_name}</Text>
+          <Text style={styles.details_text}>{settings.company_name}</Text>
+          <Text style={styles.details_text}>{settings.company_title}</Text>
+        </View>
       </View>
 
       <View style={styles.footer}>
@@ -73,9 +82,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'lightgray'
   },
+  header_text: {
+    fontWeight: 'bold',
+    color: 'lightgray'
+  },
   content: {
     flex: 8,
     backgroundColor: 'white'
+  },
+  details: {
+    borderTopWidth: 1,
+    borderTopColor: 'lightgray',
+    alignItems: 'center',
+    padding: 15,
+  },
+  details_text: {
+    fontWeight: 'bold',
+    fontSize: 14,
   },
   footer: {
     flex: 1,

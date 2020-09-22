@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const patientNurseCallService = require('./../../services/patient_nurse_call.service');
 const List = require('./../../lib/list');
+const REAL_TIME_CALL_DELAY = process.env.REAL_TIME_CALL_DELAY || 2;
 
 router.get('/', async (req, res) => {
     try {
         const todate = new Date();
-        const date = new Date(todate.setHours(todate.getHours() - 24));
+        const date = new Date(todate.setHours(todate.getHours() - REAL_TIME_CALL_DELAY));
         req.filter = {
             created_at: {$gt: date},
         };

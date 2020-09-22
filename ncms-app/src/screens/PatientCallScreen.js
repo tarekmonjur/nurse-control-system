@@ -19,6 +19,7 @@ export default function PatientCallScreen() {
 
 
   React.useEffect(() => {
+    configClientIO();
     BackgroundTimer.runBackgroundTimer(() => {
       if (AppState.currentState === 'background') {
         configClientIO();

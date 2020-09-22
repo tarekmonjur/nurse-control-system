@@ -5,12 +5,14 @@ const userService = require('./../services/user.service');
 const patientService = require('./../services/patient.service');
 const nurseService = require('./../services/nurse.service');
 const doctorService = require('./../services/doctor.service');
+const settingsService = require('./../services/settings.service');
 
-router.use((req, res, next) => {
+router.use(async (req, res, next) => {
     if (req.path) {
         res.locals.data = Object.assign({}, res.locals, {route: ''});
         res.locals.data.route = req.path.split('/')[1];
     }
+    res.locals.data.settings = await settingsService.getSettings();
     next();
 });
 
@@ -92,7 +94,7 @@ router.get('/users', checkAuthenticated, async (req, res) => {
     return res.render('user');
 });
 
-router.get('/settings', (req, res) => {
+router.get('/settings', checkAuthenticated, (req, res) => {
     return res.render('settings');
 });
 

@@ -14,10 +14,10 @@ class Header extends Component {
     }
 
     render() {
-        const {user} = this.state;
+        const {user, settings} = this.state;
         return (
             <div className="row">
-                <HeaderLeft />
+                <HeaderLeft settings={settings} />
                 { user && <HeaderCenter /> }
                 { user && <HeaderRight /> }
             </div>

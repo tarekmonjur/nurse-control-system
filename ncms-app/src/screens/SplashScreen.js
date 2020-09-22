@@ -12,7 +12,7 @@ export default function SplashScreen({settings}) {
         width: '100%',
         height: '100%',
       }}>
-      <Loading {...settings.hospital} />
+      <Loading {...settings} />
     </ImageBackground>
   )
 }

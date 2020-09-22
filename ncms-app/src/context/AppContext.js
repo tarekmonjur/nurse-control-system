@@ -21,11 +21,41 @@ export const AppMemo = (appStore, dispatch) => {
       try {
         await AsyncStorage.setItem('api_host', host);
         dispatch({type: 'INIT', host: host});
+        await app.getSettings(host);
       } catch (err) {
         console.log('init storage failed: ', err);
         result = false;
       }
       return result;
+    };
+
+    app.getSettings = async (host = null) => {
+      if (!host) {
+        host = app.appStore.settings.api_host;
+      }
+
+      try {
+        if (!host) {
+          return null;
+        }
+        return fetch(`http://${host}/api/settings`, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then( result => {
+            console.log('settings: ', JSON.stringify(result));
+            if (result.status === 'success') {
+              dispatch({type: 'SETTINGS', settings: get(result, 'results', null)});
+            }
+            return result;
+          });
+      } catch (err) {
+        console.log('settings request failed: ', err);
+      }
     };
 
     app.logIn = async (username, password) => {
@@ -149,7 +179,8 @@ export const AppMemo = (appStore, dispatch) => {
       app.clientIO.on('connect', () => {
         if (app.clientIO.connected) {
           console.log('client io connect');
-          app.appStore.clientIO = app.clientIO
+          app.appStore.clientIO = app.clientIO;
+          app.getPatientCalls();
         }
       });
 

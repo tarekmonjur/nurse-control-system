@@ -10,7 +10,7 @@ class Navbar extends Component {
     }
 
     render() {
-        const { route } = this.state;
+        const { route, settings } = this.state;
         // console.log(route);
         return (
             <div id="navbar" className="container-fluid sticky-top">
@@ -90,7 +90,7 @@ class Navbar extends Component {
                                 </div>
                             </li>
                         </ul>
-                        <span className="navbar-text">HotLine - 01780292737</span>
+                        <span className="navbar-text">HotLine - {settings.hotline}</span>
                     </div>
                 </nav>
             </div>

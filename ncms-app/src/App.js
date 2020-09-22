@@ -21,7 +21,7 @@ export default function App() {
   const [ appStore, dispatch ] = useReducer(appReducer, initialLoginState);
   const appContext = React.useMemo(AppMemo(appStore, dispatch));
   appContext.configPushNotification();
-  if (appContext.user_token) {
+  if (appStore.user_token) {
     appContext.configClientIO();
   }
 
@@ -35,11 +35,12 @@ export default function App() {
         user = await AsyncStorage.getItem('user');
         host = await AsyncStorage.getItem('api_host');
         user = JSON.parse(user);
+        await appContext.getSettings(host);
       } catch(err) {
         console.log('retrieve data failed', err);
       }
       dispatch({type: 'RETRIEVE_DATA', token, user, host})
-    }, 2000);
+    }, 1000);
   }, []);
 
   if (appStore.is_loading) {

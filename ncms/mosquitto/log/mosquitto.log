@@ -12605,3 +12605,519 @@
 1600447300: New client connected from 172.24.0.2 as broker1 (p2, c1, k60, u'tarek').
 1600447859: Saving in-memory database to /mosquitto/data/mosquitto.db.
 1600448652: Socket error on client broker1, disconnecting.
+1600451902: mosquitto version 1.6.10 starting
+1600451902: Config loaded from /mosquitto/config/mosquitto.conf.
+1600451902: Opening ipv4 listen socket on port 1883.
+1600451902: Opening ipv6 listen socket on port 1883.
+1600451910: New connection from 172.24.0.4 on port 1883.
+1600451910: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600451925: Socket error on client broker1, disconnecting.
+1600451927: New connection from 172.24.0.4 on port 1883.
+1600451927: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600452180: Socket error on client broker1, disconnecting.
+1600452184: New connection from 172.24.0.4 on port 1883.
+1600452184: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600453702: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600455446: New connection from 172.24.0.1 on port 1883.
+1600455446: New client connected from 172.24.0.1 as mosqpub|12847-tarek-mon (p1, c1, k60, u'tarek').
+1600455446: Client mosqpub|12847-tarek-mon disconnected.
+1600455484: New connection from 172.24.0.1 on port 1883.
+1600455484: New client connected from 172.24.0.1 as mosqpub|13233-tarek-mon (p1, c1, k60, u'tarek').
+1600455484: Client mosqpub|13233-tarek-mon disconnected.
+1600455503: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600455504: New connection from 172.24.0.1 on port 1883.
+1600455504: New client connected from 172.24.0.1 as mosqpub|13475-tarek-mon (p1, c1, k60, u'tarek').
+1600455504: Client mosqpub|13475-tarek-mon disconnected.
+1600455563: New connection from 172.24.0.1 on port 1883.
+1600455563: New client connected from 172.24.0.1 as mosqpub|13775-tarek-mon (p1, c1, k60, u'tarek').
+1600455563: Client mosqpub|13775-tarek-mon disconnected.
+1600455564: New connection from 172.24.0.1 on port 1883.
+1600455564: New client connected from 172.24.0.1 as mosqpub|13776-tarek-mon (p1, c1, k60, u'tarek').
+1600455564: Client mosqpub|13776-tarek-mon disconnected.
+1600455567: New connection from 172.24.0.1 on port 1883.
+1600455567: New client connected from 172.24.0.1 as mosqpub|13967-tarek-mon (p1, c1, k60, u'tarek').
+1600455567: Client mosqpub|13967-tarek-mon disconnected.
+1600455761: New connection from 172.24.0.1 on port 1883.
+1600455761: New client connected from 172.24.0.1 as mosqpub|15451-tarek-mon (p1, c1, k60, u'tarek').
+1600455761: Client mosqpub|15451-tarek-mon disconnected.
+1600455777: New connection from 172.24.0.1 on port 1883.
+1600455777: New client connected from 172.24.0.1 as mosqpub|15698-tarek-mon (p1, c1, k60, u'tarek').
+1600455777: Client mosqpub|15698-tarek-mon disconnected.
+1600455840: Socket error on client broker1, disconnecting.
+1600455843: New connection from 172.24.0.4 on port 1883.
+1600455843: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600455850: New connection from 172.24.0.1 on port 1883.
+1600455850: New client connected from 172.24.0.1 as mosqpub|16295-tarek-mon (p1, c1, k60, u'tarek').
+1600455850: Client mosqpub|16295-tarek-mon disconnected.
+1600456062: Socket error on client broker1, disconnecting.
+1600456063: New connection from 172.24.0.4 on port 1883.
+1600456063: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600456070: New connection from 172.24.0.1 on port 1883.
+1600456070: New client connected from 172.24.0.1 as mosqpub|18220-tarek-mon (p1, c1, k60, u'tarek').
+1600456070: Client mosqpub|18220-tarek-mon disconnected.
+1600456417: Socket error on client broker1, disconnecting.
+1600456419: New connection from 172.24.0.4 on port 1883.
+1600456419: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600456558: Socket error on client broker1, disconnecting.
+1600492396: mosquitto version 1.6.10 starting
+1600492396: Config loaded from /mosquitto/config/mosquitto.conf.
+1600492396: Opening ipv4 listen socket on port 1883.
+1600492396: Opening ipv6 listen socket on port 1883.
+1600492402: New connection from 172.24.0.4 on port 1883.
+1600492402: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600492414: Socket error on client broker1, disconnecting.
+1600492415: New connection from 172.24.0.4 on port 1883.
+1600492415: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600493031: Socket error on client broker1, disconnecting.
+1600493035: New connection from 172.24.0.4 on port 1883.
+1600493035: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600493496: Socket error on client broker1, disconnecting.
+1600493499: New connection from 172.24.0.4 on port 1883.
+1600493499: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600493930: Socket error on client broker1, disconnecting.
+1600493933: New connection from 172.24.0.4 on port 1883.
+1600493933: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600494196: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600494586: Socket error on client broker1, disconnecting.
+1600494589: New connection from 172.24.0.4 on port 1883.
+1600494589: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600494628: Socket error on client broker1, disconnecting.
+1600494631: New connection from 172.24.0.4 on port 1883.
+1600494631: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600494679: Socket error on client broker1, disconnecting.
+1600494680: New connection from 172.24.0.4 on port 1883.
+1600494680: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600495997: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600496919: Socket error on client broker1, disconnecting.
+1600496921: New connection from 172.24.0.4 on port 1883.
+1600496921: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600497798: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600499008: Socket error on client broker1, disconnecting.
+1600499012: New connection from 172.24.0.4 on port 1883.
+1600499012: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600499032: Socket error on client broker1, disconnecting.
+1600499034: New connection from 172.24.0.4 on port 1883.
+1600499034: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600499051: Socket error on client broker1, disconnecting.
+1600499054: New connection from 172.24.0.4 on port 1883.
+1600499054: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600499155: Socket error on client broker1, disconnecting.
+1600499157: New connection from 172.24.0.4 on port 1883.
+1600499157: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600502140: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600502423: Socket error on client broker1, disconnecting.
+1600502428: New connection from 172.24.0.4 on port 1883.
+1600502428: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600506744: Socket error on client broker1, disconnecting.
+1600506747: New connection from 172.24.0.4 on port 1883.
+1600506747: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507244: Socket error on client broker1, disconnecting.
+1600507245: New connection from 172.24.0.4 on port 1883.
+1600507245: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507265: Socket error on client broker1, disconnecting.
+1600507267: New connection from 172.24.0.4 on port 1883.
+1600507267: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507274: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600507323: Socket error on client broker1, disconnecting.
+1600507325: New connection from 172.24.0.4 on port 1883.
+1600507325: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507424: Socket error on client broker1, disconnecting.
+1600507427: New connection from 172.24.0.4 on port 1883.
+1600507427: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507445: Socket error on client broker1, disconnecting.
+1600507449: New connection from 172.24.0.4 on port 1883.
+1600507449: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507478: Socket error on client broker1, disconnecting.
+1600507480: New connection from 172.24.0.4 on port 1883.
+1600507480: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507553: Socket error on client broker1, disconnecting.
+1600507555: New connection from 172.24.0.4 on port 1883.
+1600507555: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507771: Socket error on client broker1, disconnecting.
+1600507773: New connection from 172.24.0.4 on port 1883.
+1600507773: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507915: Socket error on client broker1, disconnecting.
+1600507917: New connection from 172.24.0.4 on port 1883.
+1600507917: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600507968: Socket error on client broker1, disconnecting.
+1600507970: New connection from 172.24.0.4 on port 1883.
+1600507970: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600508251: Socket error on client broker1, disconnecting.
+1600508253: New connection from 172.24.0.4 on port 1883.
+1600508253: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600508356: Socket error on client broker1, disconnecting.
+1600508357: New connection from 172.24.0.4 on port 1883.
+1600508357: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600508371: Socket error on client broker1, disconnecting.
+1600508372: New connection from 172.24.0.4 on port 1883.
+1600508372: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600508492: Socket error on client broker1, disconnecting.
+1600508494: New connection from 172.24.0.4 on port 1883.
+1600508494: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600508527: Socket error on client broker1, disconnecting.
+1600508528: New connection from 172.24.0.4 on port 1883.
+1600508528: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600508550: Socket error on client broker1, disconnecting.
+1600508551: New connection from 172.24.0.4 on port 1883.
+1600508551: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600508578: Socket error on client broker1, disconnecting.
+1600508580: New connection from 172.24.0.4 on port 1883.
+1600508580: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600509075: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600509202: Socket error on client broker1, disconnecting.
+1600509205: New connection from 172.24.0.4 on port 1883.
+1600509205: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600509236: Socket error on client broker1, disconnecting.
+1600509238: New connection from 172.24.0.4 on port 1883.
+1600509238: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600509276: Socket error on client broker1, disconnecting.
+1600509278: New connection from 172.24.0.4 on port 1883.
+1600509278: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600509371: Socket error on client broker1, disconnecting.
+1600509373: New connection from 172.24.0.4 on port 1883.
+1600509373: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600509437: Socket error on client broker1, disconnecting.
+1600509440: New connection from 172.24.0.4 on port 1883.
+1600509440: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600509495: Socket error on client broker1, disconnecting.
+1600509497: New connection from 172.24.0.4 on port 1883.
+1600509497: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600509515: Socket error on client broker1, disconnecting.
+1600509517: New connection from 172.24.0.4 on port 1883.
+1600509517: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600509626: Socket error on client broker1, disconnecting.
+1600509630: New connection from 172.24.0.4 on port 1883.
+1600509630: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600509668: Socket error on client broker1, disconnecting.
+1600509670: New connection from 172.24.0.4 on port 1883.
+1600509670: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600510094: Socket error on client broker1, disconnecting.
+1600510095: New connection from 172.24.0.4 on port 1883.
+1600510095: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600510295: Socket error on client broker1, disconnecting.
+1600510298: New connection from 172.24.0.4 on port 1883.
+1600510298: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600510876: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600511835: Socket error on client broker1, disconnecting.
+1600511838: New connection from 172.24.0.4 on port 1883.
+1600511838: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600511956: Socket error on client broker1, disconnecting.
+1600511958: New connection from 172.24.0.4 on port 1883.
+1600511958: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600512029: Socket error on client broker1, disconnecting.
+1600512037: New connection from 172.24.0.4 on port 1883.
+1600512037: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600512677: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600513141: Socket error on client broker1, disconnecting.
+1600513143: New connection from 172.24.0.4 on port 1883.
+1600513143: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600513674: Socket error on client broker1, disconnecting.
+1600513676: New connection from 172.24.0.4 on port 1883.
+1600513676: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600519305: Socket error on client broker1, disconnecting.
+1600519309: New connection from 172.24.0.4 on port 1883.
+1600519309: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600519404: Socket error on client broker1, disconnecting.
+1600519407: New connection from 172.24.0.4 on port 1883.
+1600519407: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600519417: Socket error on client broker1, disconnecting.
+1600519421: New connection from 172.24.0.4 on port 1883.
+1600519421: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600519475: Socket error on client broker1, disconnecting.
+1600519478: New connection from 172.24.0.4 on port 1883.
+1600519478: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600519609: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600519696: Socket error on client broker1, disconnecting.
+1600519700: New connection from 172.24.0.4 on port 1883.
+1600519700: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600519855: Socket error on client broker1, disconnecting.
+1600519858: New connection from 172.24.0.4 on port 1883.
+1600519858: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600520005: Socket error on client broker1, disconnecting.
+1600520008: New connection from 172.24.0.4 on port 1883.
+1600520008: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600520089: Socket error on client broker1, disconnecting.
+1600520092: New connection from 172.24.0.4 on port 1883.
+1600520092: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600520368: Socket error on client broker1, disconnecting.
+1600520371: New connection from 172.24.0.4 on port 1883.
+1600520371: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600520517: Socket error on client broker1, disconnecting.
+1600520521: New connection from 172.24.0.4 on port 1883.
+1600520521: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600520696: Socket error on client broker1, disconnecting.
+1600520699: New connection from 172.24.0.4 on port 1883.
+1600520699: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600521411: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600521513: Socket error on client broker1, disconnecting.
+1600521515: New connection from 172.24.0.4 on port 1883.
+1600521515: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600521518: Socket error on client broker1, disconnecting.
+1600522078: New connection from 172.24.0.4 on port 1883.
+1600522078: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600522722: Socket error on client broker1, disconnecting.
+1600522725: New connection from 172.24.0.4 on port 1883.
+1600522725: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600522796: Socket error on client broker1, disconnecting.
+1600522798: New connection from 172.24.0.4 on port 1883.
+1600522798: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600522866: Socket error on client broker1, disconnecting.
+1600522869: New connection from 172.24.0.4 on port 1883.
+1600522869: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600522982: Socket error on client broker1, disconnecting.
+1600522984: New connection from 172.24.0.4 on port 1883.
+1600522984: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600523029: Socket error on client broker1, disconnecting.
+1600523030: New connection from 172.24.0.4 on port 1883.
+1600523030: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600523212: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600523302: Socket error on client broker1, disconnecting.
+1600523304: New connection from 172.24.0.4 on port 1883.
+1600523304: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600523317: Socket error on client broker1, disconnecting.
+1600523319: New connection from 172.24.0.4 on port 1883.
+1600523319: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600523324: Socket error on client broker1, disconnecting.
+1600523327: New connection from 172.24.0.4 on port 1883.
+1600523327: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600523592: Socket error on client broker1, disconnecting.
+1600523593: New connection from 172.24.0.4 on port 1883.
+1600523593: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600524009: Socket error on client broker1, disconnecting.
+1600524010: New connection from 172.24.0.4 on port 1883.
+1600524010: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600524240: Socket error on client broker1, disconnecting.
+1600524243: New connection from 172.24.0.4 on port 1883.
+1600524243: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600524402: Socket error on client broker1, disconnecting.
+1600524404: New connection from 172.24.0.4 on port 1883.
+1600524404: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600524466: Socket error on client broker1, disconnecting.
+1600524469: New connection from 172.24.0.4 on port 1883.
+1600524469: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600524516: Socket error on client broker1, disconnecting.
+1600524518: New connection from 172.24.0.4 on port 1883.
+1600524518: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600524584: Socket error on client broker1, disconnecting.
+1600524586: New connection from 172.24.0.4 on port 1883.
+1600524586: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600524716: Socket error on client broker1, disconnecting.
+1600524720: New connection from 172.24.0.4 on port 1883.
+1600524720: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600524870: Socket error on client broker1, disconnecting.
+1600524871: New connection from 172.24.0.4 on port 1883.
+1600524871: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600525013: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600525061: Socket error on client broker1, disconnecting.
+1600525062: New connection from 172.24.0.4 on port 1883.
+1600525062: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600525123: Socket error on client broker1, disconnecting.
+1600525126: New connection from 172.24.0.4 on port 1883.
+1600525126: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600525241: Socket error on client broker1, disconnecting.
+1600525242: New connection from 172.24.0.4 on port 1883.
+1600525243: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600525304: Socket error on client broker1, disconnecting.
+1600525305: New connection from 172.24.0.4 on port 1883.
+1600525305: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600525422: Socket error on client broker1, disconnecting.
+1600525425: New connection from 172.24.0.4 on port 1883.
+1600525425: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600525555: Socket error on client broker1, disconnecting.
+1600525558: New connection from 172.24.0.4 on port 1883.
+1600525558: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600525778: Socket error on client broker1, disconnecting.
+1600525780: New connection from 172.24.0.4 on port 1883.
+1600525780: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600526170: Socket error on client broker1, disconnecting.
+1600526171: New connection from 172.24.0.4 on port 1883.
+1600526171: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600526236: Socket error on client broker1, disconnecting.
+1600526237: New connection from 172.24.0.4 on port 1883.
+1600526237: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600526313: Socket error on client broker1, disconnecting.
+1600526316: New connection from 172.24.0.4 on port 1883.
+1600526316: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600526372: Socket error on client broker1, disconnecting.
+1600526375: New connection from 172.24.0.4 on port 1883.
+1600526375: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600526814: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600526864: Socket error on client broker1, disconnecting.
+1600526867: New connection from 172.24.0.4 on port 1883.
+1600526867: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600526951: Socket error on client broker1, disconnecting.
+1600526953: New connection from 172.24.0.4 on port 1883.
+1600526953: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600526997: Socket error on client broker1, disconnecting.
+1600527000: New connection from 172.24.0.4 on port 1883.
+1600527000: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527089: Socket error on client broker1, disconnecting.
+1600527090: New connection from 172.24.0.4 on port 1883.
+1600527090: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527153: Socket error on client broker1, disconnecting.
+1600527155: New connection from 172.24.0.4 on port 1883.
+1600527155: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527203: Socket error on client broker1, disconnecting.
+1600527205: New connection from 172.24.0.4 on port 1883.
+1600527205: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527394: Socket error on client broker1, disconnecting.
+1600527396: New connection from 172.24.0.4 on port 1883.
+1600527396: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527507: Socket error on client broker1, disconnecting.
+1600527510: New connection from 172.24.0.4 on port 1883.
+1600527510: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527607: Socket error on client broker1, disconnecting.
+1600527610: New connection from 172.24.0.4 on port 1883.
+1600527610: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527705: Socket error on client broker1, disconnecting.
+1600527707: New connection from 172.24.0.4 on port 1883.
+1600527707: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527788: Socket error on client broker1, disconnecting.
+1600527791: New connection from 172.24.0.4 on port 1883.
+1600527791: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527914: Socket error on client broker1, disconnecting.
+1600527918: New connection from 172.24.0.4 on port 1883.
+1600527918: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600527998: Socket error on client broker1, disconnecting.
+1600528001: New connection from 172.24.0.4 on port 1883.
+1600528001: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600528072: Socket error on client broker1, disconnecting.
+1600528076: New connection from 172.24.0.4 on port 1883.
+1600528076: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600528405: Socket error on client broker1, disconnecting.
+1600528409: New connection from 172.24.0.4 on port 1883.
+1600528409: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600528614: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600528691: Socket error on client broker1, disconnecting.
+1600528695: New connection from 172.24.0.4 on port 1883.
+1600528695: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600528839: Socket error on client broker1, disconnecting.
+1600528841: New connection from 172.24.0.4 on port 1883.
+1600528841: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600528900: Socket error on client broker1, disconnecting.
+1600528902: New connection from 172.24.0.4 on port 1883.
+1600528902: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530416: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600530419: Socket error on client broker1, disconnecting.
+1600530421: New connection from 172.24.0.4 on port 1883.
+1600530421: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530586: Socket error on client broker1, disconnecting.
+1600530589: New connection from 172.24.0.4 on port 1883.
+1600530589: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530608: Socket error on client broker1, disconnecting.
+1600530612: New connection from 172.24.0.4 on port 1883.
+1600530612: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530665: Socket error on client broker1, disconnecting.
+1600530677: New connection from 172.24.0.4 on port 1883.
+1600530677: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530722: Socket error on client broker1, disconnecting.
+1600530733: New connection from 172.24.0.4 on port 1883.
+1600530733: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530844: Socket error on client broker1, disconnecting.
+1600530847: New connection from 172.24.0.4 on port 1883.
+1600530847: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530903: Socket error on client broker1, disconnecting.
+1600530905: New connection from 172.24.0.4 on port 1883.
+1600530905: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530964: Socket error on client broker1, disconnecting.
+1600530965: New connection from 172.24.0.4 on port 1883.
+1600530965: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530971: Socket error on client broker1, disconnecting.
+1600530974: New connection from 172.24.0.4 on port 1883.
+1600530974: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530976: Socket error on client broker1, disconnecting.
+1600530978: New connection from 172.24.0.4 on port 1883.
+1600530978: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600530992: Socket error on client broker1, disconnecting.
+1600530994: New connection from 172.24.0.4 on port 1883.
+1600530994: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600531107: Socket error on client broker1, disconnecting.
+1600531109: New connection from 172.24.0.4 on port 1883.
+1600531109: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600531235: Socket error on client broker1, disconnecting.
+1600531238: New connection from 172.24.0.4 on port 1883.
+1600531238: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600531631: Socket error on client broker1, disconnecting.
+1600531633: New connection from 172.24.0.4 on port 1883.
+1600531633: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600531869: Socket error on client broker1, disconnecting.
+1600531873: New connection from 172.24.0.4 on port 1883.
+1600531873: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600532217: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600532275: Socket error on client broker1, disconnecting.
+1600532278: New connection from 172.24.0.4 on port 1883.
+1600532278: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600532405: Socket error on client broker1, disconnecting.
+1600532406: New connection from 172.24.0.4 on port 1883.
+1600532406: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600532513: Socket error on client broker1, disconnecting.
+1600532516: New connection from 172.24.0.4 on port 1883.
+1600532516: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600532572: Socket error on client broker1, disconnecting.
+1600532575: New connection from 172.24.0.4 on port 1883.
+1600532575: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600532645: Socket error on client broker1, disconnecting.
+1600532648: New connection from 172.24.0.4 on port 1883.
+1600532648: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600532688: Socket error on client broker1, disconnecting.
+1600532690: New connection from 172.24.0.4 on port 1883.
+1600532690: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600532826: Socket error on client broker1, disconnecting.
+1600532828: New connection from 172.24.0.4 on port 1883.
+1600532828: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600532907: Socket error on client broker1, disconnecting.
+1600532910: New connection from 172.24.0.4 on port 1883.
+1600532910: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533076: Socket error on client broker1, disconnecting.
+1600533079: New connection from 172.24.0.4 on port 1883.
+1600533079: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533104: Socket error on client broker1, disconnecting.
+1600533108: New connection from 172.24.0.4 on port 1883.
+1600533108: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533161: Socket error on client broker1, disconnecting.
+1600533165: New connection from 172.24.0.4 on port 1883.
+1600533165: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533303: Socket error on client broker1, disconnecting.
+1600533305: New connection from 172.24.0.4 on port 1883.
+1600533305: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533460: Socket error on client broker1, disconnecting.
+1600533464: New connection from 172.24.0.4 on port 1883.
+1600533464: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533532: Socket error on client broker1, disconnecting.
+1600533533: New connection from 172.24.0.4 on port 1883.
+1600533533: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533566: Socket error on client broker1, disconnecting.
+1600533568: New connection from 172.24.0.4 on port 1883.
+1600533568: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533696: Socket error on client broker1, disconnecting.
+1600533699: New connection from 172.24.0.4 on port 1883.
+1600533699: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533771: Socket error on client broker1, disconnecting.
+1600533774: New connection from 172.24.0.4 on port 1883.
+1600533774: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533814: Socket error on client broker1, disconnecting.
+1600533817: New connection from 172.24.0.4 on port 1883.
+1600533817: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533881: Socket error on client broker1, disconnecting.
+1600533884: New connection from 172.24.0.4 on port 1883.
+1600533884: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600533938: Socket error on client broker1, disconnecting.
+1600533939: New connection from 172.24.0.4 on port 1883.
+1600533939: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600534018: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600534020: Socket error on client broker1, disconnecting.
+1600534023: New connection from 172.24.0.4 on port 1883.
+1600534023: New client connected from 172.24.0.4 as broker1 (p2, c1, k60, u'tarek').
+1600534116: mosquitto version 1.6.10 terminating
+1600534116: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600751830: mosquitto version 1.6.10 starting
+1600751830: Config loaded from /mosquitto/config/mosquitto.conf.
+1600751830: Opening ipv4 listen socket on port 1883.
+1600751830: Opening ipv6 listen socket on port 1883.
+1600751831: New connection from 172.24.0.2 on port 1883.
+1600751831: New client connected from 172.24.0.2 as broker1 (p2, c1, k60, u'tarek').
+1600753631: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600755432: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600757233: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600759034: Saving in-memory database to /mosquitto/data/mosquitto.db.
+1600760835: Saving in-memory database to /mosquitto/data/mosquitto.db.

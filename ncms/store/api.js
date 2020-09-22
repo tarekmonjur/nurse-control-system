@@ -8,16 +8,18 @@ const REAL_TIME_CALL_URL = '/real-time-call';
 const REPORT_URL = '/reports';
 const USER_URL = '/users';
 const SETTINGS_URL = '/settings';
+const {get, unset} = require('lodash');
 
 async function makeRequest(url, method = 'GET', payload = null, headers = null) {
     url = `${API_PREFIX}${url}`;
     method = method.toUpperCase();
+    headers = headers ? headers : {
+        'Content-Type': 'application/json',
+    }
 
     const request = {
         method: method,
-        headers: headers ? headers : {
-            'Content-Type': 'application/json',
-        },
+        headers,
         json: true,
     };
 
@@ -27,7 +29,14 @@ async function makeRequest(url, method = 'GET', payload = null, headers = null) 
     }
 
     if (method === 'POST' || method === 'PUT') {
-        request.body = JSON.stringify(payload);
+        if (headers && get(headers, 'Content-Type', get(headers, 'content-type', '')) === 'multipart/form-data') {
+            request.body = payload;
+            if (get(headers, 'formData', false)) {
+                unset(request, 'headers');
+            }
+        } else {
+            request.body = JSON.stringify(payload);
+        }
     }
 
     try {
@@ -276,10 +285,15 @@ module.exports = {
           payload);
     },
 
-    async updateSettings(id, payload) {
+    async updateSettings(payload) {
         return await makeRequest(
-          `${SETTINGS_URL}/${id}`,
+          SETTINGS_URL,
           'put',
-          payload);
+          payload,
+          {
+              'content-type': 'multipart/form-data',
+              'formData': true
+          }
+        );
     },
 };

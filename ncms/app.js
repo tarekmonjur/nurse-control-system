@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 require('dotenv').config();
-// global.appRoot = path.resolve(__dirname, 'src');
 require('./src/lib/db');
 const mqtt = require('./src/lib/mqtt');
 const pagesRoute = require('./src/routes/pages');
@@ -63,16 +62,16 @@ app.use((err, req, res, next) => {
    const io = require('socket.io')(server, {path: '/ncms'});
 
    // io middleware
-   io.use((socket, next) => {
-      try {
-         let token = socket.handshake.query.token;
-         jwt.verify(token, process.env.SECRET);
-         return next();
-      } catch (err) {
-         console.log('io unauthorized');
-         return next(new Error('io authentication error'));
-      }
-   });
+   // io.use((socket, next) => {
+   //    try {
+   //       let token = socket.handshake.query.token;
+   //       jwt.verify(token, process.env.SECRET);
+   //       return next();
+   //    } catch (err) {
+   //       console.log('io unauthorized');
+   //       return next(new Error('io authentication error'));
+   //    }
+   // });
 
    io.origins(['*:*']);
    io.on('connection', (client) => {
