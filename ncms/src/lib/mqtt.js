@@ -6,7 +6,8 @@ const PATIENT_DEVICE_TOPIC = '$share/broker/device/+/status/+/patient';
 const PATIENT_UI_UPDATE_TOPIC = 'broker/ui/patient';
 // const PATIENT_MOBILE_TOPIC = '$share/broker/mobile/+/nurse/+/patient';
 const PATIENT_MOBILE_TOPIC = 'broker/mobile/patient/call/receive';
-const PATIENT_DEVICE_CALLBACK_TOPIC = 'broker/device/callback/patient';
+const PATIENT_DEVICE_LIGHT_TOPIC = 'device/light/+/patient';
+const PATIENT_DEVICE_SIREN_TOPIC = 'device/siren/patient';
 
 const getCallbackData = (result) => {
     const item = get(result, 'results', null);
@@ -53,7 +54,9 @@ module.exports.patientNurseCallHandle = async (io) => {
                 console.log({result});
                 if (result) {
                     patientIO.emit(PATIENT_UI_UPDATE_TOPIC, JSON.stringify(result));
-                    client.publish(PATIENT_DEVICE_CALLBACK_TOPIC, JSON.stringify(getCallbackData(result)));
+                    const LIGHT_CALLBACK_TOPIC = PATIENT_DEVICE_LIGHT_TOPIC.replace('+', get(result, 'results.bed.device_no', ''));
+                    client.publish(LIGHT_CALLBACK_TOPIC, JSON.stringify(getCallbackData(result)));
+                    client.publish(PATIENT_DEVICE_SIREN_TOPIC, JSON.stringify(getCallbackData(result)));
                 }
             });
         });
@@ -94,7 +97,9 @@ module.exports.patientNurseCallHandle = async (io) => {
                 console.log({result});
                 if (result) {
                     patientIO.emit(PATIENT_UI_UPDATE_TOPIC, JSON.stringify(result));
-                    client.publish(PATIENT_DEVICE_CALLBACK_TOPIC, JSON.stringify(getCallbackData(result)));
+                    const LIGHT_CALLBACK_TOPIC = PATIENT_DEVICE_LIGHT_TOPIC.replace('+', get(result, 'results.bed.device_no', ''));
+                    client.publish(LIGHT_CALLBACK_TOPIC, JSON.stringify(getCallbackData(result)));
+                    client.publish(PATIENT_DEVICE_SIREN_TOPIC, JSON.stringify(getCallbackData(result)));
                 }
             }
             else if (topic_first_segment === 'mobile' && topic_last_segment === 'patient') {

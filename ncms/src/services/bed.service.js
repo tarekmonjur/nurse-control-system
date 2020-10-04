@@ -7,7 +7,7 @@ module.exports = {
         bed_no: 'Bed No',
         device_no: 'Device No',
         bed_type: 'Bed Type',
-        bed_price: 'Price',
+        bed_price: 'Callback Topic',
         bed_location: 'Bed Location',
     },
 
