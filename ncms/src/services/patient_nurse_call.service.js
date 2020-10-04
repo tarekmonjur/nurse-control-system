@@ -125,28 +125,35 @@ module.exports = {
             const current_time = new Date().getTime();
             if (_.get(last_call, 'complete', null)) {
                 const call_time = _.get(last_call, 'complete', null);
-                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + PATIENT_COMPLETE_CALL_DELAY);
-                console.log(current_time, '--',last_call_tiem);
+                const last_call_tiem = new Date(call_time)
+                    .setMinutes(new Date(call_time)
+                    .getMinutes() + parseInt(PATIENT_COMPLETE_CALL_DELAY, 10));
                 if ( current_time < last_call_tiem) {
                     return result;
                 }
             }
             else if (_.get(last_call, 'present', null)) {
                 const call_time = _.get(last_call, 'complete', null);
-                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + PATIENT_PRESENT_CALL_DELAY);
+                const last_call_tiem = new Date(call_time)
+                    .setMinutes(new Date(call_time)
+                    .getMinutes() + parseInt(PATIENT_PRESENT_CALL_DELAY, 10));
                 if ( current_time < last_call_tiem) {
                     return result;
                 }
             }
             else if (_.get(last_call, 'receive', null)) {
                 const call_time = _.get(last_call, 'receive', null);
-                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + PATIENT_RECEIVE_CALL_DELAY);
+                const last_call_tiem = new Date(call_time)
+                    .setMinutes(new Date(call_time)
+                    .getMinutes() + parseInt(PATIENT_RECEIVE_CALL_DELAY, 10));
                 if ( current_time < last_call_tiem) {
                     return result;
                 }
             } else if (_.get(last_call, 'call', null)) {
                 const call_time = _.get(last_call, 'call', null);
-                const last_call_tiem = new Date(call_time).setMinutes(new Date(call_time).getMinutes() + PATIENT_CALLING_CALL_DELAY);
+                const last_call_tiem = new Date(call_time)
+                    .setMinutes(new Date(call_time)
+                    .getMinutes() + parseInt(PATIENT_CALLING_CALL_DELAY, 10));
                 if ( current_time < last_call_tiem) {
                     return result;
                 }
