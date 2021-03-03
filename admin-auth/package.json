@@ -30,7 +30,7 @@
     "mongodb": "^3.5.7",
     "multer": "^1.4.2",
     "popper.js": "^1.16.1",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.4.2",
